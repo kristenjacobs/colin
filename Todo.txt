@@ -1,5 +1,9 @@
+===============================================================================
 Programming:
-============
+===============================================================================
+
+- Implement a command line test harness which we can use to validate/automate
+  the testing of both jcolin.jar and refdb.jar
 
 - Wire up the output validators
 

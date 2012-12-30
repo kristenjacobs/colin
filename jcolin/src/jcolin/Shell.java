@@ -100,6 +100,14 @@ public class Shell {
     		   m_cli.getVersion() : "????";
     }
 
+    private File getConfigFile() {
+	    String configFilePath = System.getProperty("ConfigFile");
+	    if (configFilePath == null) {
+	    	configFilePath = "config.xml";
+	    }
+	    return new File(configFilePath);
+    }
+    
     private void initialise(Console console, CommandFactory commandFactory, ModelFactory modelFactory) throws Exception {
 	    m_model = modelFactory.createModel();
 		m_console = console;
@@ -109,7 +117,7 @@ public class Shell {
 	    m_commandHistory = new Vector<Command>();
 	    
 	    // Creates the custom commands from the config.xml
-	    File configFile = new File("config.xml");
+	    File configFile = getConfigFile();
 	    if (configFile.exists()) {
      		m_cli = new CLIBuilder(console).build(configFile);	    		
 			for (Command command : m_cli.getCommands()) {

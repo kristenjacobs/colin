@@ -1,0 +1,14 @@
+  [-]create <title>: Creates a new reference in the database
+  [-]delete <refid>: Removes the reference with the given id from the database
+  [-]add <option> <arg0> <arg1>...: Adds attributes to an existing reference
+  [-]remove <option> <arg0> <arg1>...: Removes attributes from an existing reference
+  [-]set <option> <arg0> <arg1>...: Sets attributes on an existing reference
+  [-]list: Lists all the references currently stored in the database
+  [-]system <option> <arg0> <arg1>...: Deals with the saving/restoring of the reference database
+  [-]echo "text": Prints the text to the console
+  [-]exit: Quits the application
+  [-]help [command|command subcommand|option]: Displays help message for the given argumen
+  [-]history: Displays the command history
+  [-]source <file name> [args]: Sources the given script file
+  [-]testcase <option> <arg0> <arg1>...: Testcase related commands
+  [-]version: Displays the version information
