@@ -24,11 +24,7 @@ public class List extends Command {
     }
 
     public Command clone(String[] args, int index) {
-		if ((index + numArgs()) >= args.length)
-			return null;
-
-    	String testcase = args[index + 1];
-    	return new Run(testcase);
+    	return new List();
     }
 
     public void execute(Shell shell, Object model, Console console) {

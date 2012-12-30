@@ -14,7 +14,12 @@ public class JColin {
 	
 	static public void main(String[] args) {
 		JColin jcolin = new JColin();
-		int returnCode = jcolin.start(null, args);
+		int returnCode = jcolin.start(new ModelFactory() {			
+			@Override
+			public Object createModel() {
+				return null;
+			}
+		}, args);
 		System.exit(returnCode);
 	}	
 }

@@ -19,6 +19,6 @@ public class TestCase extends Container {
 	public TestCase(Command command) { super(COMMAND_NAMES, command); }
 
 	public Collection<Command> getSubCommands() { return Arrays.asList(m_options); }
-	protected String getDescription() { return "Testcase releated commands"; }
+	protected String getDescription() { return "Testcase related commands"; }
 	protected Command clone(Command command) { return new TestCase(command); }
 }

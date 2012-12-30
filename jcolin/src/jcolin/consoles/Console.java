@@ -20,6 +20,7 @@ public abstract class Console implements IConsole {
 	public abstract boolean hasEscaped();
 
 	public Console() {
+		m_outputDisplay = true;
 		m_outputBuffer = new StringBuffer();
 	}
 	

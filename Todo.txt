@@ -35,3 +35,12 @@ BUGS:
 - If there are errors in the config.xml valiadtion, ensure that the tool exits
   and does not enter the command loop
 
+===============================================================================
+REFACTORING:
+===============================================================================
+
+- Can we sort out the 'setOutputDisplay' mechanism in the CustomCommand class.
+  I.e. instead of effectively setting a global in the console, maybe the console 
+  should be calling back into the command to see of the output should be displayed
+  for this command, and in the case of framework cammands, this is always true.
+
