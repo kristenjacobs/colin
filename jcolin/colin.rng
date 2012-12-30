@@ -1,0 +1,175 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+
+    <start>
+        <element name="colin">
+            <attribute name="toolname"/>
+            <attribute name="version"/>
+            <optional>
+                <attribute name="prompt"/>
+            </optional>    
+
+            <!-- Commands -->
+            <element name="commands">
+                <zeroOrMore>
+                    <choice>
+                        <ref name="command"/>
+                        <element name="container">
+                            <attribute name="name"/>
+                            <element name="description">
+                                <text/>
+                            </element>
+                            <oneOrMore>
+                                <ref name="command"/>
+                            </oneOrMore>
+                        </element>
+        
+                    </choice>    
+                </zeroOrMore>
+            </element>
+
+            <!-- Extensions -->
+            <element name="extensions">
+                <zeroOrMore>
+                    <choice>
+                        <ref name="extcommand"/>
+                        <element name="container">
+                            <attribute name="name"/>
+                            <element name="description">
+                                <text/>
+                            </element>
+                            <oneOrMore>
+                                <ref name="extcommand"/>
+                            </oneOrMore>
+                        </element>
+                    </choice>    
+                </zeroOrMore>
+            </element>
+
+            <!-- TestCases -->
+            <element name="testcases">
+                <zeroOrMore>
+                    <element name="testcase">
+                        <attribute name="name"/>
+                        <attribute name="description"/>
+                        <oneOrMore>
+                            <choice>
+                                <element name="run">
+                                    <attribute name="command"/>
+                                    <optional>
+                                        <attribute name="output"/>
+                                    </optional>
+                                    <text/> 
+                                </element>
+                                <element name="assertEquals">
+                                    <attribute name="var"/>
+                                    <element name="value">
+                                        <text/>
+                                    </element>    
+                                </element>
+                            </choice>    
+                        </oneOrMore>
+                    </element>
+                </zeroOrMore>
+            </element>
+        </element>
+    </start>
+
+    <!-- Schema for builtin commands -->
+    <define name="command">
+        <element name="command">
+            <attribute name="name"/>
+            <attribute name="class"/>
+            <element name="description">
+                <text/>
+            </element>
+            <optional>
+                <element name="args">
+                    <zeroOrMore>
+                        <element name="arg">
+                            <attribute name="name"/>
+                            <optional>
+                                <ref name="Type"/>
+                            </optional>    
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>    
+            <optional>
+                <element name="output">
+                    <optional>    
+                        <attribute name="display"/>
+                    </optional>    
+                    <zeroOrMore>
+                        <ref name="Type"/>
+                    </zeroOrMore>
+                </element>
+            </optional>    
+        </element>
+    </define>
+
+    <!-- Schema for user-defined commands -->
+    <define name="extcommand">
+        <element name="command">
+            <attribute name="name"/>
+            <attribute name="impl"/>
+            <element name="description">
+                <text/>
+            </element>
+            <optional>
+                <element name="args">
+                    <zeroOrMore>
+                        <element name="arg">
+                            <attribute name="name"/>
+                            <optional>
+                                <ref name="Type"/>
+                            </optional>    
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </optional>    
+        </element>
+    </define>
+
+    <define name="Type">
+        <choice>
+            <ref name="String"/>
+            <ref name="Integer"/>
+            <ref name="Regex"/>
+            <ref name="Boolean"/>
+        </choice>
+    </define>    
+
+    <define name="String">
+        <element name="String">
+            <text/>
+        </element>
+    </define>
+    
+    <define name="Integer">
+        <element name="Integer">
+            <optional>
+                <attribute name="min"/>
+            </optional>    
+            <optional>
+                <attribute name="max"/>
+            </optional>    
+        </element>
+    </define>
+    
+    <define name="Regex">
+        <element name="Regex">
+            <optional>
+                <attribute name="pattern"/>
+            </optional>    
+        </element>
+    </define>
+
+    <define name="Boolean">
+        <element name="Boolean">
+            <text/>
+        </element>
+    </define>
+
+</grammar>
+
+

@@ -1,0 +1,37 @@
+Programming:
+============
+
+- Wire up the output validators
+
+- Update the type validators to use the new look (WC3) datatypes + restrictions
+  Is there a way that we can support the full set (i.e. can we get 
+  the rng schema for the full set from somewhere)?
+
+- Implement the regression test running framework including the 
+  invariants and assertions.
+
+- Implement a custom command mechanism using a
+  generated jython interface, maybe using the output returned from the 
+  console?
+
+- Work out how the type-based completers are going to work
+  (i.e. the file completor)?
+
+- Think about deployment. i.e. can we build the entire app into a jar?
+  If so, then can we supply a script for users to do this?
+
+- Add a example command that uses a variable argument list.
+
+- How do we make the jing validator less verbose (i.e. quiet)?
+
+- Need to implement the "-" scheme for refering to the ids in the model 
+
+- Need to fix the TODO in the Console.java file.
+
+===============================================================================
+BUGS:
+===============================================================================
+
+- If there are errors in the config.xml valiadtion, ensure that the tool exits
+  and does not enter the command loop
+

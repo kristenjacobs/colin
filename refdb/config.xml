@@ -1,0 +1,180 @@
+<colin toolname="refdb" prompt=">" version="0.9.9">
+
+    <!-- ================================================================== -->
+    <!-- These commands make up the interface to the refdb tool -->
+    <!-- ================================================================== -->
+    <commands>
+       <command name="create" impl="refdb.commands.create.Create">
+           <description>Creates a new reference in the database</description>
+           <args>
+               <arg name="title"><String/></arg>    
+           </args>
+           <output display="false">
+               <!-- This comand returns the reference id -->
+               <Integer min="0"/>
+           </output>
+       </command>
+       
+       <command name="delete" lass="refdb.commands.delete.Delete">
+           <description>Removes the reference with the given id from the database</description>
+           <args>
+               <arg name="refid"><Integer min="0"/></arg>    
+           </args>
+           <output>
+               <!-- Return the success status of the command -->
+               <Boolean/>
+           </output>
+       </command>
+
+       <container name="add">
+           <description>Adds attributes to an existing reference</description>
+           <command name="author" impl="refdb.commands.add.Author">
+               <description>Adds another author to the given reference</description>
+               <args>
+                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="name"><String/></arg>    
+               </args>
+               <output display="false">
+                   <!-- This comand returns the author id (or -1 on failure) -->
+                   <Integer min="-1"/>
+               </output>
+           </command>
+           <command name="info" impl="refdb.commands.add.Info">
+               <description>Adds another piece of information to the given reference</description>
+               <args>
+                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="info"><String/></arg>    
+               </args>
+               <output display="false">
+                   <!-- This comand returns the info id (or -1 on failure) -->
+                   <Integer min="-1"/>
+               </output>
+           </command>
+       </container>
+
+       <container name="remove">
+           <description>Removes attributes from an existing reference</description>
+           <command name="author" impl="refdb.commands.remove.Author">
+               <description>Removes the author from the given reference</description>
+               <args>
+                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="authorid"><Integer min="0"/></arg>    
+               </args>
+               <output display="false">
+                   <!-- return the success status of the command -->
+                   <Boolean/>
+               </output>
+           </command>
+           <command name="info" impl="refdb.commands.remove.Info">
+               <description>Adds another piece of information to the given reference</description>
+               <args>
+                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="infoid"><Integer min="0"/></arg>    
+               </args>
+               <output display="false">
+                   <!-- Return the success status of the command -->
+                   <Boolean/>
+               </output>
+           </command>
+       </container>
+
+       <container name="set">
+           <description>Sets attributes on an existing reference</description>
+           <command name="date" impl="refdb.commands.set.Date">
+               <description>Sets the date for the given reference</description>
+               <args>
+                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="date"><Regex pattern="%d%d%d%d"/></arg>
+               </args>
+               <output display="false">
+                   <!-- Return the success status of the command -->
+                   <Boolean/>
+               </output>
+           </command>
+           <command name="isbn" impl="refdb.commands.set.ISBN">
+               <description>Sets the ISBN number for the given reference</description>
+               <args>
+                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="number"><Regex pattern="[0-9]{10}"/></arg>
+               </args>
+               <output display="false">
+                   <!-- Return the success status of the command -->
+                   <Boolean/>
+               </output>
+           </command>
+       </container>
+
+       <command name="list" impl="refdb.commands.list.List">
+           <description>Lists all the references currently stored in the database</description>
+       </command>
+
+       <container name="system">
+           <description>Deals with the saving/restoring of the reference database</description>
+           <command name="save" impl="refdb.commands.system.Save">
+               <description>Saves the current state of the reference database</description>
+               <args>
+                   <arg name="filename"><XmlFile schemaFile="save.rnc"/></arg>
+               </args>
+           </command>
+           <command name="restore" impl="refdb.commands.system.Restore">
+               <description>Restores the current state of the reference database</description>
+               <args>
+                   <arg name="filename"><XmlFile schemaFile="save.rnc"/></arg>
+               </args>
+           </command>
+       </container>
+    </commands>
+
+    <!-- ================================================================== -->
+    <!-- These commands extend the interface for the refdb tool -->
+    <!-- ================================================================== -->
+    <extensions>
+       <container name="search">
+           <description>Creates a summary of the database contents</description>
+           <command name="author" impl="SearchAuthor.py">
+               <description>Lists entries with the given author</description>
+               <args>
+                   <arg name="name"><String/></arg>
+               </args>
+           </command>
+           <command name="title" impl="SearchTitle.py"> 
+               <description>Lists entires with the given keyword in the title</description>
+               <args>
+                   <arg name="keyword"><String/></arg>
+               </args>
+           </command>
+       </container>
+    </extensions>    
+
+    <!-- ================================================================== -->
+    <!-- Specification of the acceptance tests for the refdb tool -->
+    <!-- ================================================================== -->
+    <testcases>
+        <testcase name="StartEmpty" 
+            description="This test checks that we start with an empty database">
+            <run command="list" output="result"/>
+            <assertEquals var="result">
+                <value></value>
+            </assertEquals>
+        </testcase>
+        <testcase name="CreateRef" 
+            description="This test checks that we can add an reference to the database">
+            <run command="create ref1"/>
+            <run command="list" output="result"/>
+            <assertEquals var="result">
+                <value>[0] ref1</value>
+            </assertEquals>    
+        </testcase>
+        <testcase name="DeleteRef" 
+            description="This test checks that we can remove a reference from the database">
+            <run command="create ref1"/>
+            <run command="delete ref1"/>
+            <run command="list" output="result"/>
+            <assertEquals var="result">
+                <value></value>
+            </assertEquals>    
+        </testcase>
+    </testcases>
+
+</colin>
+

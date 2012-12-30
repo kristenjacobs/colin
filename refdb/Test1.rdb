@@ -1,0 +1,22 @@
+
+create "Software Engineering Book Part 1"
+add author 0 "Kristen Jacobs"
+add author 0 "Fred Bloggs"
+add info 0 "www.kris.com"
+add info 0 "First Edition"
+add info 0 "Microsoft Press"
+set date 0 "September 2001"
+set isbn 0 1234567890
+
+create "Software Engineering Book Part 2"
+add author 1 "Homer Simpson"
+add author 1 "Marge Simpson"
+add info 1 "www.thesimpsons.com"
+add info 1 "First Edition"
+add info 1 "Springfield Press"
+set date 1 "September 2001"
+set isbn 1 1234567890
+
+list
+system save "Test1.xml"
+

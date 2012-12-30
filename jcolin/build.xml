@@ -1,0 +1,43 @@
+<project name="jcolin" default="dist" basedir=".">
+
+  <property name="src" location="src"/>
+  <property name="bin" location="bin"/>
+  
+  <target name="init">
+    <tstamp/>
+    <mkdir dir="${bin}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source">
+    <depend srcdir="${src}" destdir="${bin}"
+           closure="true" />
+    <javac srcdir="${src}" destdir="${bin}"
+           deprecation="true"
+           debug="${debug}"
+           debuglevel="lines,vars,source"
+    	   target="1.5">
+           <classpath>
+             <fileset dir="jars/">
+                 <include name="**/*.jar"/>
+             </fileset>
+           </classpath>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile" description="generate the distribution" >
+    <mkdir dir="jars"/>
+
+    <jar jarfile="jars/jcolin.jar"
+         basedir="${bin}"
+         manifest="manifests/jcolin">
+         <zipfileset src="jars/jline-1.0.jar"/>
+    </jar>
+  </target>
+
+  <target name="clean" description="clean up" >
+    <delete dir="${bin}"/>
+  	<delete file="jars/jcolin.jar"/>
+  </target>
+
+</project>
+

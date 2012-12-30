@@ -1,0 +1,82 @@
+start =
+  element colin {
+    attribute toolname { text },
+    attribute version { text },
+    attribute prompt { text }?,
+    # Commands
+    element commands {
+      (command
+       | element container {
+           attribute name { text },
+           element description { text },
+           command+
+         })*
+    },
+    # Extensions
+    element extensions {
+      (extcommand
+       | element container {
+           attribute name { text },
+           element description { text },
+           extcommand+
+         })*
+    },
+    # TestCases
+    element testcases {
+      element testcase {
+        attribute name { text },
+        attribute description { text },
+        (element run {
+           attribute command { text },
+           attribute output { text }?,
+           text
+         }
+         | element assertEquals {
+             attribute var { text },
+             element value { text }
+           })+
+      }*
+    }
+  }
+# Schema for builtin commands
+command =
+  element command {
+    attribute name { text },
+    attribute impl { text },
+    element description { text },
+    element args {
+      element arg {
+        attribute name { text },
+        Type?
+      }*
+    }?,
+    element output {
+      attribute display { text }?,
+      Type*
+    }?
+  }
+# Schema for user-defined commands
+extcommand =
+  element command {
+    attribute name { text },
+    attribute impl { text },
+    element description { text },
+    element args {
+      element arg {
+        attribute name { text },
+        Type?
+      }*
+    }?
+  }
+Type = String | Integer | Regex | Boolean
+String = element String { text }
+Integer =
+  element Integer {
+    attribute min { text }?,
+    attribute max { text }?
+  }
+Regex =
+  element Regex {
+    attribute pattern { text }?
+  }
+Boolean = element Boolean { text }
