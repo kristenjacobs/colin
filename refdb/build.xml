@@ -17,6 +17,11 @@
            debug="${debug}"
            debuglevel="lines,vars,source"
     	   target="1.5">
+           <classpath>
+             <fileset dir="../jcolin/jars/">
+                 <include name="**/*.jar"/>
+             </fileset>
+           </classpath>
     </javac>
   </target>
 
