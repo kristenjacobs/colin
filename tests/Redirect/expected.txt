@@ -1,0 +1,7 @@
+  [-]echo "text": Prints the text to the console
+  [-]exit: Quits the application
+  [-]help [command|command subcommand|option]: Displays help message for the given argumen
+  [-]history: Displays the command history
+  [-]source <file name> [args]: Sources the given script file
+  [-]testcase <option> <arg0> <arg1>...: Testcase related commands
+  [-]version: Displays the version information
