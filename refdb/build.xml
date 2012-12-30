@@ -17,27 +17,22 @@
            debug="${debug}"
            debuglevel="lines,vars,source"
     	   target="1.5">
-           <classpath>
-             <fileset dir="jars/">
-                 <include name="**/*.jar"/>
-             </fileset>
-           </classpath>
     </javac>
   </target>
 
   <target name="dist" depends="compile" description="generate the distribution" >
     <mkdir dir="jars"/>
 
-    <jar jarfile="jars/jcolin.jar"
+    <jar jarfile="jars/refdb.jar"
          basedir="${bin}"
-         manifest="manifests/jcolin">
-         <zipfileset src="jars/jline-1.0.jar"/>
+         manifest="manifests/refdb">
+         <zipfileset src="../jcolin/jars/jcolin.jar"/>
     </jar>
   </target>
 
   <target name="clean" description="clean up" >
     <delete dir="${bin}"/>
-  	<delete file="jars/jcolin.jar"/>
+  	<delete file="jars/refdb.jar"/>
   </target>
 
 </project>

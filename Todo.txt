@@ -32,6 +32,9 @@ Programming:
 BUGS:
 ===============================================================================
 
+- Fix the command completion mechanims when used on the command line 
+  (i.e. just via the jcolin.jar)
+
 - If there are errors in the config.xml valiadtion, ensure that the tool exits
   and does not enter the command loop
 

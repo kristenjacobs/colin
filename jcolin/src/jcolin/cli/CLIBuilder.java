@@ -105,9 +105,9 @@ public class CLIBuilder {
 	
 	private CustomCommand createCustomCommand(Element element) throws Exception {
     	String name = element.getAttribute("name");
-    	String clss = element.getAttribute("class");  
+    	String impl = element.getAttribute("impl");  
             
-        CustomCommand command = new CustomCommand(name.split(","), clss);
+        CustomCommand command = new CustomCommand(name.split(","), impl);
         
     	String description = getElement(element, "description").getTextContent();        
         command.setDescription(description);

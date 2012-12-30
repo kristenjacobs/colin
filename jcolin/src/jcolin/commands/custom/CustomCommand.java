@@ -14,7 +14,7 @@ import jcolin.consoles.IConsole;
 import jcolin.validators.Validator;
 
 public class CustomCommand extends Command {
-    private String m_class;
+    private String m_impl;
 	private String m_description;
 	private ICommand m_command;
 	private List<Argument> m_args;
@@ -22,17 +22,17 @@ public class CustomCommand extends Command {
 	private List<Validator> m_outputValidators;
 	private boolean m_outputDisplay;
 
-	public CustomCommand(String[] names, String clss) throws Exception {
+	public CustomCommand(String[] names, String impl) throws Exception {
 		super(names);
-		m_class = clss;
-		m_command = loadCommandClass(m_class, ICommand.class);
+		m_impl = impl;
+		m_command = loadCommandClass(m_impl, ICommand.class);
 		m_args = new ArrayList<Argument>();
 		m_argValues = new ArrayList<String>();
 		m_outputValidators = new ArrayList<Validator>();
 		m_outputDisplay = true;
 	}
 
-	public CustomCommand(String[] names, String clss,
+	public CustomCommand(String[] names, String impl,
 			ICommand command,
 			List<Argument> args,
 			List<String> argValues,
@@ -40,7 +40,7 @@ public class CustomCommand extends Command {
 			boolean outoutDisplay) throws Exception {
 		
 		super(names);
-		m_class = clss;
+		m_impl = impl;
 		m_command = command;
 		m_args = args;
 		m_argValues = argValues;
@@ -73,7 +73,7 @@ public class CustomCommand extends Command {
     		
     		List<String> argumentValues = extractArgumentList(args, index);
     		
-			return new CustomCommand(names(), m_class, m_command,
+			return new CustomCommand(names(), m_impl, m_command,
 					m_args, argumentValues, m_outputValidators, 
 					m_outputDisplay);
 

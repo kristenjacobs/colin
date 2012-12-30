@@ -15,7 +15,7 @@
            </output>
        </command>
        
-       <command name="delete" lass="refdb.commands.delete.Delete">
+       <command name="delete" impl="refdb.commands.delete.Delete">
            <description>Removes the reference with the given id from the database</description>
            <args>
                <arg name="refid"><Integer min="0"/></arg>    
