@@ -2,9 +2,9 @@ package refdb.commands.set;
 
 import java.util.Map;
 
-import jcolin.Shell;
 import jcolin.commands.ICommand;
 import jcolin.consoles.IConsole;
+import jcolin.shell.Shell;
 import jcolin.utils.TypeUtils;
 import refdb.Model;
 

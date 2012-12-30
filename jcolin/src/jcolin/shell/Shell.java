@@ -1,13 +1,11 @@
-package jcolin;
+package jcolin.shell;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Vector;
 
-import jcolin.cli.CLI;
-import jcolin.cli.CLIBuilder;
+import jcolin.ModelFactory;
 import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
 import jcolin.commands.Invalid;
@@ -26,12 +24,18 @@ public class Shell {
 	private CommandFactory m_commandFactory;
     private Queue<Command> m_commands;
     private Vector<Command> m_commandHistory;
-    private String m_prompt;
-    private CLI m_cli;
     private int m_returnCode;
+    private String m_toolName;
+    private String m_version;
+    private String m_prompt;
 
 	public Shell(Console console, CommandFactory commandFactory, 
-			ModelFactory modelFactory, String[] args) {
+			ModelFactory modelFactory, String[] args, 
+			String toolName, String version, String prompt) {
+		
+		m_toolName = toolName;
+		m_version = version;
+		m_prompt = prompt;
 		
 		try {
 		    initialise(console, commandFactory, modelFactory);
@@ -86,26 +90,12 @@ public class Shell {
     	}
     }
 
-    public String getPrompt() {
-		return m_prompt;
-	}
-
     public String getToolName() {
-    	return m_cli != null ?
-    		   m_cli.getToolName() : "????";    	
+    	return m_toolName;    	
     }
 
     public String getVersion() {
-    	return m_cli != null ?
-    		   m_cli.getVersion() : "????";
-    }
-
-    private File getConfigFile() {
-	    String configFilePath = System.getProperty("ConfigFile");
-	    if (configFilePath == null) {
-	    	configFilePath = "config.xml";
-	    }
-	    return new File(configFilePath);
+    	return m_version;
     }
     
     private void initialise(Console console, CommandFactory commandFactory, ModelFactory modelFactory) throws Exception {
@@ -115,21 +105,6 @@ public class Shell {
 		m_state = State.RUNNING;
 	    m_commands = new LinkedList<Command>();
 	    m_commandHistory = new Vector<Command>();
-	    
-	    // Creates the custom commands from the config.xml
-	    File configFile = getConfigFile();
-	    if (configFile.exists()) {
-     		m_cli = new CLIBuilder(console).build(configFile);	    		
-			for (Command command : m_cli.getCommands()) {
-				m_commandFactory.addCustomCommand(command);
-			}
-	    	
-	    } else {
-	    	console.displayWarning("config.xml file not found\n");
-	    }
-	    
-	    // Adds all the commands contributed by the framework.
-	    m_commandFactory.addBuiltInCommands();
     }
 
     private void processCommands(String[] args) {
@@ -161,9 +136,8 @@ public class Shell {
 
     private void fillCommandQueueFromConsole() {
     	while (m_commands.size() == 0) {
-    		m_prompt = (m_commandHistory.size() + 1) + 
-    				(m_cli != null ? m_cli.getPrompt() : ">");
-    		m_console.displayPrompt(m_prompt);
+    		String prompt = (m_commandHistory.size() + 1) + m_prompt;
+    		m_console.displayPrompt(prompt);
 
     		String consoleCommand = m_console.getNextLine(m_commandHistory);
 

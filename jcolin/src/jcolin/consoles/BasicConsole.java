@@ -1,13 +1,18 @@
 package jcolin.consoles;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
 import jcolin.commands.Command;
+import jcolin.commands.CommandFactory;
 
 public class BasicConsole extends Console {
 
 	public BasicConsole(){
+	}
+	
+	public void initialise(CommandFactory commandFactory) throws IOException {		
 	}
 	
 	public void display(String str) {

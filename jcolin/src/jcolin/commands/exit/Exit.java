@@ -1,8 +1,8 @@
 package jcolin.commands.exit;
 
-import jcolin.Shell;
 import jcolin.commands.Command;
 import jcolin.consoles.Console;
+import jcolin.shell.Shell;
 
 public class Exit extends Command {
 	private static final String[] COMMAND_NAMES = { "exit", "quit" };

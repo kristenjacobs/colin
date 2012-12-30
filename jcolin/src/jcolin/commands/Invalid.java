@@ -1,7 +1,7 @@
 package jcolin.commands;
 
-import jcolin.Shell;
 import jcolin.consoles.Console;
+import jcolin.shell.Shell;
 
 public class Invalid extends Command {
 	private static final String[] COMMAND_NAMES = { "" };

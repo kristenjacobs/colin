@@ -1,8 +1,8 @@
 package jcolin.commands.testcase;
 
-import jcolin.Shell;
 import jcolin.commands.Command;
 import jcolin.consoles.Console;
+import jcolin.shell.Shell;
 
 public class Run extends Command {	
 	private static final String[] COMMAND_NAMES = { "run" };

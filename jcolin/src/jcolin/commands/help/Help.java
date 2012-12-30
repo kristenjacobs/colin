@@ -1,9 +1,9 @@
 package jcolin.commands.help;
 
-import jcolin.Shell;
 import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
 import jcolin.consoles.Console;
+import jcolin.shell.Shell;
 
 public class Help extends Command {
 	private static final String[] COMMAND_NAMES = { "help" };

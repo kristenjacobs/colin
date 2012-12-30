@@ -5,12 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import jcolin.Shell;
 import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
 import jcolin.commands.Invalid;
 import jcolin.consoles.Console;
 import jcolin.consoles.IConsole;
+import jcolin.shell.Shell;
 import jcolin.utils.StringUtil;
 
 public class Source extends Command {	

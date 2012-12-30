@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.Vector;
 
 import jcolin.commands.Command;
+import jcolin.commands.CommandFactory;
 import jcolin.commands.Command.RedirectMode;
 
 public abstract class Console implements IConsole {
@@ -14,6 +15,7 @@ public abstract class Console implements IConsole {
 	private StringBuffer m_outputBuffer;
 	private boolean m_outputDisplay;
 
+	public abstract void initialise(CommandFactory commandFactory) throws IOException;
 	public abstract void displayPrompt(String str);
 	public abstract String getNextLine(Vector<Command> commandHistory);
 	public abstract void clearScreen();

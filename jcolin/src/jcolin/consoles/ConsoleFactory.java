@@ -2,10 +2,8 @@ package jcolin.consoles;
 
 import java.io.IOException;
 
-import jcolin.commands.CommandFactory;
-
 public class ConsoleFactory {
-	public static Console buildConsole(CommandFactory commandFactory) {
+	public static Console buildConsole() {
 		
 	    String consoleProperty = System.getProperty("Console");
 	    if ((consoleProperty != null) && (consoleProperty.equals("Basic"))) {
@@ -13,7 +11,7 @@ public class ConsoleFactory {
 	    }
 
     	try {
-			return new JLineConsole(commandFactory);
+			return new JLineConsole();
 			
 		} catch (IOException e) {
 			return new BasicConsole();

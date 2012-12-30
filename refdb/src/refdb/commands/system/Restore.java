@@ -4,9 +4,9 @@ import java.util.Map;
 
 import refdb.Model;
 
-import jcolin.Shell;
 import jcolin.commands.ICommand;
 import jcolin.consoles.IConsole;
+import jcolin.shell.Shell;
 import jcolin.utils.TypeUtils;
 
 public class Restore implements ICommand {

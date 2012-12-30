@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
 
+import jcolin.cli.CLI;
 import jcolin.commands.Command.RedirectMode;
 import jcolin.commands.echo.Echo;
 import jcolin.commands.exit.Exit;
@@ -21,15 +22,12 @@ public class CommandFactory {
 		m_commands = new ArrayList<Command>();
 	}
 	
-	public Collection<Command> getCommands() {
-		return m_commands;
-	}
-
-	public void addCustomCommand(Command command) {
-		m_commands.add(command);
-	}
-	
-	public void addBuiltInCommands() {
+	public void initialise(CLI cli) {
+		// Adds the custom commands..
+	    for (Command command : cli.getCommands()) {
+	    	m_commands.add(command);
+		}	
+	    // Adds all the commands contributed by the framework.
 		m_commands.add(new Echo());
 		m_commands.add(new Exit());
 		m_commands.add(new Help(this));
@@ -39,6 +37,10 @@ public class CommandFactory {
 		m_commands.add(new Version());		
 	}
 	
+	public Collection<Command> getCommands() {
+		return m_commands;
+	}
+		
     public Command buildCommand(String[] args, int index,
     		Vector<Command> commandHistory, Console console) {
     	String arg = args[index];

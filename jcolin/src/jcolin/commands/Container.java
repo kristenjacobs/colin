@@ -1,7 +1,7 @@
 package jcolin.commands;
 
-import jcolin.Shell;
 import jcolin.consoles.Console;
+import jcolin.shell.Shell;
 
 public abstract class Container extends Command {
 	private Command m_option;

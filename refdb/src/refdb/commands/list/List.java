@@ -4,9 +4,9 @@ import java.util.Map;
 
 import refdb.Model;
 
-import jcolin.Shell;
 import jcolin.commands.ICommand;
 import jcolin.consoles.IConsole;
+import jcolin.shell.Shell;
 
 public class List implements ICommand {
 	@Override

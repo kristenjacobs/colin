@@ -22,17 +22,31 @@ public class CLIBuilder {
 		m_console = console;
 	}
 
-	public CLI build(File configFile) throws Exception {		
-		if (!validateConfigFile(configFile)) {
-			throw new Exception("Validation Failed");
-		}
-
-        Document doc = DomUtils.createDocument(configFile);
-		CLI cli = createCLI(doc);
-		addCommandsToCLI(cli, doc);
-		addTestCasesToCLI(cli, doc);		
-		return cli;
+	public CLI build() throws Exception {
+	    File configFile = getConfigFile();
+	    if (configFile.exists()) {
+			if (!validateConfigFile(configFile)) {
+				throw new Exception("Validation Failed");
+			}
+	        Document doc = DomUtils.createDocument(configFile);
+			CLI cli = createCLI(doc);
+			addCommandsToCLI(cli, doc);
+			addTestCasesToCLI(cli, doc);		
+			return cli;
+			
+        } else {
+    	    m_console.displayWarning("config.xml file not found\n");
+    		return new CLI("jcolin", ">", "????");
+        }
 	}
+
+    private File getConfigFile() {
+	    String configFilePath = System.getProperty("ConfigFile");
+	    if (configFilePath == null) {
+	    	configFilePath = "config.xml";
+	    }
+	    return new File(configFilePath);
+    }
 
 	private boolean validateConfigFile(File configFile) throws Exception {
 		String schemaFileStr = System.getProperty("SchemaFile");

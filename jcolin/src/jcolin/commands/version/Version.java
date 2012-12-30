@@ -1,8 +1,8 @@
 package jcolin.commands.version;
 
-import jcolin.Shell;
 import jcolin.commands.Command;
 import jcolin.consoles.Console;
+import jcolin.shell.Shell;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;

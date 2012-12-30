@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import jcolin.Shell;
 import jcolin.commands.Command;
 import jcolin.commands.ICommand;
 import jcolin.consoles.Console;
 import jcolin.consoles.IConsole;
+import jcolin.shell.Shell;
 import jcolin.validators.Validator;
 
 public class CustomCommand extends Command {
