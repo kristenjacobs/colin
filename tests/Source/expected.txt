@@ -1,0 +1,5 @@
+warning: config.xml file not found
+Tool: jcolin, Version: ????
+1: source "test.txt"
+2: version
+3: history

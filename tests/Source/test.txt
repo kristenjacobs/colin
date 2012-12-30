@@ -1,0 +1,7 @@
+# This is a comment
+version
+history
+
+# We will now exit
+exit
+
