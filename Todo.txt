@@ -1,5 +1,5 @@
 ===============================================================================
-Programming:
+Implementation:
 ===============================================================================
 
 - Wire up the output validators
@@ -25,6 +25,21 @@ Programming:
 - Need to implement the "-" scheme for refering to the ids in the model 
 
 - Need to fix the TODO in the Console.java file.
+
+===============================================================================
+Testing:
+===============================================================================
+
+- Add tests for the common operations using the refdb application
+  e.g. 
+      - Create/delete a reference
+      - Add/remove attributes to a referecne
+      - Set attributes on a reference
+      - Test the saving and restoring mechanism
+      **** Can we do all of the abobe using the references for this dissertation ****
+
+- Make an errors suite:
+    - Test the error conditions for all of the types.
 
 ===============================================================================
 BUGS:
