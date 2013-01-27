@@ -161,17 +161,14 @@ public class CLIBuilder {
 	private Argument createArgument(Element element) throws Exception {
     	String argName = element.getAttribute("name");
     	Argument argument = new Argument(argName);		
-		
-        Element validatorsElement = getElement(element, "validators");
-        if (validatorsElement != null) {
-            NodeList validatorNodes = validatorsElement.getChildNodes();
-            for (int i = 0; i < validatorNodes.getLength(); i++) {
-                Node validatorNode = validatorNodes.item(i);
-                if (validatorNode instanceof Element) {       
-               		argument.addValidator(ValidatorFactory.create((Element)validatorNode));
-                }
-            }                	
-        }		
+    	
+        NodeList validatorNodes = element.getChildNodes();
+        for (int i = 0; i < validatorNodes.getLength(); i++) {
+            Node validatorNode = validatorNodes.item(i);
+            if (validatorNode instanceof Element) {       
+           		argument.addValidator(ValidatorFactory.create((Element)validatorNode));
+            }
+        }                	
     	return argument;		
 	}
 		

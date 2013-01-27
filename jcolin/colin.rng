@@ -78,7 +78,7 @@
     <define name="command">
         <element name="command">
             <attribute name="name"/>
-            <attribute name="class"/>
+            <attribute name="impl"/>
             <element name="description">
                 <text/>
             </element>
@@ -134,8 +134,10 @@
         <choice>
             <ref name="String"/>
             <ref name="Integer"/>
-            <ref name="Regex"/>
+            <ref name="Real"/>
             <ref name="Boolean"/>
+            <ref name="Regex"/>
+            <ref name="XmlFile"/>
         </choice>
     </define>    
 
@@ -147,6 +149,17 @@
     
     <define name="Integer">
         <element name="Integer">
+            <optional>
+                <attribute name="min"/>
+            </optional>    
+            <optional>
+                <attribute name="max"/>
+            </optional>    
+        </element>
+    </define>
+
+    <define name="Real">
+        <element name="Real">
             <optional>
                 <attribute name="min"/>
             </optional>    
@@ -167,6 +180,14 @@
     <define name="Boolean">
         <element name="Boolean">
             <text/>
+        </element>
+    </define>
+
+    <define name="XmlFile">
+        <element name="XmlFile">
+            <optional>
+                <attribute name="schemaFile"/>
+            </optional>    
         </element>
     </define>
 

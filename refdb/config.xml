@@ -119,7 +119,7 @@
            <command name="restore" impl="refdb.commands.system.Restore">
                <description>Restores the current state of the reference database</description>
                <args>
-                   <arg name="filename"><XmlFile schemaFile="save.rnc"/></arg>
+                   <arg name="filename"><XmlFile schemaFile="restore.rnc"/></arg>
                </args>
            </command>
        </container>

@@ -28,4 +28,11 @@ public class TypeUtils {
 		}
 		throw new IllegalArgumentException();
 	}
+	
+	public static boolean getBoolean(Map<String, String> args, String argName) {
+		if (args.containsKey(argName)) {
+    		return Boolean.parseBoolean(args.get(argName));				
+		}
+		throw new IllegalArgumentException();
+	}	
 }

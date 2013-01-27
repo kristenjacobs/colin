@@ -16,7 +16,7 @@
            deprecation="true"
            debug="${debug}"
            debuglevel="lines,vars,source"
-    	   target="1.5">
+    	   target="1.7">
            <classpath>
              <fileset dir="../jcolin/jars/">
                  <include name="**/*.jar"/>

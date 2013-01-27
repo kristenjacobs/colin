@@ -35,10 +35,10 @@ public class BasicConsole extends Console {
 		System.out.printf("%s", str);
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public String getNextLine(Vector<Command> commandHistory) {
-    	Scanner in = new Scanner(System.in);
-        return in.nextLine();
+    	return new Scanner(System.in).nextLine();
 	}
 
 	public void clearScreen() {

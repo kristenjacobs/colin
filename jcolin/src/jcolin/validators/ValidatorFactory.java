@@ -15,8 +15,21 @@ public class ValidatorFactory {
         	String max = element.getAttribute("max");
     		return new IntegerValidator(min, max);
 
+    	} else if (nodeName.equals("Real")) {
+        	String min = element.getAttribute("min");
+        	String max = element.getAttribute("max");
+    		return new RealValidator(min, max);
+
     	} else if (nodeName.equals("Boolean")) {
         	return new BooleanValidator();
+
+    	} else if (nodeName.equals("Regex")) {
+        	String pattern = element.getAttribute("pattern");
+        	return new RegexValidator(pattern);
+
+    	} else if (nodeName.equals("XmlFile")) {
+        	String schemaFile = element.getAttribute("schemaFile");
+        	return new XmlFileValidator(schemaFile);
 
     	} else {
     		throw new Exception("Unknown validator: " + nodeName);

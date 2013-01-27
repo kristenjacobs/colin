@@ -16,7 +16,7 @@
            deprecation="true"
            debug="${debug}"
            debuglevel="lines,vars,source"
-    	   target="1.5">
+    	   target="1.7">
            <classpath>
              <fileset dir="jars/">
                  <include name="**/*.jar"/>
@@ -32,6 +32,7 @@
          basedir="${bin}"
          manifest="manifests/jcolin">
          <zipfileset src="jars/jline-1.0.jar"/>
+         <zipfileset src="jars/jing.jar"/>
     </jar>
   </target>
 
