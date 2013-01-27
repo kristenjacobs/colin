@@ -1,0 +1,11 @@
+<colin toolname="test" prompt=">" version="1.0.0">
+    <commands>
+       <command name="testBoolean" impl="test.BooleanCommand">
+           <description>Test command that takes a boolean argument</description>
+           <args>
+               <arg name="argument"><Boolean/></arg>    
+           </args>
+       </command>
+    </commands>
+</colin>
+
