@@ -1,10 +1,17 @@
 package jcolin.validators;
 
-public class BooleanValidator implements Validator {
+import java.util.ArrayList;
+import java.util.Collection;
 
-	public boolean validate(String value) {
-		String lower = value.toLowerCase();
-		return ((lower.equals("true")) || 
-			    (lower.equals("false")));	
+public class BooleanValidator extends Validator {
+
+	@Override
+	String getTypeName() {
+		return "boolean";
+	}
+
+	@Override
+	Collection<ValidatorAttribute> getAttributes() {
+		return new ArrayList<ValidatorAttribute>();
 	}
 }

@@ -1,14 +1,23 @@
 package jcolin.validators;
 
-public class RegexValidator implements Validator {
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class RegexValidator extends Validator {
     private String m_pattern;
 
 	public RegexValidator(String pattern) {
 		m_pattern = pattern;			
 	}
 
-	public boolean validate(String value) {
-		// TODO: Need to create the rng file here!
-		return false;
+	@Override
+	String getTypeName() {
+		return "string";
 	}
+
+	@Override
+	Collection<ValidatorAttribute> getAttributes() {
+		return new ArrayList<ValidatorAttribute>();
+	}
+	
 }

@@ -53,12 +53,12 @@ public class CLIBuilder {
 		if (schemaFileStr != null) {
 		    File rngFile = new File(schemaFileStr);
 		    if (rngFile.exists()) {
-	    		return RngUtils.validate(configFile, rngFile);
-		    	
-		    } else {
-		    	m_console.displayWarning("Schema not found, unable to validate the config.xml\n");
-		    }			
-		}
+	    		return RngUtils.validate(configFile, rngFile, m_console);		    	
+    		}
+		    
+	    } else {
+	    	m_console.displayWarning("Schema not found, unable to validate the config.xml\n");
+	    }			
 		return true;
 	}
 	

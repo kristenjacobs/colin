@@ -1,6 +1,9 @@
 package jcolin.validators;
 
-public class RealValidator implements Validator {
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class RealValidator extends Validator {
     private String m_min;
     private boolean m_hasMin;
     private String m_max;
@@ -17,8 +20,13 @@ public class RealValidator implements Validator {
 		}
 	}
 
-	public boolean validate(String value) {
-		// TODO: Need to create the rng file here.
-		return false;
+	@Override
+	String getTypeName() {
+		return "double";
+	}
+
+	@Override
+	Collection<ValidatorAttribute> getAttributes() {		
+		return new ArrayList<ValidatorAttribute>();
 	}
 }

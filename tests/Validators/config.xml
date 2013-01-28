@@ -6,6 +6,12 @@
                <arg name="argument"><Boolean/></arg>    
            </args>
        </command>
+       <command name="testInteger" impl="test.IntegerCommand">
+           <description>Test command that takes an integer argument</description>
+           <args>
+               <arg name="argument"><Integer min="11" max="29"/></arg>    
+           </args>
+       </command>
     </commands>
 </colin>
 

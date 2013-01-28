@@ -1,8 +1,17 @@
 package jcolin.validators;
 
-public class StringValidator implements Validator {
+import java.util.ArrayList;
+import java.util.Collection;
 
-	public boolean validate(String value) {
-		return true;
+public class StringValidator extends Validator {
+
+	@Override
+	String getTypeName() {
+		return "string";
+	}
+
+	@Override
+	Collection<ValidatorAttribute> getAttributes() {
+		return new ArrayList<ValidatorAttribute>();
 	}
 }
