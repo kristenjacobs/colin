@@ -26,7 +26,7 @@
   </target>
 
   <target name="dist" depends="compile" description="generate the distribution" >
-    <jar jarfile="test.jar"
+      <jar jarfile="${bin}/test.jar"
          basedir="${bin}"
          manifest="manifests/test">
          <zipfileset src="../../jcolin/jars/jcolin.jar"/>
@@ -35,7 +35,6 @@
 
   <target name="clean" description="clean up" >
     <delete dir="${bin}"/>
-  	<delete file="test.jar"/>
   </target>
 
 </project>

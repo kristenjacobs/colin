@@ -1,0 +1,4 @@
+===== Boolean tests =====
+The argument value is: true
+The argument value is: false
+error: Argument: argument is not valid for value: invalid
