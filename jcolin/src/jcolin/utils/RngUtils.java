@@ -28,7 +28,7 @@ public class RngUtils {
 	public static boolean validate(String xmlStr, String rngStr) throws Exception {		
 		return validate(new InputSource(new StringReader(xmlStr)),
 			     new InputSource(new StringReader(rngStr)),
-			     new QuietErrorHandler()); 
+			     new VerboseErrorHandler(null)); 
 	}
 	
 	private static boolean validate(InputSource inXml, InputSource inRng, 
@@ -55,34 +55,23 @@ public class RngUtils {
 		@Override
 		public void warning(SAXParseException exception)
 				throws SAXException {
-			m_console.displayWarning(exception.getMessage() + "\n");
+			if (m_console != null) {
+				m_console.displayWarning(exception.getMessage() + "\n");				
+			}
 		}
 		@Override
 		public void error(SAXParseException exception)
 		        throws SAXException {
-			m_console.displayError(exception.getMessage() + "\n");
+			if (m_console != null) {
+				m_console.displayError(exception.getMessage() + "\n");				
+			}
 		}
 		@Override
 		public void fatalError(SAXParseException exception)
 				throws SAXException {
-			m_console.displayError(exception.getMessage() + "\n");
+			if (m_console != null) {
+				m_console.displayError(exception.getMessage() + "\n");				
+			}
 		}	    	
     };
-
-    private static class QuietErrorHandler implements ErrorHandler {
-		@Override
-		public void warning(SAXParseException exception)
-				throws SAXException {
-		}
-		@Override
-		public void error(SAXParseException exception)
-		        throws SAXException {
-		}
-		@Override
-		public void fatalError(SAXParseException exception)
-				throws SAXException {
-		}	    	
-    };    
-    
-    
 }
