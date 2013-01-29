@@ -24,6 +24,7 @@ public class JColin {
 			
 		} catch (Exception e) {
 			System.out.printf("Exception Detected: %s\n", e.getMessage());
+			e.printStackTrace();
 			return 1;
 		}		
 	}

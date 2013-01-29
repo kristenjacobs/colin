@@ -50,10 +50,9 @@ public abstract class Console implements IConsole {
 				assert(false);
 				return false;
 			}
-			
-		} catch (IOException e) {			
-			//notifier.notify(src, Notifier.NOTIFY_ERROR, String.format("Unable to open file for writing: %s", fileName));
-			// TODO
+
+		} catch (IOException e) {
+			displayError("Unable to open file for writing: " + fileName + "\n");
 			m_fileWriter = null;
 			return false;
 		}

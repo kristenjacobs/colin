@@ -27,11 +27,7 @@ Implementation:
 
 - Add a example command that uses a variable argument list.
 
-- How do we make the jing validator less verbose (i.e. quiet)?
-
 - Need to implement the "-" scheme for refering to the ids in the model 
-
-- Need to fix the TODO in the Console.java file.
 
 ===============================================================================
 Testing:
