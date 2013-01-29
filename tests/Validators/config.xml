@@ -13,9 +13,15 @@
            </args>
        </command>
        <command name="testDouble" impl="test.DoubleCommand">
-           <description>Test command that takes an double argument</description>
+           <description>Test command that takes a double argument</description>
            <args>
                <arg name="argument"><Double min="11.0" max="29.0"/></arg>    
+           </args>
+       </command>
+       <command name="testString" impl="test.StringCommand">
+           <description>Test command that takes a string argument</description>
+           <args>
+               <arg name="argument"><String pattern="Arg.*"/></arg>    
            </args>
        </command>
     </commands>

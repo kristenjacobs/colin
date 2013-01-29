@@ -12,3 +12,6 @@ error: Argument: argument is not valid for value: 10.4
 The argument value is: 11.4
 The argument value is: 29.0
 error: Argument: argument is not valid for value: 30.5
+===== String tests =====
+The argument value is: Arg1234
+error: Argument: argument is not valid for value: NoArg1234

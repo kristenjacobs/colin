@@ -8,7 +8,8 @@ public class ValidatorFactory {
     	String nodeName = element.getNodeName();
     	
     	if (nodeName.equals("String")) {
-    		return new StringValidator();
+        	String pattern = element.getAttribute("pattern");
+    		return new StringValidator(pattern);
     		
     	} else if (nodeName.equals("Integer")) {
         	String min = element.getAttribute("min");
@@ -22,10 +23,6 @@ public class ValidatorFactory {
 
     	} else if (nodeName.equals("Boolean")) {
         	return new BooleanValidator();
-
-    	} else if (nodeName.equals("Regex")) {
-        	String pattern = element.getAttribute("pattern");
-        	return new RegexValidator(pattern);
 
     	} else if (nodeName.equals("XmlFile")) {
         	String schemaFile = element.getAttribute("schemaFile");

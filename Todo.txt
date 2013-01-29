@@ -2,18 +2,7 @@
 Implementation:
 ===============================================================================
 
-- Design a 'compact' (non xml) input language. Maybe make this look rather
-  functional/haskell-ish. Also need a script to convert back and forth from the 
-  compact form to the XML. If we have time, we should also make the framework accept
-  input in this form. We could therefore either just write a custome parser, 
-  or possibly we can also specify a grammar for this 
-  and generate a parser (maybe using antler?)
-
 - Wire up the output validators
-
-- Update the type validators to use the new look (WC3) datatypes + restrictions
-  Is there a way that we can support the full set (i.e. can we get 
-  the rng schema for the full set from somewhere)?
 
 - Implement the regression test running framework including the 
   invariants and assertions.
@@ -29,9 +18,20 @@ Implementation:
 
 - Need to implement the "-" scheme for refering to the ids in the model 
 
+- Design a 'compact' (non xml) input language. Maybe make this look rather
+  functional/haskell-ish. Also need a script to convert back and forth from the 
+  compact form to the XML. If we have time, we should also make the framework accept
+  input in this form. We could therefore either just write a custome parser, 
+  or possibly we can also specify a grammar for this 
+  and generate a parser (maybe using antler?)
+
 ===============================================================================
 Testing:
 ===============================================================================
+
+- Write some tests for both the argument and output validators 
+  (i.e. a test for each supported datatype that both passes and fails the valiadation) 
+  THIS NEEDS COMPLETING!!!
 
 - Add tests for the common operations using the refdb application
   (These need to be specified in the COLIN language itself, then we can add
@@ -43,17 +43,7 @@ Testing:
       - Test the saving and restoring mechanism
       **** Can we do all of the abobe using the references for this dissertation ****
 
-- Write some tests for both the argument and output validators 
-  (i.e. a test for each supported datatype that both passes and fails the valiadation) 
-  THIS NEEDS COMPLETING!!!
-
-- Make an errors suite:
-    - Test the error conditions for all of the types.
-
 ===============================================================================
 BUGS:
 ===============================================================================
-
-- If there are errors in the config.xml valiadtion, ensure that the tool exits
-  and does not enter the command loop
 

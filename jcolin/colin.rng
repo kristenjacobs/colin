@@ -139,14 +139,15 @@
             <ref name="Integer"/>
             <ref name="Double"/>
             <ref name="Boolean"/>
-            <ref name="Regex"/>
             <ref name="XmlFile"/>
         </choice>
     </define>    
 
     <define name="String">
         <element name="String">
-            <text/>
+            <optional>
+                <attribute name="pattern"/>
+            </optional>    
         </element>
     </define>
     
@@ -172,14 +173,6 @@
         </element>
     </define>
     
-    <define name="Regex">
-        <element name="Regex">
-            <optional>
-                <attribute name="pattern"/>
-            </optional>    
-        </element>
-    </define>
-
     <define name="Boolean">
         <element name="Boolean">
             <text/>

@@ -84,7 +84,7 @@
                <description>Sets the date for the given reference</description>
                <args>
                    <arg name="refid"><Integer min="0"/></arg>    
-                   <arg name="date"><Regex pattern="%d%d%d%d"/></arg>
+                   <arg name="date"><String pattern="%d%d%d%d"/></arg>
                </args>
                <output display="false">
                    <!-- Return the success status of the command -->
@@ -95,7 +95,7 @@
                <description>Sets the ISBN number for the given reference</description>
                <args>
                    <arg name="refid"><Integer min="0"/></arg>    
-                   <arg name="number"><Regex pattern="[0-9]{10}"/></arg>
+                   <arg name="number"><String pattern="[0-9]{10}"/></arg>
                </args>
                <output display="false">
                    <!-- Return the success status of the command -->

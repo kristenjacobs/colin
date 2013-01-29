@@ -23,3 +23,7 @@ testutils.run(command + "testDouble 10.4 -exit >> bin/output.txt")
 testutils.run(command + "testDouble 11.4 -exit >> bin/output.txt")
 testutils.run(command + "testDouble 29.0 -exit >> bin/output.txt")
 testutils.run(command + "testDouble 30.5 -exit >> bin/output.txt")
+
+testutils.run("echo \"===== String tests =====\" >> bin/output.txt")
+testutils.run(command + "testString Arg1234 -exit >> bin/output.txt")
+testutils.run(command + "testString NoArg1234 -exit >> bin/output.txt")
