@@ -7,3 +7,8 @@ error: Argument: argument is not valid for value: 10
 The argument value is: 11
 The argument value is: 29
 error: Argument: argument is not valid for value: 30
+===== Double tests =====
+error: Argument: argument is not valid for value: 10.4
+The argument value is: 11.4
+The argument value is: 29.0
+error: Argument: argument is not valid for value: 30.5

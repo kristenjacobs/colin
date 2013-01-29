@@ -12,6 +12,12 @@
                <arg name="argument"><Integer min="11" max="29"/></arg>    
            </args>
        </command>
+       <command name="testDouble" impl="test.DoubleCommand">
+           <description>Test command that takes an double argument</description>
+           <args>
+               <arg name="argument"><Double min="11.0" max="29.0"/></arg>    
+           </args>
+       </command>
     </commands>
 </colin>
 

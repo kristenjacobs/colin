@@ -20,10 +20,10 @@ public class TypeUtils {
 		throw new IllegalArgumentException();
 	}	
 
-	public static float getFloat(Map<String, String> args, String argName) {
+	public static double getDouble(Map<String, String> args, String argName) {
 		if (args.containsKey(argName)) {
 			try {
-				return Float.parseFloat(args.get(argName));				
+				return Double.parseDouble(args.get(argName));				
 			} catch (NumberFormatException e) {}
 		}
 		throw new IllegalArgumentException();

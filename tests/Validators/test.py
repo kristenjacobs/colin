@@ -18,3 +18,8 @@ testutils.run(command + "testInteger 11 -exit >> bin/output.txt")
 testutils.run(command + "testInteger 29 -exit >> bin/output.txt")
 testutils.run(command + "testInteger 30 -exit >> bin/output.txt")
 
+testutils.run("echo \"===== Double tests =====\" >> bin/output.txt")
+testutils.run(command + "testDouble 10.4 -exit >> bin/output.txt")
+testutils.run(command + "testDouble 11.4 -exit >> bin/output.txt")
+testutils.run(command + "testDouble 29.0 -exit >> bin/output.txt")
+testutils.run(command + "testDouble 30.5 -exit >> bin/output.txt")

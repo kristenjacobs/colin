@@ -15,10 +15,10 @@ public class ValidatorFactory {
         	String max = element.getAttribute("max");
     		return new IntegerValidator(min, max);
 
-    	} else if (nodeName.equals("Real")) {
+    	} else if (nodeName.equals("Double")) {
         	String min = element.getAttribute("min");
         	String max = element.getAttribute("max");
-    		return new RealValidator(min, max);
+    		return new DoubleValidator(min, max);
 
     	} else if (nodeName.equals("Boolean")) {
         	return new BooleanValidator();

@@ -137,7 +137,7 @@
         <choice>
             <ref name="String"/>
             <ref name="Integer"/>
-            <ref name="Real"/>
+            <ref name="Double"/>
             <ref name="Boolean"/>
             <ref name="Regex"/>
             <ref name="XmlFile"/>
@@ -161,8 +161,8 @@
         </element>
     </define>
 
-    <define name="Real">
-        <element name="Real">
+    <define name="Double">
+        <element name="Double">
             <optional>
                 <attribute name="min"/>
             </optional>    
