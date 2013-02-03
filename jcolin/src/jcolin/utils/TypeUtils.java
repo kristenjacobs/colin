@@ -34,5 +34,12 @@ public class TypeUtils {
     		return Boolean.parseBoolean(args.get(argName));				
 		}
 		throw new IllegalArgumentException();
+	}
+	
+	public static String getFile(Map<String, String> args, String argName) {
+		if (args.containsKey(argName)) {
+			return args.get(argName);
+		}
+		throw new IllegalArgumentException();
 	}	
 }

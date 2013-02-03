@@ -1,0 +1,10 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <start>
+        <element name="colin">
+            <attribute name="toolname"/>
+            <attribute name="version"/>
+        </element>
+    </start>
+</grammar>
+
+

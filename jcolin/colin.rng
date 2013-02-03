@@ -139,7 +139,7 @@
             <ref name="Integer"/>
             <ref name="Double"/>
             <ref name="Boolean"/>
-            <ref name="XmlFile"/>
+            <ref name="File"/>
         </choice>
     </define>    
 
@@ -179,10 +179,10 @@
         </element>
     </define>
 
-    <define name="XmlFile">
-        <element name="XmlFile">
+    <define name="File">
+        <element name="File">
             <optional>
-                <attribute name="schemaFile"/>
+                <attribute name="schema"/>
             </optional>    
         </element>
     </define>

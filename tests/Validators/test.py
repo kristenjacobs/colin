@@ -27,3 +27,9 @@ testutils.run(command + "testDouble 30.5 -exit >> bin/output.txt")
 testutils.run("echo \"===== String tests =====\" >> bin/output.txt")
 testutils.run(command + "testString Arg1234 -exit >> bin/output.txt")
 testutils.run(command + "testString NoArg1234 -exit >> bin/output.txt")
+
+testutils.run("echo \"===== File tests =====\" >> bin/output.txt")
+testutils.run(command + "testFileWithSchema testFileWithSchemaPass.xml -exit >> bin/output.txt")
+testutils.run(command + "testFileWithSchema testFileWithSchemaFail.xml -exit >> bin/output.txt")
+testutils.run(command + "testFileWithoutSchema testFileWithoutSchema.xml -exit >> bin/output.txt")
+

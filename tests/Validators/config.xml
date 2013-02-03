@@ -24,6 +24,18 @@
                <arg name="argument"><String pattern="Arg.*"/></arg>    
            </args>
        </command>
+       <command name="testFileWithSchema" impl="test.FileCommand">
+           <description>Test command that takes a file argument with a schema</description>
+           <args>
+               <arg name="argument"><File schema="FileSchema.rng"/></arg>    
+           </args>
+       </command>
+       <command name="testFileWithoutSchema" impl="test.FileCommand">
+           <description>Test command that takes a file argument without a schema</description>
+           <args>
+               <arg name="argument"><File/></arg>    
+           </args>
+       </command>
     </commands>
 </colin>
 

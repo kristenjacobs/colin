@@ -24,9 +24,9 @@ public class ValidatorFactory {
     	} else if (nodeName.equals("Boolean")) {
         	return new BooleanValidator();
 
-    	} else if (nodeName.equals("XmlFile")) {
-        	String schemaFile = element.getAttribute("schemaFile");
-        	return new XmlFileValidator(schemaFile);
+    	} else if (nodeName.equals("File")) {
+        	String schema = element.getAttribute("schema");
+        	return new FileValidator(schema);
 
     	} else {
     		throw new Exception("Unknown validator: " + nodeName);

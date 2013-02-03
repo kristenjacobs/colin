@@ -15,3 +15,7 @@ error: Argument: argument is not valid for value: 30.5
 ===== String tests =====
 The argument value is: Arg1234
 error: Argument: argument is not valid for value: NoArg1234
+===== File tests =====
+The argument value is: testFileWithSchemaPass.xml
+error: Argument: argument is not valid for value: testFileWithSchemaFail.xml
+The argument value is: testFileWithoutSchema.xml
