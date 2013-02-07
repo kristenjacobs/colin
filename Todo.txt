@@ -2,8 +2,6 @@
 Implementation:
 ===============================================================================
 
-- Wire up and test the output validators
-
 - Work out how the type-based completers are going to work
   (i.e. the file completor)?
 
@@ -28,10 +26,6 @@ Implementation:
 ===============================================================================
 Testing:
 ===============================================================================
-
-- Write some tests for both the argument and output validators 
-  (i.e. a test for each supported datatype that both passes and fails the valiadation) 
-  THIS NEEDS COMPLETING!!!
 
 - Add tests for the common operations using the refdb application
   (These need to be specified in the COLIN language itself, then we can add
