@@ -1,0 +1,28 @@
+===== Boolean tests =====
+BooleanCommandPass
+BooleanCommandFail
+error: Validation failed for the output of this command
+===== Integer tests =====
+IntegerCommandPass
+IntegerCommandFail1
+error: Validation failed for the output of this command
+IntegerCommandFail2
+error: Validation failed for the output of this command
+===== Double tests =====
+DoubleCommandPass
+DoubleCommandFail1
+error: Validation failed for the output of this command
+DoubleCommandFail2
+error: Validation failed for the output of this command
+===== String tests =====
+StringCommandPass
+StringCommandFail1
+error: Validation failed for the output of this command
+StringCommandFail2
+error: Validation failed for the output of this command
+===== File tests =====
+FileCommandPass
+FileCommandFail1
+error: Validation failed for the output of this command
+FileCommandFail2
+error: Validation failed for the output of this command

@@ -26,8 +26,9 @@ public class FileValidator extends Validator {
 				}	
 	    		return RngUtils.validate(valueFile, schemaFile, null);
 			}
-			// No schema file has been specified so validation must succeed.
-			return true;			
+			// No schema file has been specified so the most 
+			// we can do is check that the file exists.
+			return new File(value).exists();			
 			
 		} catch (Exception e) {
 			return false;

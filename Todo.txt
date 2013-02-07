@@ -2,14 +2,7 @@
 Implementation:
 ===============================================================================
 
-- Wire up the output validators
-
-- Implement the regression test running framework including the 
-  invariants and assertions.
-
-- Implement a custom command mechanism using a
-  generated jython interface, maybe using the output returned from the 
-  console?
+- Wire up and test the output validators
 
 - Work out how the type-based completers are going to work
   (i.e. the file completor)?
@@ -17,6 +10,13 @@ Implementation:
 - Add a example command that uses a variable argument list.
 
 - Need to implement the "-" scheme for refering to the ids in the model 
+
+- Implement the regression test running framework including the 
+  invariants and assertions.
+
+- Implement a custom command mechanism using a
+  generated jython interface, maybe using the output returned from the 
+  console?
 
 - Design a 'compact' (non xml) input language. Maybe make this look rather
   functional/haskell-ish. Also need a script to convert back and forth from the 
