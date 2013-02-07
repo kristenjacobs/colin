@@ -23,6 +23,9 @@ Implementation:
   or possibly we can also specify a grammar for this 
   and generate a parser (maybe using antler?)
 
+- Add some comments to the code in general, focusing on the code that
+  is called from the application (i.e. the ModelFactory/creation + TypeUtils)
+
 ===============================================================================
 Testing:
 ===============================================================================

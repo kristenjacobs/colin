@@ -16,6 +16,8 @@ public class FileValidator extends Validator {
 	public boolean validate(String value) {
 		try {
 			if (!m_schema.equals("")) {
+				// A schema file has been specified, so we must
+				// validate the given file against this.
 				File schemaFile = new File(m_schema);				
 				if (!schemaFile.exists()) {
 					return false;
