@@ -3,6 +3,8 @@ package jcolin.validators;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jcolin.commands.Command.ArgType;
+
 public class StringValidator extends Validator {
     private String m_pattern;
 	private boolean m_hasPattern;
@@ -12,6 +14,11 @@ public class StringValidator extends Validator {
 			m_pattern = pattern;			
 			m_hasPattern = true;
 		}
+	}
+
+	@Override
+	public ArgType getArgType() {
+		return ArgType.IGNORE;
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package jcolin.validators;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jcolin.commands.Command.ArgType;
+
 public class DoubleValidator extends Validator {
     private String m_min;
     private boolean m_hasMin;
@@ -18,6 +20,11 @@ public class DoubleValidator extends Validator {
 			m_max = max;
 			m_hasMax = true;			
 		}
+	}
+
+	@Override
+	public ArgType getArgType() {
+		return ArgType.IGNORE;
 	}
 
 	@Override

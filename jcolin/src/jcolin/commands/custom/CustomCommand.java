@@ -2,6 +2,7 @@ package jcolin.commands.custom;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -51,6 +52,20 @@ public class CustomCommand extends Command {
     public int numArgs() {
     	return m_args.size();
     }
+
+	public ArgType[] getArgTypes() {
+		Collection<ArgType> argTypes = new ArrayList<ArgType>();
+		for (Argument argument : m_args) {
+		    argTypes.add(argument.getArgType());	
+		}
+		
+		System.out.printf("++++ Command: %s\n", name());
+		for (ArgType argType : argTypes) {
+			System.out.printf("+> %s\n", argType.toString());
+		}
+		
+		return argTypes.toArray(new ArgType[]{});
+	}
 
     public String commandLine() {
     	String str = name();

@@ -9,7 +9,7 @@ import jcolin.shell.Shell;
 public abstract class Command {
 	public static final String REDIRECT_OVERWITE = ">";
 	public static final String REDIRECT_APPEND   = ">>";
-
+	
     public enum ArgType {
     	FILE,
     	HELP,

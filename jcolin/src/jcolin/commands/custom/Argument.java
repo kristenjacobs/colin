@@ -3,6 +3,7 @@ package jcolin.commands.custom;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jcolin.commands.Command.ArgType;
 import jcolin.validators.Validator;
 
 public class Argument {
@@ -29,5 +30,22 @@ public class Argument {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * This method returns the ArgType for this argument which is used
+	 * for tab completion purposes. As we can have more than a single 
+	 * type/validator per arument, we choose the order of the ArgType
+	 * enum to be the priority mechanism.
+	 */
+	public ArgType getArgType() {
+		for (ArgType argType : ArgType.values()) {
+			for (Validator validator : m_validators) {
+				if (validator.getArgType() == argType) {
+					return argType;
+				}
+			}
+		}
+        return ArgType.IGNORE;		
 	}
 }

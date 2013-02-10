@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import jcolin.commands.Command.ArgType;
 import jcolin.utils.DomUtils;
 import jcolin.utils.RngUtils;
 
@@ -12,7 +13,8 @@ public abstract class Validator {
 	
 	abstract String getTypeName();
 	abstract Collection<ValidatorAttribute> getAttributes();
-	
+	abstract public ArgType getArgType();
+
 	public boolean validate(String value) {
 		try {
 		    String xml = createXml(value);		
@@ -23,7 +25,7 @@ public abstract class Validator {
 			return false;
 		}				
 	}
-	
+			
 	private String createXml(String value) throws Exception {
 		Document argDoc = DomUtils.createDocument();
 	    Element argElement = DomUtils.addElement(argDoc, argDoc, "argument");

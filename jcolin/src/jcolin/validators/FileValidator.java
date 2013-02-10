@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import jcolin.commands.Command.ArgType;
 import jcolin.utils.RngUtils;
 
 public class FileValidator extends Validator {
@@ -13,6 +14,12 @@ public class FileValidator extends Validator {
 		m_schema = schema;			
 	}
 
+	@Override
+	public ArgType getArgType() {
+		return ArgType.FILE;
+	}
+
+	@Override
 	public boolean validate(String value) {
 		try {
 			if (!m_schema.equals("")) {

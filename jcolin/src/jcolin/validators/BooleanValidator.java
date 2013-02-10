@@ -3,8 +3,15 @@ package jcolin.validators;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class BooleanValidator extends Validator {
+import jcolin.commands.Command.ArgType;
 
+public class BooleanValidator extends Validator {
+	
+	@Override
+	public ArgType getArgType() {
+		return ArgType.IGNORE;
+	}
+	
 	@Override
 	String getTypeName() {
 		return "boolean";
@@ -14,4 +21,5 @@ public class BooleanValidator extends Validator {
 	Collection<ValidatorAttribute> getAttributes() {
 		return new ArrayList<ValidatorAttribute>();
 	}
+	
 }
