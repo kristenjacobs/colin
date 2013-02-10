@@ -4,6 +4,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Properties;
+
+import org.python.core.PyList;
+import org.python.core.PyString;
+import org.python.core.PySystemState;
+import org.python.util.PythonInterpreter;
 
 import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
@@ -16,23 +23,42 @@ import jcolin.utils.StringUtil;
 public class Source extends Command {	
 	private static final String[] COMMAND_NAMES = { "source" };
 
+	private enum ScriptType { EXTERNAL, INTERNAL, }
+
 	private CommandFactory m_commandFactory;
-	private String m_fileName;
+	private String m_toolName;
+	private String m_fileName;	
+	private ScriptType m_scriptType;
+	private String[] m_args;
 	
-	public Source(CommandFactory commandFactory) {
+	public Source(CommandFactory commandFactory, String toolName) {
 		super(COMMAND_NAMES);
 		m_commandFactory = commandFactory;
+		m_toolName = toolName;
 		m_fileName = "";
+		m_scriptType = ScriptType.EXTERNAL;
+		m_args = new String[]{};
 	}
 
-	public Source(CommandFactory commandFactory, String fileName) {
+	public Source(CommandFactory commandFactory, String toolName, 
+			String fileName, ScriptType scriptType, String[] args) {
+		
 		super(COMMAND_NAMES);
 		m_commandFactory = commandFactory;
+		m_toolName = toolName;
 		m_fileName = fileName;
+		m_scriptType = scriptType;
+		m_args = args;
 	}
 
-    public int numArgs() {
-    	return 1;    		
+    public int numArgs() {    	
+    	switch (m_scriptType) {
+    	case INTERNAL: return m_args.length;    		
+    	case EXTERNAL: return 1;    		
+    	default:
+            assert(false);
+            return 0;
+    	}    	    
     }
 
 	public ArgType[] getArgTypes() {
@@ -40,7 +66,21 @@ public class Source extends Command {
 	}
 
     public String commandLine() {
-   		return name() + " \"" + m_fileName + "\"";
+    	switch (m_scriptType) {
+    	case INTERNAL:
+        	String commandLine = name();
+        	for (String arg : m_args) {
+        		commandLine += " \"" + arg + "\"";
+        	}
+        	return commandLine; 
+            
+    	case EXTERNAL:    		
+    		return name() + " \"" + m_fileName + "\"";
+    		
+    	default:
+            assert(false);
+            return null;
+    	}    	
     }
 
     public String description(boolean detailed) {
@@ -52,14 +92,37 @@ public class Source extends Command {
 			return null;
 
     	String fileName = args[index + 1];
-    	return new Source(m_commandFactory, fileName);
+    	ScriptType scriptType = getScriptType(fileName);
+    	
+    	switch (scriptType) {
+    	case INTERNAL:
+    		Collection<String> scriptArgs = getScriptArgs(args, index);
+            return new Source(m_commandFactory, m_toolName, fileName, 
+            		scriptType, scriptArgs.toArray(new String[]{}));
+            
+    	case EXTERNAL:
+    		return new Source(m_commandFactory, m_toolName,
+    				fileName, scriptType, new String[]{});
+    		
+    	default: 
+    		assert(false);
+    		return null;
+    	}
     }
 
     public void execute(Shell shell, Object model, Console console) {
-   		sourceScript(shell, model, console);
+    	switch (m_scriptType) {
+    	case INTERNAL:
+    		sourceInternalScript(shell, model, console);
+    		break;
+            
+    	case EXTERNAL:
+    		sourceExternalScript(shell, model, console);
+    		break;
+    	}
     }
     
-    private void sourceScript(Shell shell, Object model, IConsole console) {    	    
+    private void sourceExternalScript(Shell shell, Object model, IConsole console) {    	    
         try {
             BufferedReader fp = new BufferedReader(new FileReader(m_fileName));
             int location = shell.getLocation(this);
@@ -130,4 +193,68 @@ public class Source extends Command {
         	System.out.printf("Error: unable to open file for reading: %s", m_fileName);
         }
     }
+    
+    private void sourceInternalScript(Shell shell, Object model, Console console) {
+    	Properties postProperties = new Properties();
+    	Properties systemProperties = System.getProperties();    	
+
+    	String pythonHome = System.getenv("PYTHON_HOME");
+    	if (pythonHome == null) {
+    		console.displayError("PYTHON_HOME environment variable not set");
+    		return;    		
+    	}
+    	
+    	String pythonVerbose = System.getenv("PYTHON_VERBOSE");  
+    	if (pythonVerbose == null) {
+    		console.displayError("PYTHON_VERBOSE environment variable not set");
+    		return;    		
+    	}
+
+    	systemProperties.setProperty("python.home", pythonHome);
+    	systemProperties.setProperty("python.verbose", pythonVerbose);
+
+	    PythonInterpreter.initialize(systemProperties, postProperties, new String[] {""});        
+        PythonInterpreter interp = getPythonInterpreter(m_args);
+
+        interp.setOut(new ScriptConsoleWriter(console));
+        interp.setErr(new ScriptConsoleWriter(console));
+        
+        interp.set(m_toolName, new ScriptInterface(
+        		m_commandFactory, shell, model, console));        
+        try {
+            interp.execfile(m_fileName);
+            
+        } catch (Exception e) {
+        	console.display(e.toString() + "\n");
+        }
+    }    
+    
+    private PythonInterpreter getPythonInterpreter(String[] args) {
+        PySystemState pySystemState = new PySystemState();        
+       	PyList argv = new PyList();
+        for (String arg : args) {
+            argv.append(new PyString(arg));
+        }
+        pySystemState.argv = argv;        
+        return new PythonInterpreter(null, pySystemState);    	
+    }   
+    
+    private ScriptType getScriptType(String fileName) {
+    	String extension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
+    	if (extension.equals("py")) {   
+    		return ScriptType.INTERNAL;
+    	} else {
+    		return ScriptType.EXTERNAL;
+    	}
+    }
+    
+    private Collection<String> getScriptArgs(String[] args, int index) {  		
+        Collection<String> scriptArgs = new ArrayList<String>();
+	    int i = 1;
+	    while (!areArgsDone(args, index + i)) {
+		    scriptArgs.add(args[index + i]);
+		    ++i;
+	    }    	
+        return scriptArgs;
+    }    
 }

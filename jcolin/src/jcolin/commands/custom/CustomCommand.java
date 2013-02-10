@@ -58,12 +58,6 @@ public class CustomCommand extends Command {
 		for (Argument argument : m_args) {
 		    argTypes.add(argument.getArgType());	
 		}
-		
-		System.out.printf("++++ Command: %s\n", name());
-		for (ArgType argType : argTypes) {
-			System.out.printf("+> %s\n", argType.toString());
-		}
-		
 		return argTypes.toArray(new ArgType[]{});
 	}
 

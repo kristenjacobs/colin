@@ -32,7 +32,7 @@ public class CommandFactory {
 		m_commands.add(new Exit());
 		m_commands.add(new Help(this));
 		m_commands.add(new History());
-		m_commands.add(new Source(this));
+		m_commands.add(new Source(this, cli.getToolName()));
 		m_commands.add(new TestCase());
 		m_commands.add(new Version());		
 	}

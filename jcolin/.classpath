@@ -4,5 +4,6 @@
 	<classpathentry kind="lib" path="jars/jing.jar" sourcepath="/home/kris/Tools/jing-20091111"/>
 	<classpathentry kind="lib" path="jars/jline-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jars/jython.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
