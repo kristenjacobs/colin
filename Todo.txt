@@ -2,9 +2,6 @@
 Implementation:
 ===============================================================================
 
-- Work out how the type-based completers are going to work
-  (i.e. the file completor)?
-
 - Add a example command that uses a variable argument list.
 
 - Need to implement the "-" scheme for refering to the ids in the model 
