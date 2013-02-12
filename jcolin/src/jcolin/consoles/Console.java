@@ -65,7 +65,7 @@ public abstract class Console implements IConsole {
 		}
 	}
 	
-	public void clearOutputBuffer() {
+	public void clearCommandOutput() {
 		m_outputBuffer = new StringBuffer();
 	}
 	

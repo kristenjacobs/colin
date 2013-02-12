@@ -219,8 +219,7 @@ public class Source extends Command {
         interp.setOut(new ScriptConsoleWriter(console));
         interp.setErr(new ScriptConsoleWriter(console));
         
-        interp.set(m_toolName, new ScriptInterface(
-        		m_commandFactory, shell, model, console));        
+        interp.set(m_toolName, new ScriptInterface(shell));        
         try {
             interp.execfile(m_fileName);
             

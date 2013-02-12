@@ -48,17 +48,39 @@ public class Shell {
 		}
 	}
 
+	/**
+	 * Used by the external script interface  
+	 */
     public int execute() {
     	while (!isComplete()) {
-    		Command command = getNextCommand();
-           	if (preCommandExecute(command)) {
-              	command.execute(this, m_model, m_console);
-              	postCommandExecute(command);
-           	}
+    		execute(getNextCommand());
     	}
     	return m_returnCode;
     }
 
+    /**
+     * Used by the internal script interface  
+     */
+    public String execute(String[] args) throws Exception {
+        Command command = m_commandFactory.buildCommand(
+        		args, 0, new Vector<Command>(), m_console);
+
+        if (command != null) {
+            if (command.numArgs() == (args.length - 1)) {
+            	execute(command);
+            	return m_console.getCommandOutput();
+            }
+        }
+        throw new Exception("invalid command");    		        	
+    }
+    
+    public void execute(Command command) {
+       	if (preCommandExecute(command)) {
+           	command.execute(this, m_model, m_console);
+           	postCommandExecute(command);
+       	}
+    }
+    
 	public void exit(int returnCode) {
     	m_state = State.EXIT;
     	m_returnCode = returnCode;
@@ -193,6 +215,12 @@ public class Shell {
 	}
 
 	private boolean preCommandExecute(Command command) {
+		
+		// The console is used to store the command output
+		// in order for the output validation and the
+		// internal DSL scripts to access it.
+		m_console.clearCommandOutput();
+		
     	if (command.getFileRedirect() != null) {
     		if (!m_console.openRedirectFile(command.getFileRedirect(), command.getFileRedirectMode())) {
     			return false;
@@ -210,5 +238,5 @@ public class Shell {
     	if (m_console.hasEscaped()) {
     		m_commands.clear();
     	}
-	}
+	}	
 }

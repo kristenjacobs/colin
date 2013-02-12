@@ -9,10 +9,12 @@ for arg in sys.argv:
     print arg,
 print    
 
-# Valid command
+# Valid commands
 try:
     output = jcolin.exec(["version"])
-    print "Command Output: " + output
+    print "Command Output [version]>> " + output + "<<"
+    output = jcolin.exec(["version"])
+    print "Command Output [help]>> " + output + "<<"
 
 except java.lang.Exception, e:
     print e.getMessage()

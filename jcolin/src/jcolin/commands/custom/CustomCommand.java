@@ -94,11 +94,7 @@ public class CustomCommand extends Command {
     public void execute(Shell shell, Object model, Console console) {
     	try {
     		if (validateArguments(console)) {
-    			
-    			// The console buffer is used to store the command output
-    			// in order for the output validation to access it.
-    			console.clearOutputBuffer();
-    			
+    			    			
     			// Determines if the output from this command should be 
     			// visible to the user on the console.
     			console.setOutputDisplay(m_outputDisplay);

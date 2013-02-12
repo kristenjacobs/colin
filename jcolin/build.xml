@@ -33,6 +33,7 @@
          manifest="manifests/jcolin">
          <zipfileset src="jars/jline-1.0.jar"/>
          <zipfileset src="jars/jing.jar"/>
+         <zipfileset src="jars/jython.jar"/>
     </jar>
   </target>
 

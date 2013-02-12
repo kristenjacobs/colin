@@ -1,0 +1,9 @@
+warning: config.xml file not found
+Source test start
+Script Args:  cmds.py arg1 arg2 arg3
+Tool: jcolin, Version: ????
+Command Output [version]>> Tool: jcolin, Version: ????<<
+Tool: jcolin, Version: ????
+Command Output [help]>> Tool: jcolin, Version: ????<<
+invalid command
+Source test complete
