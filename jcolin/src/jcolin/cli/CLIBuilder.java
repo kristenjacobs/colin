@@ -30,7 +30,8 @@ public class CLIBuilder {
 			}
 	        Document doc = DomUtils.createDocument(configFile);
 			CLI cli = createCLI(doc);
-			addCommandsToCLI(cli, doc);
+			addCommandsToCLI(cli, doc, "commands");
+			addCommandsToCLI(cli, doc, "extensions");			
 			addTestCasesToCLI(cli, doc);		
 			return cli;
 			
@@ -72,24 +73,26 @@ public class CLIBuilder {
 		return new CLI(toolname, prompt, version);
     }
     
-	private void addCommandsToCLI(CLI cli, Document doc) throws Exception {
-        NodeList commandsNodes = doc.getElementsByTagName("commands");
-        Node commandsNode = commandsNodes.item(0);
-        NodeList children = commandsNode.getChildNodes();
+	private void addCommandsToCLI(CLI cli, Document doc, String nodeName) throws Exception {
+        NodeList commandsNodes = doc.getElementsByTagName(nodeName);
+        if (commandsNodes.getLength() > 0) {
+            Node commandsNode = commandsNodes.item(0);
+            NodeList children = commandsNode.getChildNodes();
 
-        for (int i = 0; i < children.getLength(); i++) {
-            Node child = children.item(i);
-            if (child instanceof Element) {
-            	Element element = (Element)child;
-    
-            	if (element.getNodeName().equals("command")) {
-            		handleCommandElement(cli, element);
-                                    		
-            	} else if (element.getNodeName().equals("container")) {
-            		handleContainerElement(cli, element);
-            	}
-            }
-        }    
+            for (int i = 0; i < children.getLength(); i++) {
+                Node child = children.item(i);
+                if (child instanceof Element) {
+                	Element element = (Element)child;
+        
+                	if (element.getNodeName().equals("command")) {
+                		handleCommandElement(cli, element);
+                                        		
+                	} else if (element.getNodeName().equals("container")) {
+                		handleContainerElement(cli, element);
+                	}
+                }
+            }            	
+        }
 	}
 	
 	private void addTestCasesToCLI(CLI cli, Document doc) {		

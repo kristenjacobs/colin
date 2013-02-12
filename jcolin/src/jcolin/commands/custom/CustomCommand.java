@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import jcolin.commands.Command;
-import jcolin.commands.ICommand;
 import jcolin.consoles.Console;
 import jcolin.consoles.IConsole;
 import jcolin.shell.Shell;
@@ -17,7 +16,7 @@ import jcolin.validators.Validator;
 public class CustomCommand extends Command {
     private String m_impl;
 	private String m_description;
-	private ICommand m_command;
+	private Executor m_executor;
 	private List<Argument> m_args;
 	private List<String> m_argValues;
 	private List<Validator> m_outputValidators;
@@ -26,7 +25,12 @@ public class CustomCommand extends Command {
 	public CustomCommand(String[] names, String impl) throws Exception {
 		super(names);
 		m_impl = impl;
-		m_command = loadCommandClass(m_impl, ICommand.class);
+		if (m_impl.endsWith("py")) {
+			m_executor = new ExtensionExecutor(m_impl);
+			
+		} else {
+			m_executor = new CommandExecutor(m_impl);	
+		}
 		m_args = new ArrayList<Argument>();
 		m_argValues = new ArrayList<String>();
 		m_outputValidators = new ArrayList<Validator>();
@@ -34,7 +38,7 @@ public class CustomCommand extends Command {
 	}
 
 	public CustomCommand(String[] names, String impl,
-			ICommand command,
+			Executor executor,
 			List<Argument> args,
 			List<String> argValues,
 			List<Validator> outputValidators,
@@ -42,7 +46,7 @@ public class CustomCommand extends Command {
 		
 		super(names);
 		m_impl = impl;
-		m_command = command;
+		m_executor = executor;
 		m_args = args;
 		m_argValues = argValues;
 		m_outputValidators = outputValidators;
@@ -82,7 +86,7 @@ public class CustomCommand extends Command {
     		
     		List<String> argumentValues = extractArgumentList(args, index);
     		
-			return new CustomCommand(names(), m_impl, m_command,
+			return new CustomCommand(names(), m_impl, m_executor,
 					m_args, argumentValues, m_outputValidators, 
 					m_outputDisplay);
 
@@ -99,7 +103,7 @@ public class CustomCommand extends Command {
     			// visible to the user on the console.
     			console.setOutputDisplay(m_outputDisplay);
     			
-            	m_command.execute(shell, model, console, getArgsMap()); 
+            	m_executor.execute(shell, model, console, getArgsMap()); 
 
             	console.setOutputDisplay(true);
             	
@@ -126,13 +130,7 @@ public class CustomCommand extends Command {
     public void addOutputValidator(Validator validator) {
     	m_outputValidators.add(validator);
     }
-    
-    private <T> T loadCommandClass(final String className, final Class<T> type) 
-    		throws Exception {
-    	
-        return type.cast(Class.forName(className).newInstance());
-    }
-    
+        
     private Map<String, String> getArgsMap() {
     	Map<String, String> argsMap = new TreeMap<String, String>();
     	for (int i = 0; i < m_args.size(); ++i) {
