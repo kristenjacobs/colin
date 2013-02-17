@@ -1,0 +1,8 @@
+export REFDBROOT=/home/kris/University/SoftwareEngineeringMscOxford/PRJ/Implementation/refdb
+
+export JCOLIN_CONFIG_FILE=$REFDBROOT/config.xml
+export JCOLIN_SCHEMA_FILE=$REFDBROOT/../jcolin/colin.rng
+export JCOLIN_EXT_PATH=$REFDBROOT/extensions
+
+export PYTHON_HOME=$REFDBROOT/../jcolin/jython
+export PYTHON_VERBOSE=error

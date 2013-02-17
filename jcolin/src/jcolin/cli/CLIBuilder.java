@@ -42,27 +42,46 @@ public class CLIBuilder {
 	}
 
     private File getConfigFile() {
-	    String configFilePath = System.getProperty("ConfigFile");
-	    if (configFilePath == null) {
-	    	configFilePath = "config.xml";
+    	// To find the config file we first look for the required system property    	    
+	    String configFile = System.getProperty("ConfigFile");
+	    if (configFile != null) {
+		    return new File(configFile);
 	    }
-	    return new File(configFilePath);
+	    // Next see if the required environment variable is set..
+	    configFile = System.getenv("JCOLIN_CONFIG_FILE");
+	    if (configFile != null) {
+		    return new File(configFile);
+	    }
+	    // Otherwise, default to looking for a 'config.xml' in the current directory. 
+	    return new File("config.xml");
     }
 
-	private boolean validateConfigFile(File configFile) throws Exception {
-		String schemaFileStr = System.getProperty("SchemaFile");
-		if (schemaFileStr != null) {
-		    File rngFile = new File(schemaFileStr);
-		    if (rngFile.exists()) {
-	    		return RngUtils.validate(configFile, rngFile, m_console);		    	
-    		}
-		    
+	private boolean validateConfigFile(File configFile) throws Exception {		
+		File schemaFile = getSchemaFile();
+		if (schemaFile.exists()) {
+	        return RngUtils.validate(configFile, schemaFile, m_console);
+	        
 	    } else {
 	    	m_console.displayWarning("Schema not found, unable to validate the config.xml\n");
+			return true;
 	    }			
-		return true;
 	}
-	
+
+    private File getSchemaFile() {
+    	// To find the schema file we first look for the required system property    	    
+	    String schemaFile = System.getProperty("SchemaFile");
+	    if (schemaFile != null) {
+		    return new File(schemaFile);
+	    }
+	    // Next see if the required environment variable is set..
+	    schemaFile = System.getenv("JCOLIN_SCHEMA_FILE");
+	    if (schemaFile != null) {
+		    return new File(schemaFile);
+	    }
+	    // Otherwise, default to looking for a 'config.rng' in the current directory. 
+	    return new File("config.rng");
+    }
+
     private CLI createCLI(Document doc) {
         NodeList interfaceNodes = doc.getElementsByTagName("colin");
         Node interfaceNode = interfaceNodes.item(0);
@@ -179,5 +198,5 @@ public class CLIBuilder {
         NodeList nodes = element.getElementsByTagName(name);
         Node node = nodes.item(0);
         return (Element)node; 	
-    }
+    }    
 }
