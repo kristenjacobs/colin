@@ -56,6 +56,10 @@
            <description></description>
            <output display="false"><File schema="FileSchema.rng"/></output>
        </command>
+       <command name="testFileFail3" impl="test.FileCommandFail3">
+           <description></description>
+           <output display="false"><File shouldExist="true"/></output>
+       </command>
     </commands>
 </colin>
 

@@ -30,4 +30,5 @@ testutils.run("echo \"===== File tests =====\" >> bin/output.txt")
 testutils.run(command + "testFilePass -exit >> bin/output.txt")
 testutils.run(command + "testFileFail1 -exit >> bin/output.txt")
 testutils.run(command + "testFileFail2 -exit >> bin/output.txt")
+testutils.run(command + "testFileFail3 -exit >> bin/output.txt")
 
