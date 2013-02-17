@@ -9,9 +9,11 @@ import jcolin.utils.RngUtils;
 
 public class FileValidator extends Validator {
     private String m_schema;
+    private String m_shouldExist;
 
-	public FileValidator(String schema) {
+	public FileValidator(String schema, String shouldExist) {
 		m_schema = schema;			
+		m_shouldExist = shouldExist;
 	}
 
 	@Override
@@ -36,8 +38,11 @@ public class FileValidator extends Validator {
 	    		return RngUtils.validate(valueFile, schemaFile, null);
 			}
 			// No schema file has been specified so the most 
-			// we can do is check that the file exists.
-			return new File(value).exists();			
+			// we can do is check that the file exists (if required).
+			if ((m_shouldExist != null) && m_shouldExist.equals("true")) {
+    			return new File(value).exists();
+			}
+			return true;
 			
 		} catch (Exception e) {
 			return false;

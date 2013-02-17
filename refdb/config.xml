@@ -84,7 +84,7 @@
                <description>Sets the date for the given reference</description>
                <args>
                    <arg name="refid"><Integer min="0"/></arg>    
-                   <arg name="date"><String pattern="%d%d%d%d"/></arg>
+                   <arg name="date"><String pattern="(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec) \d{4}"/></arg>
                </args>
                <output display="false">
                    <!-- Return the success status of the command -->
@@ -113,7 +113,7 @@
            <command name="save" impl="refdb.commands.system.Save">
                <description>Saves the current state of the reference database</description>
                <args>
-                   <arg name="filename"><File schema="save.rnc"/></arg>
+                   <arg name="filename"><File/></arg>
                </args>
            </command>
            <command name="restore" impl="refdb.commands.system.Restore">

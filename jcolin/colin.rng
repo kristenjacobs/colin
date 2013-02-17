@@ -184,6 +184,9 @@
             <optional>
                 <attribute name="schema"/>
             </optional>    
+            <optional>
+                <attribute name="shouldExist"/>
+            </optional>    
         </element>
     </define>
 

@@ -68,7 +68,7 @@ public class CustomCommand extends Command {
     public String commandLine() {
     	String str = name();
     	for (String argValue : m_argValues) {
-    		str += " " + argValue;
+    		str += " \"" + argValue + "\"";
     	}
     	return str;
     }

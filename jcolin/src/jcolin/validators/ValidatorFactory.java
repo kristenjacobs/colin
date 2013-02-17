@@ -26,7 +26,8 @@ public class ValidatorFactory {
 
     	} else if (nodeName.equals("File")) {
         	String schema = element.getAttribute("schema");
-        	return new FileValidator(schema);
+        	String shouldExist = element.getAttribute("shouldExist");
+        	return new FileValidator(schema, shouldExist);
 
     	} else {
     		throw new Exception("Unknown validator: " + nodeName);
