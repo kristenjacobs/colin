@@ -1,0 +1,16 @@
+<colin toolname="test" prompt=">" version="1.0.0">
+    <commands>
+       <command name="sayhello" impl="test.SayHello">
+           <description>Test command that returns the string 'hello world'</description>
+       </command>
+    </commands>
+    <extensions>
+       <command name="repeatsayhello" impl="RepeatSayHello.py">
+           <description>Repeats the sayhello command a given number of times</description>
+           <args>
+               <arg name="name"><Integer min="0"/></arg>
+           </args>
+       </command>
+    </extensions>    
+</colin>
+

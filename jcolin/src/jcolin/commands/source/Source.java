@@ -1,24 +1,12 @@
 package jcolin.commands.source;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Properties;
-
-import org.python.core.PyList;
-import org.python.core.PyString;
-import org.python.core.PySystemState;
-import org.python.util.PythonInterpreter;
 
 import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
-import jcolin.commands.Invalid;
 import jcolin.consoles.Console;
-import jcolin.consoles.IConsole;
 import jcolin.shell.Shell;
-import jcolin.utils.StringUtil;
 
 public class Source extends Command {	
 	private static final String[] COMMAND_NAMES = { "source" };
@@ -113,131 +101,15 @@ public class Source extends Command {
     public void execute(Shell shell, Object model, Console console) {
     	switch (m_scriptType) {
     	case INTERNAL:
-    		sourceInternalScript(shell, model, console);
+    		shell.sourceInternalScript(m_fileName, m_args);
     		break;
             
     	case EXTERNAL:
-    		sourceExternalScript(shell, model, console);
+    		shell.sourceExternalScript(this, m_fileName);
     		break;
     	}
-    }
-    
-    private void sourceExternalScript(Shell shell, Object model, IConsole console) {    	    
-        try {
-            BufferedReader fp = new BufferedReader(new FileReader(m_fileName));
-            int location = shell.getLocation(this);
-            try {
-                String line;
-                String commandString = "";
-                boolean multilineCommand = false;
-
-                while ((line = fp.readLine()) != null) {
-                    line = line.trim();
-                    if (line.length() > 0) {
-
-                        if (line.startsWith("#")) {
-                        	// Ignore comment lines...
-
-                        } else if (line.endsWith("\\")) {
-                        	// Handles the line continuation character...
-                        	commandString += " " + line.substring(0, line.length() - 2).trim();
-                        	multilineCommand = true;
-
-                        } else {
-                            if (multilineCommand) {
-                            	commandString += " " + line;
-                            } else {
-                            	commandString = line;
-                            }
-                            multilineCommand = false;
-
-                            String[] tokens = commandString.trim().split("\\s+");
-                            ArrayList<String> tokenGroups = StringUtil.groupQuotedTokens(tokens);
-                            if (tokenGroups.size() > 0) {
-                                tokens = tokenGroups.toArray(new String[0]);
-
-	                            Command command = m_commandFactory.buildCommand(
-	                            		tokens, 0, shell.getCommandHistory(), (Console)console);
-
-	                            boolean invalidCommand = false;
-	                            if (command != null) {
-	                            	if (command.getFileRedirect() != null) {
-	                            		invalidCommand = ((command.numArgs() + 2) != (tokens.length - 1));
-	                            	} else {
-	                            		invalidCommand = (command.numArgs() != (tokens.length - 1));
-	                            	}
-	                                if (!invalidCommand) {
-	                            	    shell.addCommand(command, location + 1);
-	                            	    location++;
-	                                }
-	                            } else {
-	                            	invalidCommand = true;
-	                            }
-
-	                            if (invalidCommand) {
-	                            	String errorMessage = String.format("invalid command");
-	                            	shell.addCommand(new Invalid(commandString, errorMessage), location+1);
-	                            	location++;
-	                            }
-	                            commandString = "";
-                            }
-                    	}
-                    }
-                }
-                fp.close();
-                
-            } catch (IOException e) {
-            	System.out.printf("Error: problem reading the file: %s", m_fileName);
-            }
-        } catch (IOException e) {
-        	System.out.printf("Error: unable to open file for reading: %s", m_fileName);
-        }
-    }
-    
-    private void sourceInternalScript(Shell shell, Object model, Console console) {
-    	Properties postProperties = new Properties();
-    	Properties systemProperties = System.getProperties();    	
-
-    	String pythonHome = System.getenv("PYTHON_HOME");
-    	if (pythonHome == null) {
-    		console.displayError("PYTHON_HOME environment variable not set");
-    		return;    		
-    	}
-    	
-    	String pythonVerbose = System.getenv("PYTHON_VERBOSE");  
-    	if (pythonVerbose == null) {
-    		console.displayError("PYTHON_VERBOSE environment variable not set");
-    		return;    		
-    	}
-
-    	systemProperties.setProperty("python.home", pythonHome);
-    	systemProperties.setProperty("python.verbose", pythonVerbose);
-
-	    PythonInterpreter.initialize(systemProperties, postProperties, new String[] {""});        
-        PythonInterpreter interp = getPythonInterpreter(m_args);
-
-        interp.setOut(new ScriptConsoleWriter(console));
-        interp.setErr(new ScriptConsoleWriter(console));
-        
-        interp.set(m_toolName, new ScriptInterface(shell));        
-        try {
-            interp.execfile(m_fileName);
-            
-        } catch (Exception e) {
-        	console.display(e.toString() + "\n");
-        }
-    }    
-    
-    private PythonInterpreter getPythonInterpreter(String[] args) {
-        PySystemState pySystemState = new PySystemState();        
-       	PyList argv = new PyList();
-        for (String arg : args) {
-            argv.append(new PyString(arg));
-        }
-        pySystemState.argv = argv;        
-        return new PythonInterpreter(null, pySystemState);    	
     }   
-    
+         
     private ScriptType getScriptType(String fileName) {
     	String extension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
     	if (extension.equals("py")) {   
