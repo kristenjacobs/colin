@@ -3,6 +3,7 @@ package refdb.commands.remove;
 import java.util.Map;
 
 import refdb.Model;
+import refdb.commands.CommandUtils;
 
 import jcolin.commands.ICommand;
 import jcolin.consoles.IConsole;
@@ -14,7 +15,7 @@ public class Info implements ICommand {
 	public void execute(Shell shell, Object model, 
 			IConsole console, Map<String, String> args) {	
 	    ((Model)model).removeInfo(
-	    		TypeUtils.getInteger(args, "refid"),
+	    		CommandUtils.getRefId(args, (Model)model),
 		        TypeUtils.getInteger(args, "infoid"));				
 	}
 }

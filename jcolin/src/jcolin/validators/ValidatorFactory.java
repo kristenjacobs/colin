@@ -29,6 +29,12 @@ public class ValidatorFactory {
         	String shouldExist = element.getAttribute("shouldExist");
         	return new FileValidator(schema, shouldExist);
 
+    	} else if (nodeName.equals("Or")) {
+            return new OrValidator(element);
+    		
+    	} else if (nodeName.equals("And")) {        	
+            return new AndValidator(element);
+            
     	} else {
     		throw new Exception("Unknown validator: " + nodeName);
     	}

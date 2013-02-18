@@ -18,7 +18,7 @@
        <command name="delete" impl="refdb.commands.delete.Delete">
            <description>Removes the reference with the given id from the database</description>
            <args>
-               <arg name="refid"><Integer min="0"/></arg>    
+               <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
            </args>
            <output>
                <!-- Return the success status of the command -->
@@ -31,7 +31,7 @@
            <command name="author" impl="refdb.commands.add.Author">
                <description>Adds another author to the given reference</description>
                <args>
-                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>
                    <arg name="name"><String/></arg>    
                </args>
                <output display="false">
@@ -42,7 +42,7 @@
            <command name="info" impl="refdb.commands.add.Info">
                <description>Adds another piece of information to the given reference</description>
                <args>
-                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="info"><String/></arg>    
                </args>
                <output display="false">
@@ -57,7 +57,7 @@
            <command name="author" impl="refdb.commands.remove.Author">
                <description>Removes the author from the given reference</description>
                <args>
-                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="authorid"><Integer min="0"/></arg>    
                </args>
                <output display="false">
@@ -68,7 +68,7 @@
            <command name="info" impl="refdb.commands.remove.Info">
                <description>Adds another piece of information to the given reference</description>
                <args>
-                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="infoid"><Integer min="0"/></arg>    
                </args>
                <output display="false">
@@ -83,7 +83,7 @@
            <command name="date" impl="refdb.commands.set.Date">
                <description>Sets the date for the given reference</description>
                <args>
-                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="date"><String pattern="(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec) \d{4}"/></arg>
                </args>
                <output display="false">
@@ -94,7 +94,7 @@
            <command name="isbn" impl="refdb.commands.set.ISBN">
                <description>Sets the ISBN number for the given reference</description>
                <args>
-                   <arg name="refid"><Integer min="0"/></arg>    
+                   <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="number"><String pattern="[0-9]{10}"/></arg>
                </args>
                <output display="false">

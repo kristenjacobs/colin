@@ -91,7 +91,19 @@
                         <element name="arg">
                             <attribute name="name"/>
                             <optional>
-                                <ref name="Type"/>
+                                <choice>
+                                    <element name="Or">
+                                        <oneOrMore>
+                                            <ref name="Type"/>
+                                        </oneOrMore>
+                                    </element>
+                                    <element name="And">
+                                        <oneOrMore>
+                                            <ref name="Type"/>
+                                        </oneOrMore>
+                                    </element>   
+                                    <ref name="Type"/>
+                                </choice>
                             </optional>    
                         </element>
                     </zeroOrMore>

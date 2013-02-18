@@ -14,16 +14,19 @@ import org.w3c.dom.NodeList;
 
 public class Model {
 	private static final int INVALID_ID = -1;
+	private int m_lastRefId;
 	
     private Collection<Reference> m_references;
 
     public Model() {
     	m_references = new ArrayList<Reference>();
+    	m_lastRefId = INVALID_ID;
     }
 
     public int createReference(String title) {
     	int id = getNextId();
     	m_references.add(new Reference(id, title));
+    	m_lastRefId = id;
     	return id;
     }
     
@@ -198,6 +201,10 @@ public class Model {
     	} catch (Exception e) {
     		console.display("Error: Unable to restore system state from file: " + filename + "\n");    		
     	}
+    }
+    
+    public int getLastRefId() {
+    	return m_lastRefId;
     }
     
     private Reference getReference(int id) {

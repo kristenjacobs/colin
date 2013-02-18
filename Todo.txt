@@ -43,3 +43,5 @@ Testing:
 BUGS:
 ===============================================================================
 
+- If an invalid refid is used in a command, it currently does not error 
+  on this case.

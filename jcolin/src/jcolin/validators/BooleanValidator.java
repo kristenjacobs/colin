@@ -21,5 +21,4 @@ public class BooleanValidator extends Validator {
 	Collection<ValidatorAttribute> getAttributes() {
 		return new ArrayList<ValidatorAttribute>();
 	}
-	
 }
