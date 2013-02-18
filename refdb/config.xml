@@ -123,6 +123,13 @@
                </args>
            </command>
        </container>
+
+       <container name="get">
+           <description>Retrives reference database information</description>
+           <command name="refids" impl="refdb.commands.get.RefIds">
+               <description>Gets the list of reference ids currently in the database</description>
+           </command>
+       </container>
     </commands>
 
     <!-- ================================================================== -->

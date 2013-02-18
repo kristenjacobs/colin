@@ -5,6 +5,7 @@
   [-]set <option> <arg0> <arg1>...: Sets attributes on an existing reference
   [-]list: Lists all the references currently stored in the database
   [-]system <option> <arg0> <arg1>...: Deals with the saving/restoring of the reference database
+  [-]get <option> <arg0> <arg1>...: Retrives reference database information
   [-]search <option> <arg0> <arg1>...: Creates a summary of the database contents
   [-]echo "text": Prints the text to the console
   [-]exit: Quits the application

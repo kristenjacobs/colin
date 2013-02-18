@@ -203,6 +203,14 @@ public class Model {
     	}
     }
     
+    public Collection<Integer> getRefIds() {
+    	Collection<Integer> refIds = new ArrayList<Integer>();
+    	for (Reference reference : m_references) {
+    		refIds.add(reference.getId());
+    	}
+    	return refIds;
+    }
+
     public int getLastRefId() {
     	return m_lastRefId;
     }
