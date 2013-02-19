@@ -13,7 +13,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Model {
-	private static final int INVALID_ID = -1;
+	public static final int INVALID_ID = -1;
 	private int m_lastRefId;
 	
     private Collection<Reference> m_references;
@@ -214,8 +214,16 @@ public class Model {
     public int getLastRefId() {
     	return m_lastRefId;
     }
+
+    public Collection<Integer> getAuthorIds(int refId) {
+    	return getIds(getReference(refId).getAuthors());
+    }    
     
-    private Reference getReference(int id) {
+    public Collection<Integer> getInfoIds(int refId) {
+    	return getIds(getReference(refId).getInfos());
+    }
+
+    public Reference getReference(int id) {
     	for (Reference reference : m_references) {
     		if (id == reference.getId()) {
     			return reference;
@@ -224,6 +232,14 @@ public class Model {
     	return null;
     }
     
+    private Collection<Integer> getIds(Collection<ReferenceField> refFlds) {
+    	Collection<Integer> ids = new ArrayList<Integer>();
+    	for (ReferenceField refFld : refFlds) {
+    		ids.add(refFld.getId());
+    	}
+    	return ids;    	
+    }
+        
     private int getNextId() {
     	int maxId = -1;
     	for (Reference reference : m_references) {

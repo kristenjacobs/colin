@@ -1,0 +1,30 @@
+
+create "Software Engineering Book Part 1"
+get title -
+
+set date - "sep 2001"
+get date -
+
+set isbn - 1234567888
+get isbn -
+
+add author - "Kristen Jacobs"
+get authorids -
+get author - -
+
+add author - "Fred Bloggs"
+get authorids -
+get author - -
+
+add info - "www.kris.com"
+get infoids -
+get info - -
+
+add info - "First Edition"
+get infoids -
+get info - -
+
+add info - "Microsoft Press"
+get infoids -
+get info - -
+

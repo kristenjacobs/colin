@@ -11,12 +11,16 @@ public class Reference {
     private Collection<ReferenceField> m_infos;
     private String m_date;
     private String m_isbn;
+    private int m_lastAuthorId;
+    private int m_lastInfoId;
 	    
     public Reference(int id, String title) {
     	m_id = id;
     	m_title = title;
     	m_authors = new ArrayList<ReferenceField>();
     	m_infos = new ArrayList<ReferenceField>();
+    	m_lastAuthorId = Model.INVALID_ID;
+    	m_lastInfoId = Model.INVALID_ID;
     }
     
     public int getId() {
@@ -28,12 +32,20 @@ public class Reference {
     }
     
     public Collection<ReferenceField> getAuthors() {
-    	return  m_authors;
+    	return m_authors;
     }
 
+    public ReferenceField getAuthor(int id) {
+    	return getField(m_authors, id);
+    }    
+    
     public Collection<ReferenceField> getInfos() {
-    	return  m_infos;
+    	return m_infos;
     }
+
+    public ReferenceField getInfo(int id) {
+    	return getField(m_infos, id);
+    }    
 
     public String getDate() {
     	return m_date;
@@ -43,12 +55,26 @@ public class Reference {
     	return m_isbn;
     }
     
+    public int getLastAuthorId() {
+    	return m_lastAuthorId;
+    }
+    
+    public int getLastInfoId() {
+    	return m_lastInfoId;
+    }
+    
+    public String toString() {
+    	return "[" + m_id + "], Title: " + m_title;
+    }
+
     int addAuthor(String author) {
-    	return addField(m_authors, author);
+    	m_lastAuthorId = addField(m_authors, author); 
+    	return m_lastAuthorId;
     }
     
     int addInfo(String info) {
-    	return addField(m_infos, info);
+    	m_lastInfoId = addField(m_infos, info);
+    	return m_lastInfoId;
     }
 
     boolean removeAuthor(int id) {
@@ -67,10 +93,6 @@ public class Reference {
     	m_isbn = isbn;
     }    
 
-    public String toString() {
-    	return "[" + m_id + "], Title: " + m_title;
-    }
-
     private int addField(Collection<ReferenceField> fields, String data) {
     	int id = getNextId(fields);
     	fields.add(new ReferenceField(id, data));
@@ -86,6 +108,15 @@ public class Reference {
     	}
     	return false;
     }
+
+    public ReferenceField getField(Collection<ReferenceField> fields, int id) {
+    	for (ReferenceField field : fields) {
+    		if (field.getId() == id) {
+    			return field;
+    		}
+    	}
+    	return null;
+    }    
     
     private int getNextId(Collection<ReferenceField> fields) {
     	int maxId = -1;
