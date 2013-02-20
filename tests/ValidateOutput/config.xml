@@ -2,63 +2,63 @@
     <commands>
        <command name="testBooleanPass" impl="test.BooleanCommandPass">
            <description></description>
-           <output display="false"><Boolean/></output>
+           <output display="NONE"><Boolean/></output>
        </command>
        <command name="testBooleanFail" impl="test.BooleanCommandFail">
            <description></description>
-           <output display="false"><Boolean/></output>
+           <output display="NONE"><Boolean/></output>
        </command>
        <command name="testIntegerPass" impl="test.IntegerCommandPass">
            <description></description>
-           <output display="false"><Integer min="11" max="29"/></output>
+           <output display="NONE"><Integer min="11" max="29"/></output>
        </command>
        <command name="testIntegerFail1" impl="test.IntegerCommandFail1">
            <description></description>
-           <output display="false"><Integer min="11" max="29"/></output>
+           <output display="NONE"><Integer min="11" max="29"/></output>
        </command>
        <command name="testIntegerFail2" impl="test.IntegerCommandFail2">
            <description></description>
-           <output display="false"><Integer min="11" max="29"/></output>
+           <output display="NONE"><Integer min="11" max="29"/></output>
        </command>
        <command name="testDoublePass" impl="test.DoubleCommandPass">
            <description></description>
-           <output display="false"><Double min="11.0" max="29.0"/></output>
+           <output display="NONE"><Double min="11.0" max="29.0"/></output>
        </command>
        <command name="testDoubleFail1" impl="test.DoubleCommandFail1">
            <description></description>
-           <output display="false"><Double min="11.0" max="29.0"/></output>
+           <output display="NONE"><Double min="11.0" max="29.0"/></output>
        </command>
        <command name="testDoubleFail2" impl="test.DoubleCommandFail2">
            <description></description>
-           <output display="false"><Double min="11.0" max="29.0"/></output>
+           <output display="NONE"><Double min="11.0" max="29.0"/></output>
        </command>
        <command name="testStringPass" impl="test.StringCommandPass">
            <description></description>
-           <output display="false"><String pattern="Arg.*"/></output>
+           <output display="NONE"><String pattern="Arg.*"/></output>
        </command>
        <command name="testStringFail1" impl="test.StringCommandFail1">
            <description></description>
-           <output display="false"><String pattern="Arg.*"/></output>
+           <output display="NONE"><String pattern="Arg.*"/></output>
        </command>
        <command name="testStringFail2" impl="test.StringCommandFail2">
            <description></description>
-           <output display="false"><String pattern="Arg.*"/></output>
+           <output display="NONE"><String pattern="Arg.*"/></output>
        </command>
        <command name="testFilePass" impl="test.FileCommandPass">
            <description></description>
-           <output display="false"><File schema="FileSchema.rng"/></output>
+           <output display="NONE"><File schema="FileSchema.rng"/></output>
        </command>
        <command name="testFileFail1" impl="test.FileCommandFail1">
            <description></description>
-           <output display="false"><File/></output>
+           <output display="NONE"><File/></output>
        </command>
        <command name="testFileFail2" impl="test.FileCommandFail2">
            <description></description>
-           <output display="false"><File schema="FileSchema.rng"/></output>
+           <output display="NONE"><File schema="FileSchema.rng"/></output>
        </command>
        <command name="testFileFail3" impl="test.FileCommandFail3">
            <description></description>
-           <output display="false"><File shouldExist="true"/></output>
+           <output display="NONE"><File shouldExist="true"/></output>
        </command>
     </commands>
 </colin>
