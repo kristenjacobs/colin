@@ -9,7 +9,7 @@
            <args>
                <arg name="title"><String/></arg>    
            </args>
-           <output display="false">
+           <output display="NONE">
                <!-- This comand returns the reference id -->
                <Integer min="0"/>
            </output>
@@ -34,7 +34,7 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>
                    <arg name="name"><String/></arg>    
                </args>
-               <output display="false">
+               <output display="NONE">
                    <!-- This comand returns the author id (or -1 on failure) -->
                    <Integer min="-1"/>
                </output>
@@ -45,7 +45,7 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="info"><String/></arg>    
                </args>
-               <output display="false">
+               <output display="NONE">
                    <!-- This comand returns the info id (or -1 on failure) -->
                    <Integer min="-1"/>
                </output>
@@ -60,7 +60,7 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="authorid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
-               <output display="false">
+               <output display="NONE">
                    <!-- return the success status of the command -->
                    <Boolean/>
                </output>
@@ -71,7 +71,7 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="infoid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
-               <output display="false">
+               <output display="NONE">
                    <!-- Return the success status of the command -->
                    <Boolean/>
                </output>
@@ -86,7 +86,7 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="date"><String pattern="(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec) \d{4}"/></arg>
                </args>
-               <output display="false">
+               <output display="NONE">
                    <!-- Return the success status of the command -->
                    <Boolean/>
                </output>
@@ -97,7 +97,7 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="number"><String pattern="[0-9]{10}"/></arg>
                </args>
-               <output display="false">
+               <output display="NONE">
                    <!-- Return the success status of the command -->
                    <Boolean/>
                </output>
@@ -128,30 +128,35 @@
            <description>Retrives reference database information</description>
            <command name="refids" impl="refdb.commands.get.RefIds">
                <description>Gets the list of reference ids currently in the database</description>
+               <output display="EXTERNAL"/>
            </command>
            <command name="title" impl="refdb.commands.get.Title">
                <description>Gets the title for the given reference</description>
                <args>
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
+               <output display="EXTERNAL"/>
            </command>
            <command name="date" impl="refdb.commands.get.Date">
                <description>Gets the date for the given reference</description>
                <args>
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
+               <output display="EXTERNAL"/>
            </command>
            <command name="isbn" impl="refdb.commands.get.ISBN">
                <description>Gets the ISBN for the given reference</description>
                <args>
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
+               <output display="EXTERNAL"/>
            </command>
            <command name="authorids" impl="refdb.commands.get.AuthorIds">
                <description>Gets the list of author ids for the given reference id</description>
                <args>
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
+               <output display="EXTERNAL"/>
            </command>
            <command name="author" impl="refdb.commands.get.Author">
                <description>Gets the author for the given reference id and author id</description>
@@ -159,12 +164,14 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="authorid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
+               <output display="EXTERNAL"/>
            </command>
            <command name="infoids" impl="refdb.commands.get.InfoIds">
                <description>Gets the list of info ids for the given reference id</description>
                <args>
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
+               <output display="EXTERNAL"/>
            </command>
            <command name="info" impl="refdb.commands.get.Info">
                <description>Gets the info for the given reference id and author id</description>
@@ -172,6 +179,7 @@
                    <arg name="refid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                    <arg name="infoid"><Or><Integer min="0"/><String pattern="-"/></Or></arg>    
                </args>
+               <output display="EXTERNAL"/>
            </command>
        </container>
     </commands>

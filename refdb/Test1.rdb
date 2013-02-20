@@ -6,7 +6,7 @@ add info - "www.kris.com"
 add info - "First Edition"
 add info - "Microsoft Press"
 set date - "sep 2001"
-set isbn - 1234567890
+set isbn - 9999567890
 
 create "Software Engineering Book Part 2"
 add author - "Homer Simpson"
@@ -14,9 +14,9 @@ add author - "Marge Simpson"
 add info - "www.thesimpsons.com"
 add info - "First Edition"
 add info - "Springfield Press"
-set date - "sep 2001"
+set date - "sep 2004"
 set isbn - 1234567890
 
-list
-system save "Test1.xml"
+#list
+#system save "Test1.xml"
 

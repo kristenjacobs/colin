@@ -11,9 +11,23 @@ import jcolin.commands.CommandFactory;
 import jcolin.commands.Command.RedirectMode;
 
 public abstract class Console implements IConsole {
+	
+	public enum OutputMode {
+		ALL,
+		INTERNAL,
+		EXTERNAL,
+		NONE,
+	}
+	
+	public enum Context {
+		EXTERNAL,
+		INTERNAL,
+	}
+	
 	private PrintWriter m_fileWriter;
 	private StringBuffer m_outputBuffer;
-	private boolean m_outputDisplay;
+	private OutputMode m_outputMode;
+	private Context m_context;
 
 	public abstract void initialise(CommandFactory commandFactory) throws IOException;
 	public abstract void displayPrompt(String str);
@@ -22,8 +36,9 @@ public abstract class Console implements IConsole {
 	public abstract boolean hasEscaped();
 
 	public Console() {
-		m_outputDisplay = true;
 		m_outputBuffer = new StringBuffer();
+		resetOutputMode();
+		m_context = Context.EXTERNAL;
 	}
 	
 	public boolean redirectToFile(String str) {
@@ -77,11 +92,46 @@ public abstract class Console implements IConsole {
 		return m_outputBuffer.toString().trim();		
 	}
 	
-	public void setOutputDisplay(boolean outputDisplay) {
-		m_outputDisplay = outputDisplay;
+	public void setOutputMode(OutputMode outputMode) {
+		m_outputMode = outputMode;
 	}
 	
-    public boolean getOutputDisplay() {
-    	return m_outputDisplay;
+    public OutputMode getOutputMode() {
+    	return m_outputMode;
     }
+    
+    public void resetOutputMode() {
+    	m_outputMode = OutputMode.ALL;
+    }
+    
+    public void setContext(Context context) {
+    	m_context = context;
+    }
+    
+    public Context getContext() {
+    	return m_context;
+    }    
+
+	boolean outputEnabled(boolean forceOutputDisplay) {
+		if (forceOutputDisplay)
+			return true;
+		
+		switch (m_outputMode) {
+		case ALL:
+			return true;
+
+		case EXTERNAL:
+			return m_context == Context.EXTERNAL;
+			
+		case INTERNAL:
+			return m_context == Context.INTERNAL;
+			
+		case NONE:
+			return false;	
+			
+		default:
+			assert(false);
+			return true;
+		}
+	}
 }

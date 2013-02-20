@@ -16,6 +16,10 @@ Implementation:
   or possibly we can also specify a grammar for this 
   and generate a parser (maybe using antler?)
 
+- Add a html report extension 'report html' command
+
+- Combine the 'extension' and 'commands' nodes in the colin language.
+
 - Add some comments to the code in general, focusing on the code that
   is called from the application (i.e. the ModelFactory/creation + TypeUtils)
 

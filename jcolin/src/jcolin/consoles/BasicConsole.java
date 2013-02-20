@@ -50,7 +50,7 @@ public class BasicConsole extends Console {
 	
 	private void output(String str, boolean forceOutputDisplay) {
 		super.addCommandOutput(str);
-		if ((forceOutputDisplay || getOutputDisplay()) && 
+		if (outputEnabled(forceOutputDisplay) &&
 			!redirectToFile(str)) {
 			System.out.printf("%s", str);
 		}		

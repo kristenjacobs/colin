@@ -16,6 +16,7 @@ import jcolin.commands.Invalid;
 import jcolin.commands.source.ScriptConsoleWriter;
 import jcolin.commands.source.ScriptInterface;
 import jcolin.consoles.Console;
+import jcolin.consoles.Console.Context;
 import jcolin.utils.StringUtil;
 
 import org.python.core.PyList;
@@ -210,9 +211,11 @@ public class Shell {
         interp.setErr(new ScriptConsoleWriter(m_console));
         
         interp.set(m_toolName, new ScriptInterface(this));        
-        try {
+        try {        	
+        	m_console.setContext(Context.INTERNAL);
             interp.execfile(fileName);
-            
+        	m_console.setContext(Context.EXTERNAL);
+
         } catch (Exception e) {
         	m_console.display(e.toString() + "\n");
         }

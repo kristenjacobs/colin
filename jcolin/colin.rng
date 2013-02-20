@@ -112,7 +112,14 @@
             <optional>
                 <element name="output">
                     <optional>    
-                        <attribute name="display"/>
+                        <attribute name="display">
+                            <choice>
+                              <value>ALL</value>
+                              <value>INTERNAL</value>
+                              <value>EXTERNAL</value>
+                              <value>NONE</value>
+                            </choice>
+                        </attribute>
                     </optional>    
                     <zeroOrMore>
                         <ref name="Type"/>

@@ -6,6 +6,7 @@ import jcolin.commands.custom.Argument;
 import jcolin.commands.custom.CustomCommand;
 import jcolin.commands.custom.CustomContainer;
 import jcolin.consoles.IConsole;
+import jcolin.consoles.Console.OutputMode;
 import jcolin.utils.DomUtils;
 import jcolin.utils.RngUtils;
 import jcolin.validators.ValidatorFactory;
@@ -163,8 +164,17 @@ public class CLIBuilder {
         if (outputElement != null) {
         	
         	if (outputElement.hasAttribute("display")) {
-        		if (outputElement.getAttribute("display").equals("false")) {
-        			command.setOutputDisplay(false);
+        		if (outputElement.getAttribute("display").equals("ALL")) {
+        			command.setOutputMode(OutputMode.ALL);
+        			
+        		} else if (outputElement.getAttribute("display").equals("INTERNAL")) {
+        			command.setOutputMode(OutputMode.INTERNAL);
+        			
+        		} else if (outputElement.getAttribute("display").equals("EXTERNAL")) {
+        			command.setOutputMode(OutputMode.EXTERNAL);
+        			
+        		} else if (outputElement.getAttribute("display").equals("NONE")) {
+        			command.setOutputMode(OutputMode.NONE);
         		}
         	}
         

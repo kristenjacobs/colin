@@ -3,11 +3,10 @@ package jcolin.consoles;
 import java.io.IOException;
 import java.util.Vector;
 
-import jline.ConsoleReader;
-
 import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
 import jcolin.completors.JColinCompletor;
+import jline.ConsoleReader;
 
 public class JLineConsole extends Console {
 	
@@ -78,8 +77,8 @@ public class JLineConsole extends Console {
 	}
 	
 	private void output(String str, boolean forceOutputDisplay) {
-		super.addCommandOutput(str);
-		if ((forceOutputDisplay || getOutputDisplay()) && 
+		super.addCommandOutput(str);		
+		if (outputEnabled(forceOutputDisplay) &&
 			!redirectToFile(str)) {
 			System.out.printf("%s", str);
 		}		

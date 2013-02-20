@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 import jcolin.commands.Command;
 import jcolin.consoles.Console;
+import jcolin.consoles.Console.OutputMode;
 import jcolin.consoles.IConsole;
 import jcolin.shell.Shell;
 import jcolin.validators.Validator;
@@ -20,7 +21,7 @@ public class CustomCommand extends Command {
 	private List<Argument> m_args;
 	private List<String> m_argValues;
 	private List<Validator> m_outputValidators;
-	private boolean m_outputDisplay;
+	private OutputMode m_outputMode;
 
 	public CustomCommand(String[] names, String impl) throws Exception {
 		super(names);
@@ -34,7 +35,7 @@ public class CustomCommand extends Command {
 		m_args = new ArrayList<Argument>();
 		m_argValues = new ArrayList<String>();
 		m_outputValidators = new ArrayList<Validator>();
-		m_outputDisplay = true;
+		m_outputMode = OutputMode.ALL;
 	}
 
 	public CustomCommand(String[] names, String impl,
@@ -42,7 +43,7 @@ public class CustomCommand extends Command {
 			List<Argument> args,
 			List<String> argValues,
 			List<Validator> outputValidators,
-			boolean outoutDisplay) throws Exception {
+			OutputMode outputMode) throws Exception {
 		
 		super(names);
 		m_impl = impl;
@@ -50,7 +51,7 @@ public class CustomCommand extends Command {
 		m_args = args;
 		m_argValues = argValues;
 		m_outputValidators = outputValidators;
-		m_outputDisplay = outoutDisplay;
+		m_outputMode = outputMode;
 	}
 
     public int numArgs() {
@@ -88,7 +89,7 @@ public class CustomCommand extends Command {
     		
 			return new CustomCommand(names(), m_impl, m_executor,
 					m_args, argumentValues, m_outputValidators, 
-					m_outputDisplay);
+					m_outputMode);
 
 		} catch (Exception ignore) {
 			return null;
@@ -100,12 +101,12 @@ public class CustomCommand extends Command {
     		if (validateArguments(console)) {
     			    			
     			// Determines if the output from this command should be 
-    			// visible to the user on the console.
-    			console.setOutputDisplay(m_outputDisplay);
+    			// visible to the user on the console in this context.
+    		    console.setOutputMode(m_outputMode);
     			
             	m_executor.execute(shell, model, console, getArgsMap()); 
 
-            	console.setOutputDisplay(true);
+            	console.resetOutputMode();
             	
             	validateOutput(console);
     		}
@@ -123,8 +124,8 @@ public class CustomCommand extends Command {
     	m_args.add(arg);
     }
     
-    public void setOutputDisplay(boolean outputDisplay) {
-    	m_outputDisplay = outputDisplay;
+    public void setOutputMode(OutputMode outputMode) {
+    	m_outputMode = outputMode;
     }
     
     public void addOutputValidator(Validator validator) {
