@@ -1,26 +1,21 @@
 import sys
+import re
 
 targetAuthor = sys.argv[0]
+numMatchesFound = 0
 
 refids = refdb.exec(["get", "refids"]).split()
 for refid in refids:
     title = refdb.exec(["get", "title", refid])
-    date  = refdb.exec(["get", "date", refid])
-    isbn  = refdb.exec(["get", "isbn", refid])
+    if re.search(targetAuthor, title):
+        print "Found match: Title: " + title
+        numMatchesFound += 1
 
-    authorids = refdb.exec(["get", "authorids", refid]).split()
-    infoids   = refdb.exec(["get", "infoids", refid]).split()
+if numMatchesFound == 1:
+    print "Found " + str(numMatchesFound) + " match" 
 
-    print "===="
-    print refid
-    print title
-    print date
-    print isbn
-    
-    for authorid in authorids:
-        author = refdb.exec(["get", "author", refid, authorid])
-        print "Author: " + author 
+elif numMatchesFound > 1:
+    print "Found " + str(numMatchesFound) + " matches"  
 
-    for infoid in infoids:
-        info = refdb.exec(["get", "info", refid, infoid])
-        print "Info: " + info 
+else:
+    print "No matches found"
