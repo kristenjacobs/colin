@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import jcolin.consoles.Console;
+import jcolin.consoles.TestConsole;
 import jcolin.shell.Shell;
 
 public class CommandStep implements Step {
@@ -17,7 +17,7 @@ public class CommandStep implements Step {
 	}
 	
 	@Override
-	public void perform(Shell shell, Console console,
+	public void perform(Shell shell, TestConsole console,
 			Map<String, String> environment, Object model) throws Exception {		
 		
 		String output = shell.execute(getCommandArray(), model, console);

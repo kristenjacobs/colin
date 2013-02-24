@@ -195,7 +195,7 @@ public class Shell {
         }
     }
         
-    public String sourceInternalScript(String fileName, String[] args, 
+    public void sourceInternalScript(String fileName, String[] args, 
     		Object model, Console console) {
     	
     	Properties postProperties = new Properties();
@@ -204,13 +204,13 @@ public class Shell {
     	String pythonHome = System.getenv("PYTHON_HOME");
     	if (pythonHome == null) {
     		console.displayError("PYTHON_HOME environment variable not set");
-    		return null;    		
+    		return;    		
     	}
     	
     	String pythonVerbose = System.getenv("PYTHON_VERBOSE");  
     	if (pythonVerbose == null) {
     		console.displayError("PYTHON_VERBOSE environment variable not set");
-    		return null;    		
+    		return;    		
     	}
 
     	systemProperties.setProperty("python.home", pythonHome);
@@ -228,11 +228,9 @@ public class Shell {
         	console.setContext(Context.INTERNAL);
             interp.execfile(fileName);
             console.setContext(Context.EXTERNAL);
-            return consoleWriter.getScriptOutput();
         	
         } catch (Exception e) {
         	console.display(e.toString() + "\n");
-        	return null;
         }
     }    
     

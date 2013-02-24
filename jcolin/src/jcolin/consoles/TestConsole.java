@@ -7,8 +7,13 @@ import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
 
 public class TestConsole extends Console {
+	private StringBuffer m_testBuffer;
 	
-	public void initialise(CommandFactory commandFactory) throws IOException {		
+	public TestConsole() {
+		m_testBuffer = new StringBuffer();		
+	}
+	
+	public void initialise(CommandFactory commandFactory) throws IOException {	
 	}
 	
 	public void display(String str) {
@@ -37,7 +42,18 @@ public class TestConsole extends Console {
     	return null;
 	}
 
+	public String getTestOutput() {
+		return m_testBuffer.toString().trim();
+	}
+	
+	public void clearTestOutput() {
+		m_testBuffer.delete(0, m_testBuffer.length());
+	}
+	
 	private void output(String str, boolean forceOutputDisplay) {
 		super.addCommandOutput(str);
+		if (outputEnabled(forceOutputDisplay)) {
+			m_testBuffer.append(str);			
+		}
 	}
 }

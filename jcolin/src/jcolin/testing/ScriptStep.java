@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import jcolin.consoles.Console;
+import jcolin.consoles.TestConsole;
 import jcolin.shell.Shell;
 import jcolin.utils.ScriptUtils;
 
@@ -20,7 +20,7 @@ public class ScriptStep implements Step {
 	}
 	
 	@Override
-	public void perform(Shell shell, Console console,
+	public void perform(Shell shell, TestConsole console,
 			Map<String, String> environment, Object model) throws Exception {
 
 		String script = ScriptUtils.locate("JCOLIN_TEST_PATH", m_name);
@@ -28,7 +28,10 @@ public class ScriptStep implements Step {
 			throw new Exception("Cannot locate script: " + m_name);
 		}
 		
-		String output = shell.sourceInternalScript(script, getArgsArray(), model, console);
+		console.clearTestOutput();
+		shell.sourceInternalScript(script, getArgsArray(), model, console);
+		String output = console.getTestOutput();
+		
 		if (!m_var.equals("")) {
 			environment.put(m_var, output);			
 		}

@@ -1,3 +1,4 @@
 Running testcase: StartEmpty ... Passed
 Running testcase: CreateRef ... Passed
 Running testcase: DeleteRef ... Passed
+Running testcase: SearchAuthor ... Passed

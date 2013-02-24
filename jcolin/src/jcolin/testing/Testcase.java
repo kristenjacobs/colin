@@ -37,7 +37,7 @@ public class Testcase {
 		console.display("Running testcase: " + m_name);    			
 		
 		// Creates a new console with which to run this testcase with..
-		Console testConsole = new TestConsole();
+		TestConsole testConsole = new TestConsole();
 		
 		// Create a new model class with which to run this testcase with...
 		Object model = shell.createModel();
