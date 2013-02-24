@@ -370,13 +370,8 @@ public class Shell {
 	}
 
 	private void postCommandExecute(Command command, Console console) {
-
     	if (command.getFileRedirect() != null) {
     		console.closeRedirectFile();
-    	}
-
-    	if (console.hasEscaped()) {
-    		m_commands.clear();
     	}
 	}	
 	

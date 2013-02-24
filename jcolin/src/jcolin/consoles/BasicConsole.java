@@ -9,9 +9,6 @@ import jcolin.commands.CommandFactory;
 
 public class BasicConsole extends Console {
 
-	public BasicConsole(){
-	}
-	
 	public void initialise(CommandFactory commandFactory) throws IOException {		
 	}
 	
@@ -41,13 +38,6 @@ public class BasicConsole extends Console {
     	return new Scanner(System.in).nextLine();
 	}
 
-	public void clearScreen() {
-	}
-
-	public boolean hasEscaped() {
-		return false;
-	}
-	
 	private void output(String str, boolean forceOutputDisplay) {
 		super.addCommandOutput(str);
 		if (outputEnabled(forceOutputDisplay) &&

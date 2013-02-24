@@ -7,9 +7,6 @@ import jcolin.commands.Command;
 import jcolin.commands.CommandFactory;
 
 public class TestConsole extends Console {
-
-	public TestConsole(){
-	}
 	
 	public void initialise(CommandFactory commandFactory) throws IOException {		
 	}
@@ -40,13 +37,6 @@ public class TestConsole extends Console {
     	return null;
 	}
 
-	public void clearScreen() {
-	}
-
-	public boolean hasEscaped() {
-		return false;
-	}
-	
 	private void output(String str, boolean forceOutputDisplay) {
 		super.addCommandOutput(str);
 	}

@@ -32,8 +32,6 @@ public abstract class Console implements IConsole {
 	public abstract void initialise(CommandFactory commandFactory) throws IOException;
 	public abstract void displayPrompt(String str);
 	public abstract String getNextLine(Vector<Command> commandHistory);
-	public abstract void clearScreen();
-	public abstract boolean hasEscaped();
 
 	public Console() {
 		m_outputBuffer = new StringBuffer();

@@ -12,10 +12,8 @@ public class JLineConsole extends Console {
 	
 	private ConsoleReader m_reader;
 	private String m_prompt;
-	private boolean m_hasEscaped;
 
 	JLineConsole() throws IOException {
-	  	m_hasEscaped = false;
 		m_reader = new ConsoleReader();
 		m_reader.setBellEnabled(false);
 	}
@@ -58,16 +56,7 @@ public class JLineConsole extends Console {
 	            line = null;
 		    }
 		}
-		m_hasEscaped = false;
-
 		return line;
-	}
-
-	public void clearScreen() {
-	}
-
-	public boolean hasEscaped() {
-		return m_hasEscaped;
 	}
 
 	private void reportError() {
