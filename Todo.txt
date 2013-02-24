@@ -5,9 +5,9 @@ Implementation:
 - Implement a custom command mechanism using a
   generated jython interface, maybe using the output returned from the 
   console?
+      - Just need to complete the implementation of the search scripts
 
 - Implement the regression test running framework:
-      - invariants
       - assertions (equals and regex)
       - scripts
 
@@ -66,4 +66,5 @@ Optional:
 
 - Allow custom commands to accept optional arguments.
 
+- Measure the coverage for the tests
 

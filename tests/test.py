@@ -13,7 +13,7 @@ def testPassed():
     return val
 
 def traverseTestDirs(action):
-    for dir in os.listdir("."):
+    for dir in sorted(os.listdir(".")):
         if os.path.isdir(dir):
             if os.path.exists(dir + "/test.py"):
                 os.chdir(dir)
