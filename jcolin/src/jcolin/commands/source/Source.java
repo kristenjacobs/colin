@@ -101,7 +101,7 @@ public class Source extends Command {
     public void execute(Shell shell, Object model, Console console) {
     	switch (m_scriptType) {
     	case INTERNAL:
-    		shell.sourceInternalScript(m_fileName, m_args);
+    		shell.sourceInternalScript(m_fileName, m_args, model, console);
     		break;
             
     	case EXTERNAL:

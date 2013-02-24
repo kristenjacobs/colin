@@ -7,9 +7,11 @@ import jcolin.consoles.Console;
 
 public class ScriptConsoleWriter extends Writer {
 	private Console m_console;
+	private StringBuffer m_buffer;
 	
 	public ScriptConsoleWriter(Console console) {
 		m_console = console;
+		m_buffer = new StringBuffer();
 	}
 	
 	public void close() throws IOException {
@@ -24,5 +26,10 @@ public class ScriptConsoleWriter extends Writer {
 			stringBuffer.append(cbuf[i]);		
 	    }
 		m_console.display(stringBuffer.toString());
+		m_buffer.append(stringBuffer);
+	}
+	
+	public String getScriptOutput() {
+		return m_buffer.toString();
 	}
 }

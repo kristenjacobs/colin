@@ -19,7 +19,8 @@ public class JColin {
 			console.initialise(commandFactory);
 
 			Shell shell = new Shell(console, commandFactory, modelFactory, 
-					args, cli.getToolName(), cli.getVersion(), cli.getPrompt());
+					args, cli.getToolName(), cli.getVersion(), 
+					cli.getPrompt(), cli.getTestcases());
 			return shell.execute();
 			
 		} catch (Exception e) {

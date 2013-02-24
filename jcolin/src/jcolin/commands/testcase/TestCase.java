@@ -11,7 +11,6 @@ public class TestCase extends Container {
 
 	static private Command[] m_options = {
 		new Run(),
-		new RunAll(),
 		new List(),
 	};
 

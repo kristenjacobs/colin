@@ -5,8 +5,12 @@ import java.io.File;
 import jcolin.commands.custom.Argument;
 import jcolin.commands.custom.CustomCommand;
 import jcolin.commands.custom.CustomContainer;
-import jcolin.consoles.IConsole;
 import jcolin.consoles.Console.OutputMode;
+import jcolin.consoles.IConsole;
+import jcolin.testing.AssertEqualsStep;
+import jcolin.testing.AssertRegexStep;
+import jcolin.testing.CommandStep;
+import jcolin.testing.Testcase;
 import jcolin.utils.DomUtils;
 import jcolin.utils.RngUtils;
 import jcolin.validators.ValidatorFactory;
@@ -116,7 +120,54 @@ public class CLIBuilder {
 	}
 	
 	private void addTestCasesToCLI(CLI cli, Document doc) {		
-		// TODO
+        NodeList commandsNodes = doc.getElementsByTagName("testcases");
+        if (commandsNodes.getLength() > 0) {
+            Node commandsNode = commandsNodes.item(0);
+            NodeList children = commandsNode.getChildNodes();
+
+            for (int i = 0; i < children.getLength(); i++) {
+                Node child = children.item(i);
+                if (child instanceof Element) {
+                	Element element = (Element)child;
+        
+                	if (element.getNodeName().equals("testcase")) {
+                        handleTestcase(cli, element);                		
+                	}
+                }
+            }            	
+        }
+	}
+
+	private void handleTestcase(CLI cli, Element testcaseElement) {
+    	String name         = testcaseElement.getAttribute("name");
+    	String description  = testcaseElement.getAttribute("description");
+    	
+    	Testcase testcase = new Testcase(name, description); 
+		cli.addTestcase(testcase);
+
+        NodeList children = testcaseElement.getChildNodes();
+        for (int i = 0; i < children.getLength(); i++) {
+            Node child = children.item(i);
+            if (child instanceof Element) {
+            	Element element = (Element)child;
+            	
+            	if (element.getNodeName().equals("runCommand")) {
+            		testcase.addStep(new CommandStep(
+            				element.getAttribute("name"),
+            				element.getAttribute("var")));            		     
+
+            	} else if (element.getNodeName().equals("assertEquals")) {
+            		testcase.addStep(new AssertEqualsStep(
+            				element.getAttribute("var"),
+            				getElement(element, "value").getTextContent()));            		                 		
+
+            	} else if (element.getNodeName().equals("assertRegex")) {
+            		testcase.addStep(new AssertRegexStep(
+            				element.getAttribute("var"),
+            				getElement(element, "value").getTextContent()));            		                 		
+            	}
+            }
+        }		
 	}
 	
 	private void handleCommandElement(CLI cli, Element element) throws Exception {

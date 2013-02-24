@@ -19,7 +19,8 @@ public class ExtensionExecutor implements Executor {
 	public void execute(Shell shell, Object model, 
 			Console console, Map<String, String> argsMap) {
 		
-		shell.sourceInternalScript(m_scriptName, getArgs(argsMap));
+		shell.sourceInternalScript(m_scriptName, 
+				getArgs(argsMap), model, console);
 	}
 	
 	private String locateScript(String impl) {

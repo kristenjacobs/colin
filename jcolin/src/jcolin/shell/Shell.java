@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Properties;
 import java.util.Queue;
@@ -17,6 +18,7 @@ import jcolin.commands.source.ScriptConsoleWriter;
 import jcolin.commands.source.ScriptInterface;
 import jcolin.consoles.Console;
 import jcolin.consoles.Console.Context;
+import jcolin.testing.Testcase;
 import jcolin.utils.StringUtil;
 
 import org.python.core.PyList;
@@ -34,20 +36,24 @@ public class Shell {
 	private State m_state;
 	private Console m_console;
 	private CommandFactory m_commandFactory;
+	private ModelFactory m_modelFactory;
     private Queue<Command> m_commands;
     private Vector<Command> m_commandHistory;
     private int m_returnCode;
     private String m_toolName;
     private String m_version;
     private String m_prompt;
-
+    private Collection<Testcase> m_testcases;
+    
 	public Shell(Console console, CommandFactory commandFactory, 
 			ModelFactory modelFactory, String[] args, 
-			String toolName, String version, String prompt) {
+			String toolName, String version, String prompt,
+			Collection<Testcase> testcases) {
 		
 		m_toolName = toolName;
 		m_version = version;
 		m_prompt = prompt;
+		m_testcases = testcases;
 		
 		try {
 		    initialise(console, commandFactory, modelFactory);
@@ -65,22 +71,22 @@ public class Shell {
 	 */
     public int execute() {
     	while (!isComplete()) {
-    		execute(getNextCommand());
+    		execute(getNextCommand(), m_model, m_console);
     	}
     	return m_returnCode;
     }
 
     /**
-     * Used by the internal script interface  
+     * Used by the internal script interface and for testing 
      */
-    public String execute(String[] args) throws Exception {
+    public String execute(String[] args, Object model, Console console) throws Exception {
         Command command = m_commandFactory.buildCommand(
-        		args, 0, new Vector<Command>(), m_console);
+        		args, 0, new Vector<Command>(), console);
 
         if (command != null) {
             if (command.numArgs() == (args.length - 1)) {
-            	execute(command);
-            	return m_console.getCommandOutput();
+            	execute(command, model, console);
+            	return console.getCommandOutput();
             }
         }
         throw new Exception("invalid command");    		        	
@@ -111,6 +117,10 @@ public class Shell {
 
     public String getVersion() {
     	return m_version;
+    }
+    
+    public Collection<Testcase> getTestcases() {
+    	return m_testcases;
     }
     
 	public void sourceExternalScript(Command sourceCommand, String fileName) {    	    
@@ -185,20 +195,22 @@ public class Shell {
         }
     }
         
-    public void sourceInternalScript(String fileName, String[] args) {
+    public String sourceInternalScript(String fileName, String[] args, 
+    		Object model, Console console) {
+    	
     	Properties postProperties = new Properties();
     	Properties systemProperties = System.getProperties();    	
 
     	String pythonHome = System.getenv("PYTHON_HOME");
     	if (pythonHome == null) {
     		m_console.displayError("PYTHON_HOME environment variable not set");
-    		return;    		
+    		return null;    		
     	}
     	
     	String pythonVerbose = System.getenv("PYTHON_VERBOSE");  
     	if (pythonVerbose == null) {
     		m_console.displayError("PYTHON_VERBOSE environment variable not set");
-    		return;    		
+    		return null;    		
     	}
 
     	systemProperties.setProperty("python.home", pythonHome);
@@ -207,22 +219,30 @@ public class Shell {
 	    PythonInterpreter.initialize(systemProperties, postProperties, new String[] {""});        
         PythonInterpreter interp = getPythonInterpreter(args);
 
-        interp.setOut(new ScriptConsoleWriter(m_console));
-        interp.setErr(new ScriptConsoleWriter(m_console));
+        ScriptConsoleWriter consoleWriter = new ScriptConsoleWriter(m_console);
+        interp.setOut(consoleWriter);
+        interp.setErr(consoleWriter);
         
-        interp.set(m_toolName, new ScriptInterface(this));        
+        interp.set(m_toolName, new ScriptInterface(this, model, console));        
         try {        	
         	m_console.setContext(Context.INTERNAL);
             interp.execfile(fileName);
         	m_console.setContext(Context.EXTERNAL);
-
+            return consoleWriter.getScriptOutput();
+        	
         } catch (Exception e) {
         	m_console.display(e.toString() + "\n");
+        	return null;
         }
     }    
     
+    public Object createModel() {
+    	return m_modelFactory.createModel();
+    }
+
     private void initialise(Console console, CommandFactory commandFactory, ModelFactory modelFactory) throws Exception {
-	    m_model = modelFactory.createModel();
+    	m_modelFactory = modelFactory;
+	    m_model = createModel();
 		m_console = console;
 		m_commandFactory = commandFactory;
 		m_state = State.RUNNING;
@@ -288,10 +308,10 @@ public class Shell {
     	}
     }
 
-    private void execute(Command command) {
-       	if (preCommandExecute(command)) {
-           	command.execute(this, m_model, m_console);
-           	postCommandExecute(command);
+    private void execute(Command command, Object model, Console console) {
+       	if (preCommandExecute(command, console)) {
+           	command.execute(this, model, console);
+           	postCommandExecute(command, console);
        	}
     }
 
@@ -334,28 +354,28 @@ public class Shell {
     	}
     }
 
-	private boolean preCommandExecute(Command command) {
+	private boolean preCommandExecute(Command command, Console console) {
 		
 		// The console is used to store the command output
 		// in order for the output validation and the
 		// internal DSL scripts to access it.
-		m_console.clearCommandOutput();
+		console.clearCommandOutput();
 		
     	if (command.getFileRedirect() != null) {
-    		if (!m_console.openRedirectFile(command.getFileRedirect(), command.getFileRedirectMode())) {
+    		if (!console.openRedirectFile(command.getFileRedirect(), command.getFileRedirectMode())) {
     			return false;
     		}
     	}
     	return true;
 	}
 
-	private void postCommandExecute(Command command) {
+	private void postCommandExecute(Command command, Console console) {
 
     	if (command.getFileRedirect() != null) {
-    		m_console.closeRedirectFile();
+    		console.closeRedirectFile();
     	}
 
-    	if (m_console.hasEscaped()) {
+    	if (console.hasEscaped()) {
     		m_commands.clear();
     	}
 	}	

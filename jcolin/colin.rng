@@ -55,14 +55,20 @@
                             <attribute name="description"/>
                             <oneOrMore>
                                 <choice>
-                                    <element name="run">
-                                        <attribute name="command"/>
+                                    <element name="runCommand">
+                                        <attribute name="name"/>
                                         <optional>
-                                            <attribute name="output"/>
+                                            <attribute name="var"/>
                                         </optional>
                                         <text/> 
                                     </element>
                                     <element name="assertEquals">
+                                        <attribute name="var"/>
+                                        <element name="value">
+                                            <text/>
+                                        </element>    
+                                    </element>
+                                    <element name="assertRegex">
                                         <attribute name="var"/>
                                         <element name="value">
                                             <text/>

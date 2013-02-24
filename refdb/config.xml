@@ -211,24 +211,24 @@
     <testcases>
         <testcase name="StartEmpty" 
             description="This test checks that we start with an empty database">
-            <run command="list" output="result"/>
+            <runCommand name="list" var="result"/>
             <assertEquals var="result">
                 <value></value>
             </assertEquals>
         </testcase>
         <testcase name="CreateRef" 
             description="This test checks that we can add an reference to the database">
-            <run command="create ref1"/>
-            <run command="list" output="result"/>
+            <runCommand name="create ref1"/>
+            <runCommand name="list" var="result"/>
             <assertEquals var="result">
-                <value>[0] ref1</value>
+                <value>[0] "ref1"</value>
             </assertEquals>    
         </testcase>
         <testcase name="DeleteRef" 
             description="This test checks that we can remove a reference from the database">
-            <run command="create ref1"/>
-            <run command="delete ref1"/>
-            <run command="list" output="result"/>
+            <runCommand name="create ref1"/>
+            <runCommand name="delete -"/>
+            <runCommand name="list" var="result"/>
             <assertEquals var="result">
                 <value></value>
             </assertEquals>    
