@@ -1,0 +1,3 @@
+StartEmpty: This test checks that we start with an empty database
+CreateRef: This test checks that we can add an reference to the database
+DeleteRef: This test checks that we can remove a reference from the database
