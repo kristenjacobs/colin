@@ -1,2 +1,6 @@
 *.class
+*.pyc
 bin/
+refdb/jars/
+jcolin/jars/jcolin.jar
+jcolin/jython/cachedir/
