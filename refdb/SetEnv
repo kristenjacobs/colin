@@ -3,6 +3,7 @@ export REFDBROOT=/home/kris/University/SoftwareEngineeringMscOxford/PRJ/Implemen
 export JCOLIN_CONFIG_FILE=$REFDBROOT/config.xml
 export JCOLIN_SCHEMA_FILE=$REFDBROOT/../jcolin/colin.rng
 export JCOLIN_EXT_PATH=$REFDBROOT/extensions
+export JCOLIN_TEST_PATH=$REFDBROOT/tests
 
 export PYTHON_HOME=$REFDBROOT/../jcolin/jython
 export PYTHON_VERBOSE=error

@@ -2,11 +2,6 @@
 Implementation:
 ===============================================================================
 
-- Implement a custom command mechanism using a
-  generated jython interface, maybe using the output returned from the 
-  console?
-      - Just need to complete the implementation of the search scripts
-
 - Implement the regression test running framework:
       - assertions (equals and regex)
       - scripts
@@ -22,13 +17,17 @@ Implementation:
 - Replace all the tabs with spaces!
 
 - Create an external script which populates the refdb with the referecnces used
-  in the dissertation.
+  in the dissertation: Why do we need to do this?
 
 - Autogenerate the appendix
 
 ===============================================================================
 Testing:
 ===============================================================================
+
+- Need to add a test for the case where we use an extension command 
+  from within an internal dsl script, i.e. how does the system cope
+  with nested jython interpreters
 
 - Add tests for the common operations using the refdb application
   (These need to be specified in the COLIN language itself, then we can add

@@ -26,10 +26,10 @@ public class ScriptConsoleWriter extends Writer {
 			stringBuffer.append(cbuf[i]);		
 	    }
 		m_console.display(stringBuffer.toString());
-		m_buffer.append(stringBuffer);
+		m_buffer.append(stringBuffer.toString());
 	}
 	
 	public String getScriptOutput() {
-		return m_buffer.toString();
+		return m_buffer.toString().trim();
 	}
 }

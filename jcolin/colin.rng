@@ -31,14 +31,14 @@
                 <element name="extensions">
                     <zeroOrMore>
                         <choice>
-                            <ref name="extcommand"/>
+                            <ref name="command"/>
                             <element name="container">
                                 <attribute name="name"/>
                                 <element name="description">
                                     <text/>
                                 </element>
                                 <oneOrMore>
-                                    <ref name="extcommand"/>
+                                    <ref name="command"/>
                                 </oneOrMore>
                             </element>
                         </choice>    
@@ -59,6 +59,16 @@
                                         <attribute name="name"/>
                                         <optional>
                                             <attribute name="var"/>
+                                        </optional>
+                                        <text/> 
+                                    </element>
+                                    <element name="runScript">
+                                        <attribute name="name"/>
+                                        <optional>
+                                            <attribute name="var"/>
+                                        </optional>
+                                        <optional>
+                                            <attribute name="args"/>
                                         </optional>
                                         <text/> 
                                     </element>
@@ -83,7 +93,7 @@
         </element>
     </start>
 
-    <!-- Schema for builtin commands -->
+    <!-- Schema for commands -->
     <define name="command">
         <element name="command">
             <attribute name="name"/>
@@ -129,29 +139,6 @@
                     </optional>    
                     <zeroOrMore>
                         <ref name="Type"/>
-                    </zeroOrMore>
-                </element>
-            </optional>    
-        </element>
-    </define>
-
-    <!-- Schema for user-defined commands -->
-    <define name="extcommand">
-        <element name="command">
-            <attribute name="name"/>
-            <attribute name="impl"/>
-            <element name="description">
-                <text/>
-            </element>
-            <optional>
-                <element name="args">
-                    <zeroOrMore>
-                        <element name="arg">
-                            <attribute name="name"/>
-                            <optional>
-                                <ref name="Type"/>
-                            </optional>    
-                        </element>
                     </zeroOrMore>
                 </element>
             </optional>    

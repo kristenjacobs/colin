@@ -18,21 +18,21 @@ public abstract class AssertStep implements Step {
 	}
 	
 	@Override
-	public boolean perform(Shell shell, Console console,
+	public void perform(Shell shell, Console console,
 			Map<String, String> environment, Object model) throws Exception {
 
 		String output = environment.get(m_var);
 		if (output != null) {
 			if (!doCompare(output, m_value)) {
-				m_failureReason = String.format(
+				throw new Exception(String.format(
 						"Value of variable ('%s' = '%s') doesnt match the expected value of '%s'",
-						m_var, output, m_value);						
-				return false;
+						m_var, output, m_value));						
 			}
-			return true;
+			
+		} else {
+			throw new Exception("Value for variable: '" + m_var + 
+					"' has not be found in the test environment");				
 		}
-		throw new Exception("Value for variable: " + m_var + 
-				" has not be found in the test environment");	
 	}
 	
 	@Override

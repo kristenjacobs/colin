@@ -17,14 +17,13 @@ public class CommandStep implements Step {
 	}
 	
 	@Override
-	public boolean perform(Shell shell, Console console,
+	public void perform(Shell shell, Console console,
 			Map<String, String> environment, Object model) throws Exception {		
 		
 		String output = shell.execute(getCommandArray(), model, console);
 		if (!m_var.equals("")) {
 			environment.put(m_var, output);			
 		}
-		return true;
 	}
 	
 	@Override

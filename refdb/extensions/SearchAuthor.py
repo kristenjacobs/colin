@@ -7,9 +7,12 @@ numMatchesFound = 0
 refids = refdb.exec(["get", "refids"]).split()
 for refid in refids:
     title = refdb.exec(["get", "title", refid])
-    if re.search(targetAuthor, title):
-        print "Found match: Title: " + title
-        numMatchesFound += 1
+    authorids = refdb.exec(["get", "authorids", refid]).split()
+    for authorid in authorids:
+        author = refdb.exec(["get", "author", refid, authorid])
+        if re.search(targetAuthor, author):
+            print "Found match: Title: " + title + ", Author: " + author
+            numMatchesFound += 1
 
 if numMatchesFound == 1:
     print "Found " + str(numMatchesFound) + " match" 

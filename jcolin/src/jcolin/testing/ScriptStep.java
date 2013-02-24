@@ -6,6 +6,7 @@ import java.util.Map;
 
 import jcolin.consoles.Console;
 import jcolin.shell.Shell;
+import jcolin.utils.ScriptUtils;
 
 public class ScriptStep implements Step {
 	private String m_name;
@@ -19,14 +20,18 @@ public class ScriptStep implements Step {
 	}
 	
 	@Override
-	public boolean perform(Shell shell, Console console,
+	public void perform(Shell shell, Console console,
 			Map<String, String> environment, Object model) throws Exception {
+
+		String script = ScriptUtils.locate("JCOLIN_TEST_PATH", m_name);
+		if (script == null) {
+			throw new Exception("Cannot locate script: " + m_name);
+		}
 		
-		String output = shell.sourceInternalScript(m_name, getArgsArray(), model, console);
+		String output = shell.sourceInternalScript(script, getArgsArray(), model, console);
 		if (!m_var.equals("")) {
 			environment.put(m_var, output);			
 		}
-		return true;
 	}
 	
 	@Override

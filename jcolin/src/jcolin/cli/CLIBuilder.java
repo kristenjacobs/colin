@@ -10,6 +10,7 @@ import jcolin.consoles.IConsole;
 import jcolin.testing.AssertEqualsStep;
 import jcolin.testing.AssertRegexStep;
 import jcolin.testing.CommandStep;
+import jcolin.testing.ScriptStep;
 import jcolin.testing.Testcase;
 import jcolin.utils.DomUtils;
 import jcolin.utils.RngUtils;
@@ -155,6 +156,12 @@ public class CLIBuilder {
             		testcase.addStep(new CommandStep(
             				element.getAttribute("name"),
             				element.getAttribute("var")));            		     
+
+            	} else if (element.getNodeName().equals("runScript")) {
+               		testcase.addStep(new ScriptStep(
+               				element.getAttribute("name"),
+               				element.getAttribute("args"),
+               				element.getAttribute("var")));            		     
 
             	} else if (element.getNodeName().equals("assertEquals")) {
             		testcase.addStep(new AssertEqualsStep(

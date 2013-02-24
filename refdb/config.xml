@@ -193,14 +193,16 @@
            <command name="author" impl="SearchAuthor.py">
                <description>Lists entries with the given author</description>
                <args>
-                   <arg name="name"><String/></arg>
+                  <arg name="name"><String/></arg>
                </args>
+               <output display="EXTERNAL"/>
            </command>
            <command name="title" impl="SearchTitle.py"> 
                <description>Lists entires with the given keyword in the title</description>
                <args>
                    <arg name="keyword"><String/></arg>
                </args>
+               <output display="EXTERNAL"/>
            </command>
        </container>
     </extensions>    
@@ -210,14 +212,14 @@
     <!-- ================================================================== -->
     <testcases>
         <testcase name="StartEmpty" 
-            description="This test checks that we start with an empty database">
+            description="Checks that we start with an empty database">
             <runCommand name="list" var="result"/>
             <assertEquals var="result">
                 <value></value>
             </assertEquals>
         </testcase>
         <testcase name="CreateRef" 
-            description="This test checks that we can add an reference to the database">
+            description="Checks that we can add an reference to the database">
             <runCommand name="create ref1"/>
             <runCommand name="list" var="result"/>
             <assertEquals var="result">
@@ -225,12 +227,19 @@
             </assertEquals>    
         </testcase>
         <testcase name="DeleteRef" 
-            description="This test checks that we can remove a reference from the database">
+            description="Checks that we can remove a reference from the database">
             <runCommand name="create ref1"/>
             <runCommand name="delete -"/>
             <runCommand name="list" var="result"/>
             <assertEquals var="result">
                 <value></value>
+            </assertEquals>    
+        </testcase>
+        <testcase name="SearchAuthor" 
+            description="Checks the author search extension">
+            <runScript name="SearchAuthorTest.py" var="result"/>
+            <assertEquals var="result">
+                <value>Passed</value>
             </assertEquals>    
         </testcase>
     </testcases>

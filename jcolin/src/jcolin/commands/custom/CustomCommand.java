@@ -101,12 +101,12 @@ public class CustomCommand extends Command {
     		if (validateArguments(console)) {
     			    			
     			// Determines if the output from this command should be 
-    			// visible to the user on the console in this context.
-    		    console.setOutputMode(m_outputMode);
+    			// visible to the user on the console within in this context.
+    			OutputMode outputMode = setOutputMode(console);
     			
             	m_executor.execute(shell, model, console, getArgsMap()); 
 
-            	console.resetOutputMode();
+            	restoreOutputMode(console, outputMode);
             	
             	validateOutput(console);
     		}
@@ -169,5 +169,15 @@ public class CustomCommand extends Command {
     		}
     	}
     	return true;
+    }
+    
+    private OutputMode setOutputMode(Console console) {
+    	OutputMode previousOutputMode = console.getOutputMode();
+    	console.setOutputMode(m_outputMode);
+    	return previousOutputMode;
+    }
+    
+    private void restoreOutputMode(Console console, OutputMode outputMode) {
+    	console.setOutputMode(outputMode);
     }
 }

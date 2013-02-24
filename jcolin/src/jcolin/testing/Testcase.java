@@ -46,27 +46,14 @@ public class Testcase {
 		Map<String, String> environment = new HashMap<String, String>();
 		
 		try {
-			boolean passed = true;
-			String failureReason = null;
-			
 			for (Step step : m_steps) {
-				if (!step.perform(shell, testConsole, environment, model)) {
-					passed = false;
-					failureReason = step.getFailureReason();
-					break;
-				}
+				step.perform(shell, testConsole, environment, model);
 			}
-			if (passed) {
-				console.display(" ... Passed\n");    			
-
-			} else {
-				console.display(" ... ***** FAILED *****\n");
-				console.display("    [" + failureReason + "]\n");
-			}
+			console.display(" ... Passed\n");    			
 
 		} catch (Exception ex) {
-			console.display(" ***** EXCEPTION DETECTED *****: " + 
-		        ex.getMessage() + "\n");    						
+			console.display(" ***** FAILED *****\n");
+			console.display("    [" + ex.getMessage() + "]\n");    						
 		}
 	}
 }

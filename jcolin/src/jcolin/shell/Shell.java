@@ -203,13 +203,13 @@ public class Shell {
 
     	String pythonHome = System.getenv("PYTHON_HOME");
     	if (pythonHome == null) {
-    		m_console.displayError("PYTHON_HOME environment variable not set");
+    		console.displayError("PYTHON_HOME environment variable not set");
     		return null;    		
     	}
     	
     	String pythonVerbose = System.getenv("PYTHON_VERBOSE");  
     	if (pythonVerbose == null) {
-    		m_console.displayError("PYTHON_VERBOSE environment variable not set");
+    		console.displayError("PYTHON_VERBOSE environment variable not set");
     		return null;    		
     	}
 
@@ -219,19 +219,19 @@ public class Shell {
 	    PythonInterpreter.initialize(systemProperties, postProperties, new String[] {""});        
         PythonInterpreter interp = getPythonInterpreter(args);
 
-        ScriptConsoleWriter consoleWriter = new ScriptConsoleWriter(m_console);
+        ScriptConsoleWriter consoleWriter = new ScriptConsoleWriter(console);
         interp.setOut(consoleWriter);
         interp.setErr(consoleWriter);
         
         interp.set(m_toolName, new ScriptInterface(this, model, console));        
         try {        	
-        	m_console.setContext(Context.INTERNAL);
+        	console.setContext(Context.INTERNAL);
             interp.execfile(fileName);
-        	m_console.setContext(Context.EXTERNAL);
+            console.setContext(Context.EXTERNAL);
             return consoleWriter.getScriptOutput();
         	
         } catch (Exception e) {
-        	m_console.display(e.toString() + "\n");
+        	console.display(e.toString() + "\n");
         	return null;
         }
     }    
