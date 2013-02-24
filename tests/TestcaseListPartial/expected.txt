@@ -1,0 +1,1 @@
+StartEmpty: This test checks that we start with an empty database
