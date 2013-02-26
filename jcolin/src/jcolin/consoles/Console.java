@@ -35,7 +35,7 @@ public abstract class Console implements IConsole {
 
 	public Console() {
 		m_outputBuffer = new StringBuffer();
-		resetOutputMode();
+		m_outputMode = OutputMode.ALL;
 		m_context = Context.EXTERNAL;
 	}
 	
@@ -97,11 +97,7 @@ public abstract class Console implements IConsole {
     public OutputMode getOutputMode() {
     	return m_outputMode;
     }
-    
-    public void resetOutputMode() {
-    	m_outputMode = OutputMode.ALL;
-    }
-    
+        
     public void setContext(Context context) {
     	m_context = context;
     }
@@ -114,15 +110,15 @@ public abstract class Console implements IConsole {
 		if (forceOutputDisplay)
 			return true;
 		
-		switch (m_outputMode) {
+		switch (getOutputMode()) {
 		case ALL:
 			return true;
 
 		case EXTERNAL:
-			return m_context == Context.EXTERNAL;
+			return getContext() == Context.EXTERNAL;
 			
 		case INTERNAL:
-			return m_context == Context.INTERNAL;
+			return getContext() == Context.INTERNAL;
 			
 		case NONE:
 			return false;	

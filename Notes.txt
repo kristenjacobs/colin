@@ -1,0 +1,60 @@
+Notes on the script output/display isues
+========================================
+
+Sourcing a script is done from 3 places:
+----------------------------------------
+
+1) Called by the user via an explicit source command (USER SCRIPT) 
+
+2) Called by the system because the user has called a command that is implemented via a script (EXTENSION SCRIPT)
+
+3) Called by the test system in the case where the test is implemented via a script (TEST SCRIPT)
+
+How should the output be handled in each case???
+------------------------------------------------
+
+1) Here the context is INTERNAL:
+
+    - All direct script output is displayed
+
+    - For commands called from within the script, the 
+      output is only displayed if the commands output mode
+      is set to ALL or INTERNAL
+
+    - The output from each command called from within the script 
+      is always caputured and is used as the return value of the 
+      command, thus it can be used from within the script
+
+2) Here the context is INTERNAL:
+
+    - All direct script output is displayed
+
+    - For commands called from within the script, the 
+      output is only displayed if the commands output mode
+      is set to ALL or INTERNAL
+
+    - The output from each command called from within the script 
+      is always caputured and is used as the return value of the 
+      command, thus it can be used from within the script
+
+3) Here the context is ????:
+
+    - Direct script output is not displayed
+
+    - For commands called from within the script, the 
+      output is never displayed
+
+    - The output from each command called from within the script 
+      is always caputured and is used as the return value of the 
+      command, thus it can be used from within the script
+
+    - The output from the entire script is captured into the test variable.
+      This consists of the following:
+          - Direct output
+          - For commands called from within the test script, the 
+            output is only added to the final script output if the commands output mode
+            is set to ALL or INTERNAL
+
+So, the question is: How do we satisfy the above?
+-------------------------------------------------
+

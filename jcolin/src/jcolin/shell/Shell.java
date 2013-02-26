@@ -225,9 +225,9 @@ public class Shell {
         
         interp.set(m_toolName, new ScriptInterface(this, model, console));        
         try {        	
-        	console.setContext(Context.INTERNAL);
+        	Context previousContext = setContext(console, Context.INTERNAL);        	
             interp.execfile(fileName);
-            console.setContext(Context.EXTERNAL);
+            restoreContext(console, previousContext);
         	
         } catch (Exception e) {
         	console.display(e.toString() + "\n");
@@ -382,4 +382,14 @@ public class Shell {
         pySystemState.argv = argv;        
         return new PythonInterpreter(null, pySystemState);    	
     }
+    
+    private Context setContext(Console console, Context context) {
+    	Context previousContext = console.getContext();
+    	console.setContext(context);
+    	return previousContext;
+    }
+    
+    private void restoreContext(Console console, Context context) {
+    	console.setContext(context);
+    }    
 }

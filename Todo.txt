@@ -2,6 +2,8 @@
 Implementation:
 ===============================================================================
 
+- Fix the script output/display mechanism. See Notes.txt
+
 - Design a 'compact' (non xml) input language. Maybe make this look rather
   functional/haskell-ish. Also need a script to convert to this from the XML. 
 
@@ -25,9 +27,12 @@ Testing:
   from within another extension command, i.e. how does the system cope
   with nested jython interpreters?
 
+- Need to add a direct test for the extension commands (search).
+  (i.e. we want to test that these work directly, as well as through the 
+   testcase mechanism)
+
 - Add tests for the common operations using the refdb application
-  (These need to be specified in the COLIN language itself, then we can add
-   tests that list all of the colin tests and runs all of the tests)
+  (These need to be specified in the COLIN language itself)
   e.g. 
       - Create/delete a reference
       - Add/remove attributes to a reference

@@ -10,7 +10,7 @@ public class TestConsole extends Console {
 	private StringBuffer m_testBuffer;
 	
 	public TestConsole() {
-		m_testBuffer = new StringBuffer();		
+		m_testBuffer = new StringBuffer();
 	}
 	
 	public void initialise(CommandFactory commandFactory) throws IOException {	
@@ -41,7 +41,7 @@ public class TestConsole extends Console {
 		assert(false);
     	return null;
 	}
-
+	
 	public String getTestOutput() {
 		return m_testBuffer.toString().trim();
 	}

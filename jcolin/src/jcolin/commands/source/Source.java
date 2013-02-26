@@ -109,7 +109,7 @@ public class Source extends Command {
     		break;
     	}
     }   
-         
+
     private ScriptType getScriptType(String fileName) {
     	String extension = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length());
     	if (extension.equals("py")) {   

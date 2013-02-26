@@ -182,12 +182,7 @@
                <output display="EXTERNAL"/>
            </command>
        </container>
-    </commands>
 
-    <!-- ================================================================== -->
-    <!-- These commands extend the interface for the refdb tool -->
-    <!-- ================================================================== -->
-    <extensions>
        <container name="search">
            <description>Creates a summary of the database contents</description>
            <command name="author" impl="SearchAuthor.py">
@@ -205,7 +200,7 @@
                <output display="EXTERNAL"/>
            </command>
        </container>
-    </extensions>    
+    </commands>
 
     <!-- ================================================================== -->
     <!-- Specification of the acceptance tests for the refdb tool -->
