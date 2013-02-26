@@ -26,26 +26,6 @@
                 </zeroOrMore>
             </element>
 
-            <!-- Extensions -->
-            <zeroOrMore>
-                <element name="extensions">
-                    <zeroOrMore>
-                        <choice>
-                            <ref name="command"/>
-                            <element name="container">
-                                <attribute name="name"/>
-                                <element name="description">
-                                    <text/>
-                                </element>
-                                <oneOrMore>
-                                    <ref name="command"/>
-                                </oneOrMore>
-                            </element>
-                        </choice>    
-                    </zeroOrMore>
-                </element>
-            </zeroOrMore>
-
             <!-- TestCases -->
             <zeroOrMore>
                 <element name="testcases">

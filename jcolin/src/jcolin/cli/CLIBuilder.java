@@ -36,8 +36,7 @@ public class CLIBuilder {
 			}
 	        Document doc = DomUtils.createDocument(configFile);
 			CLI cli = createCLI(doc);
-			addCommandsToCLI(cli, doc, "commands");
-			addCommandsToCLI(cli, doc, "extensions");			
+			addCommandsToCLI(cli, doc);
 			addTestCasesToCLI(cli, doc);		
 			return cli;
 			
@@ -98,8 +97,8 @@ public class CLIBuilder {
 		return new CLI(toolname, prompt, version);
     }
     
-	private void addCommandsToCLI(CLI cli, Document doc, String nodeName) throws Exception {
-        NodeList commandsNodes = doc.getElementsByTagName(nodeName);
+	private void addCommandsToCLI(CLI cli, Document doc) throws Exception {
+        NodeList commandsNodes = doc.getElementsByTagName("commands");
         if (commandsNodes.getLength() > 0) {
             Node commandsNode = commandsNodes.item(0);
             NodeList children = commandsNode.getChildNodes();
