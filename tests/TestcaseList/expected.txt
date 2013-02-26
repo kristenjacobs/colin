@@ -2,3 +2,4 @@ StartEmpty: Checks that we start with an empty database
 CreateRef: Checks that we can add an reference to the database
 DeleteRef: Checks that we can remove a reference from the database
 SearchAuthor: Checks the author search extension
+SearchTitle: Checks the title search extension

@@ -24,13 +24,13 @@ def clean(dir):
     shutil.rmtree("bin", ignore_errors=True)
      
 def run(dir):
-    print "%-20s" % dir,
+    print "%-25s" % dir,
     os.mkdir("bin")
     os.system("python test.py")
     if testPassed():
         print "... PASSED"
     else:    
-        print " ***** FAILED *****"
+        print "***** FAILED *****"
 
 traverseTestDirs(clean)
 traverseTestDirs(run)

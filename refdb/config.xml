@@ -237,6 +237,13 @@
                 <value>Passed</value>
             </assertEquals>    
         </testcase>
+        <testcase name="SearchTitle" 
+            description="Checks the title search extension">
+            <runScript name="SearchTitleTest.py" var="result"/>
+            <assertEquals var="result">
+                <value>Passed</value>
+            </assertEquals>    
+        </testcase>
     </testcases>
 
 </colin>
