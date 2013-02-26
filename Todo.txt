@@ -5,8 +5,6 @@ Implementation:
 - Design a 'compact' (non xml) input language. Maybe make this look rather
   functional/haskell-ish. Also need a script to convert to this from the XML. 
 
-- Combine the 'extension' and 'commands' nodes in the colin language.
-
 - Add some comments to the code in general, focusing on the code that
   is called from the application (i.e. the ModelFactory/creation + TypeUtils)
 
@@ -35,7 +33,7 @@ Bugs:
 ===============================================================================
 
 - If an invalid refid is used in a refdb command, it currently does not error 
-  on this case.
+  on this case. Fix this and add a test for it!
 
 ===============================================================================
 Optional:
