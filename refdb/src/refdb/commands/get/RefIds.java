@@ -9,9 +9,9 @@ import refdb.Model;
 import refdb.commands.CommandUtils;
 
 public class RefIds implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {		    
-		CommandUtils.outputIds(console, ((Model)model).getRefIds());
-	}
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {           
+        CommandUtils.outputIds(console, ((Model)model).getRefIds());
+    }
 }

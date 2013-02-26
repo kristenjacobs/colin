@@ -10,14 +10,14 @@ import refdb.Reference;
 import refdb.commands.CommandUtils;
 
 public class Info implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {	
-	    
-		int refId  = CommandUtils.getRefId(args, (Model)model);
-		int infoId = CommandUtils.getInfoId(args, (Model)model);
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {   
+        
+        int refId  = CommandUtils.getRefId(args, (Model)model);
+        int infoId = CommandUtils.getInfoId(args, (Model)model);
 
-		Reference reference = ((Model)model).getReference(refId);
-		console.display(reference.getInfo(infoId).getData() + "\n");
-	}
+        Reference reference = ((Model)model).getReference(refId);
+        console.display(reference.getInfo(infoId).getData() + "\n");
+    }
 }

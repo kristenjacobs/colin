@@ -7,5 +7,5 @@ import jcolin.shell.Shell;
 
 public interface ICommand {
     public void execute(Shell shell, Object model, 
-    		IConsole console, Map<String, String> args);
+            IConsole console, Map<String, String> args);
 }

@@ -9,11 +9,11 @@ import refdb.Model;
 import refdb.commands.CommandUtils;
 
 public class ISBN implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {	
-	    
-		int refId = CommandUtils.getRefId(args, (Model)model);
-		console.display(((Model)model).getReference(refId).getISBN() + "\n");
-	}
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {   
+        
+        int refId = CommandUtils.getRefId(args, (Model)model);
+        console.display(((Model)model).getReference(refId).getISBN() + "\n");
+    }
 }

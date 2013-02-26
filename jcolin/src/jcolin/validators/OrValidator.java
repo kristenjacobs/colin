@@ -15,43 +15,43 @@ import jcolin.commands.Command.ArgType;
  * return true.
  */
 public class OrValidator extends Validator {
-	private Collection<Validator> m_validators;
+    private Collection<Validator> m_validators;
 
-	OrValidator(Element element) throws Exception {
-		m_validators = new ArrayList<Validator>();
+    OrValidator(Element element) throws Exception {
+        m_validators = new ArrayList<Validator>();
         NodeList validatorNodes = element.getChildNodes();
         for (int i = 0; i < validatorNodes.getLength(); i++) {
             Node validatorNode = validatorNodes.item(i);
             if (validatorNode instanceof Element) {       
-            	m_validators.add(ValidatorFactory.create((Element)validatorNode));
+                m_validators.add(ValidatorFactory.create((Element)validatorNode));
             }
-        }		
-	}
-	
-	@Override
-	public boolean validate(String value) {
-		for (Validator validator : m_validators) {
-			if (validator.validate(value)) {
-				return true;
-			}
-		}
-		return false;
-	}
+        }       
+    }
+    
+    @Override
+    public boolean validate(String value) {
+        for (Validator validator : m_validators) {
+            if (validator.validate(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	@Override
-	String getTypeName() {
-		assert(false);
-		return "";
-	}
+    @Override
+    String getTypeName() {
+        assert(false);
+        return "";
+    }
 
-	@Override
-	Collection<ValidatorAttribute> getAttributes() {
-		assert(false);
-		return new ArrayList<ValidatorAttribute>();
-	}
+    @Override
+    Collection<ValidatorAttribute> getAttributes() {
+        assert(false);
+        return new ArrayList<ValidatorAttribute>();
+    }
 
-	@Override
-	public ArgType getArgType() {
-		return ArgType.IGNORE;
-	}
+    @Override
+    public ArgType getArgType() {
+        return ArgType.IGNORE;
+    }
 }

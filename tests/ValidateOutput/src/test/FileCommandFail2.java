@@ -8,11 +8,11 @@ import jcolin.shell.Shell;
 import jcolin.utils.TypeUtils;
 
 public class FileCommandFail2 implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {	
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {   
         System.out.print("FileCommandFail2\n");
-	    TypeUtils.returnFile(console, "FileFail.xml");
-	}
+        TypeUtils.returnFile(console, "FileFail.xml");
+    }
 }
 

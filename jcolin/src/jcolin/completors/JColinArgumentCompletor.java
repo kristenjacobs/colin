@@ -12,12 +12,12 @@ public class JColinArgumentCompletor implements Completor {
     private String m_buffer;
 
     public JColinArgumentCompletor(final List<Completor> completors) {
-    	m_completors = completors;
+        m_completors = completors;
         m_delim = new WhitespaceArgumentDelimiter();
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	public int complete(final String buffer, final int cursor,
+    public int complete(final String buffer, final int cursor,
                         final List candidates) {
         jline.ArgumentCompletor.ArgumentList list = m_delim.delimit(buffer, cursor);
         int argpos = list.getArgumentPosition();
@@ -70,6 +70,6 @@ public class JColinArgumentCompletor implements Completor {
     }
     
     public String getBuffer() {
-    	return m_buffer;
+        return m_buffer;
     }
 }

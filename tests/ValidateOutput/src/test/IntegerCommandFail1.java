@@ -8,11 +8,11 @@ import jcolin.shell.Shell;
 import jcolin.utils.TypeUtils;
 
 public class IntegerCommandFail1 implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {	
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {   
         System.out.print("IntegerCommandFail1\n");
-	    console.display("doh!");
-	}
+        console.display("doh!");
+    }
 }
 

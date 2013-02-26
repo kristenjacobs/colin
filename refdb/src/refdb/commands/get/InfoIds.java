@@ -9,11 +9,11 @@ import refdb.Model;
 import refdb.commands.CommandUtils;
 
 public class InfoIds implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {	
-	    
-		int refId = CommandUtils.getRefId(args, (Model)model);		
-		CommandUtils.outputIds(console, ((Model)model).getInfoIds(refId));
-	}
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {   
+        
+        int refId = CommandUtils.getRefId(args, (Model)model);      
+        CommandUtils.outputIds(console, ((Model)model).getInfoIds(refId));
+    }
 }

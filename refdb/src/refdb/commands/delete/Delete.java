@@ -9,10 +9,10 @@ import refdb.Model;
 import refdb.commands.CommandUtils;
 
 public class Delete implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {
-	    ((Model)model).deleteReference(
-	    		CommandUtils.getRefId(args, (Model)model));
-	}
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {
+        ((Model)model).deleteReference(
+                CommandUtils.getRefId(args, (Model)model));
+    }
 }

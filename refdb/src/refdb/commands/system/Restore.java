@@ -10,10 +10,10 @@ import jcolin.shell.Shell;
 import jcolin.utils.TypeUtils;
 
 public class Restore implements ICommand {
-	@Override
-	public void execute(Shell shell, Object model, 
-			IConsole console, Map<String, String> args) {
-	    ((Model)model).restore(console,
-	    		TypeUtils.getString(args, "filename"));		
-	}
+    @Override
+    public void execute(Shell shell, Object model, 
+            IConsole console, Map<String, String> args) {
+        ((Model)model).restore(console,
+                TypeUtils.getString(args, "filename"));     
+    }
 }

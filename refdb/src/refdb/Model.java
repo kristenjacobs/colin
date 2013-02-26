@@ -13,103 +13,103 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Model {
-	public static final int INVALID_ID = -1;
-	private int m_lastRefId;
-	
+    public static final int INVALID_ID = -1;
+    private int m_lastRefId;
+    
     private Collection<Reference> m_references;
 
     public Model() {
-    	m_references = new ArrayList<Reference>();
-    	m_lastRefId = INVALID_ID;
+        m_references = new ArrayList<Reference>();
+        m_lastRefId = INVALID_ID;
     }
 
     public int createReference(String title) {
-    	int id = getNextId();
-    	m_references.add(new Reference(id, title));
-    	m_lastRefId = id;
-    	return id;
+        int id = getNextId();
+        m_references.add(new Reference(id, title));
+        m_lastRefId = id;
+        return id;
     }
     
     public boolean deleteReference(int refId) {
-    	Reference reference = getReference(refId);
-    	if (reference != null) {
-    		m_references.remove(reference);
-    		return true;
-    	}    	
-    	return false;
+        Reference reference = getReference(refId);
+        if (reference != null) {
+            m_references.remove(reference);
+            return true;
+        }       
+        return false;
     }
     
     public int addAuthor(int refId, String author) {
-    	Reference reference = getReference(refId);
-  		return (reference != null) ? reference.addAuthor(author) : INVALID_ID;
+        Reference reference = getReference(refId);
+        return (reference != null) ? reference.addAuthor(author) : INVALID_ID;
     }
     
     public boolean removeAuthor(int refId, int authorId) {
-    	Reference reference = getReference(refId);
-  		return (reference != null) ? reference.removeAuthor(authorId) : false;
+        Reference reference = getReference(refId);
+        return (reference != null) ? reference.removeAuthor(authorId) : false;
     }
     
     public int addInfo(int refId, String info) {
-    	Reference reference = getReference(refId);
-  		return (reference != null) ? reference.addInfo(info) : INVALID_ID;
+        Reference reference = getReference(refId);
+        return (reference != null) ? reference.addInfo(info) : INVALID_ID;
     }
     
     public boolean removeInfo(int refId, int infoId) {
-    	Reference reference = getReference(refId);
-  		return (reference != null) ? reference.removeInfo(infoId) : false;
+        Reference reference = getReference(refId);
+        return (reference != null) ? reference.removeInfo(infoId) : false;
     }
     
     public boolean setDate(int refId, String date) {
-    	Reference reference = getReference(refId);
-    	if (reference != null) {
-    		reference.setDate(date);
-    		return true;
-    	}
-    	return false;    	    	
+        Reference reference = getReference(refId);
+        if (reference != null) {
+            reference.setDate(date);
+            return true;
+        }
+        return false;               
     }
     
     public boolean setISBN(int refId, String ISBN) {
-    	Reference reference = getReference(refId);
-    	if (reference != null) {
-    		reference.setISBN(ISBN);
-    		return true;
-    	}
-    	return false;    	
+        Reference reference = getReference(refId);
+        if (reference != null) {
+            reference.setISBN(ISBN);
+            return true;
+        }
+        return false;       
     }
     
     public void listReferences(IConsole console) {
-       	for (Reference reference : m_references) {
+        for (Reference reference : m_references) {
 
-    		console.display("[" + reference.getId() + "] ");
-    		console.display("\"" + reference.getTitle() + "\"\n");
-    		
-    		if (!reference.getAuthors().isEmpty()) {
-    		    console.display("  "); 	
-        		for (ReferenceField field : reference.getAuthors()) {
-        			console.display(field.getData() + ", ");        			
-        		}
-        		console.display("\n");        		
-    		}
+            console.display("[" + reference.getId() + "] ");
+            console.display("\"" + reference.getTitle() + "\"\n");
+            
+            if (!reference.getAuthors().isEmpty()) {
+                console.display("  ");  
+                for (ReferenceField field : reference.getAuthors()) {
+                    console.display(field.getData() + ", ");                    
+                }
+                console.display("\n");              
+            }
 
-    		for (ReferenceField field : reference.getInfos()) {
-    			console.display("  " + field.getData() + "\n");        			
-    		}
-    		
-    		if (reference.getDate() != null) {
-    			console.display("  Publication Date: " + reference.getDate() + "\n");
-    		}
-    		if (reference.getISBN() != null) {
-    			console.display("  ISBN Number: " + reference.getISBN() + "\n");
-    		}
-    		console.display("\n");
-    	}
+            for (ReferenceField field : reference.getInfos()) {
+                console.display("  " + field.getData() + "\n");                 
+            }
+            
+            if (reference.getDate() != null) {
+                console.display("  Publication Date: " + reference.getDate() + "\n");
+            }
+            if (reference.getISBN() != null) {
+                console.display("  ISBN Number: " + reference.getISBN() + "\n");
+            }
+            console.display("\n");
+        }
     }
 
     /***
      * Saves the current state of the model to XML
      */
     public void save(IConsole console, String filename) {
-    	try {
+        try {
             Document doc = XmlUtils.createDocument();
             Element refdbElement = XmlUtils.addElement(doc, doc, "refdb");
 
@@ -122,38 +122,38 @@ public class Model {
                 if (!reference.getAuthors().isEmpty()) {
                     Element authorsElement = XmlUtils.addElement(doc, referenceElement, "authors");
                     for (ReferenceField field : reference.getAuthors()) {
-                        Element authorElement = XmlUtils.addElement(doc, authorsElement, "author");                    	
-                        XmlUtils.addAttribute(doc, authorElement, "id", Integer.toString(field.getId()));                	
-                        XmlUtils.addAttribute(doc, authorElement, "name", field.getData());                	
+                        Element authorElement = XmlUtils.addElement(doc, authorsElement, "author");                     
+                        XmlUtils.addAttribute(doc, authorElement, "id", Integer.toString(field.getId()));                   
+                        XmlUtils.addAttribute(doc, authorElement, "name", field.getData());                 
                     }                    
                 }
                 if (!reference.getInfos().isEmpty()) {
                     Element infosElement = XmlUtils.addElement(doc, referenceElement, "infos");
                     for (ReferenceField field : reference.getInfos()) {
-                        Element infoElement = XmlUtils.addElement(doc, infosElement, "info");                    	
-                        XmlUtils.addAttribute(doc, infoElement, "id", Integer.toString(field.getId()));                	
-                        XmlUtils.addAttribute(doc, infoElement, "name", field.getData());                	
+                        Element infoElement = XmlUtils.addElement(doc, infosElement, "info");                       
+                        XmlUtils.addAttribute(doc, infoElement, "id", Integer.toString(field.getId()));                 
+                        XmlUtils.addAttribute(doc, infoElement, "name", field.getData());                   
                     }
                 }                                
                 if (reference.getDate() != null) {
-                    XmlUtils.addAttribute(doc, referenceElement, "date", reference.getDate());                	
+                    XmlUtils.addAttribute(doc, referenceElement, "date", reference.getDate());                  
                 }
                 if (reference.getISBN() != null) {
-                    XmlUtils.addAttribute(doc, referenceElement, "isbn", reference.getISBN());                	
+                    XmlUtils.addAttribute(doc, referenceElement, "isbn", reference.getISBN());                  
                 }
             }
-            XmlUtils.output(doc, new FileOutputStream(new File(filename)));    	
-    		
-    	} catch (Exception e) {
-    		console.display("Error: Unable to save system state to file: " + filename + "\n");
-    	}
+            XmlUtils.output(doc, new FileOutputStream(new File(filename)));     
+            
+        } catch (Exception e) {
+            console.display("Error: Unable to save system state to file: " + filename + "\n");
+        }
     }
 
     /***
      * Restores the current state of the model from XML
     */
-    public void restore(IConsole console, String filename) {      	
-    	try {
+    public void restore(IConsole console, String filename) {        
+        try {
             Document doc = XmlUtils.createDocument(new File(filename));            
             Collection<Reference> references = new ArrayList<Reference>();
 
@@ -170,20 +170,20 @@ public class Model {
                     NodeList authors = ((Element) node).getElementsByTagName("author");
                     for (int j = 0; j < authors.getLength(); j++) {
                         Node author = authors.item(j);
-                        if (author instanceof Element) {                        	
-                        	reference.getAuthors().add(new ReferenceField(
-                        			Integer.parseInt(((Element)author).getAttribute("id")),
-                        			((Element)author).getAttribute("data")));
+                        if (author instanceof Element) {                            
+                            reference.getAuthors().add(new ReferenceField(
+                                    Integer.parseInt(((Element)author).getAttribute("id")),
+                                    ((Element)author).getAttribute("data")));
                         }
                     }
                     
                     NodeList infos = ((Element) node).getElementsByTagName("info");
                     for (int j = 0; j < infos.getLength(); j++) {
                         Node info = infos.item(j);
-                        if (info instanceof Element) {                        	
-                        	reference.getInfos().add(new ReferenceField(
-                        			Integer.parseInt(((Element)info).getAttribute("id")),
-                        			((Element)info).getAttribute("data")));
+                        if (info instanceof Element) {                          
+                            reference.getInfos().add(new ReferenceField(
+                                    Integer.parseInt(((Element)info).getAttribute("id")),
+                                    ((Element)info).getAttribute("data")));
                         }
                     }
                     
@@ -196,55 +196,55 @@ public class Model {
                     references.add(reference);
                 }
             }
-    		m_references = references;
-    		
-    	} catch (Exception e) {
-    		console.display("Error: Unable to restore system state from file: " + filename + "\n");    		
-    	}
+            m_references = references;
+            
+        } catch (Exception e) {
+            console.display("Error: Unable to restore system state from file: " + filename + "\n");         
+        }
     }
     
     public Collection<Integer> getRefIds() {
-    	Collection<Integer> refIds = new ArrayList<Integer>();
-    	for (Reference reference : m_references) {
-    		refIds.add(reference.getId());
-    	}
-    	return refIds;
+        Collection<Integer> refIds = new ArrayList<Integer>();
+        for (Reference reference : m_references) {
+            refIds.add(reference.getId());
+        }
+        return refIds;
     }
 
     public int getLastRefId() {
-    	return m_lastRefId;
+        return m_lastRefId;
     }
 
     public Collection<Integer> getAuthorIds(int refId) {
-    	return getIds(getReference(refId).getAuthors());
+        return getIds(getReference(refId).getAuthors());
     }    
     
     public Collection<Integer> getInfoIds(int refId) {
-    	return getIds(getReference(refId).getInfos());
+        return getIds(getReference(refId).getInfos());
     }
 
     public Reference getReference(int id) {
-    	for (Reference reference : m_references) {
-    		if (id == reference.getId()) {
-    			return reference;
-    		}
-    	}
-    	return null;
+        for (Reference reference : m_references) {
+            if (id == reference.getId()) {
+                return reference;
+            }
+        }
+        return null;
     }
     
     private Collection<Integer> getIds(Collection<ReferenceField> refFlds) {
-    	Collection<Integer> ids = new ArrayList<Integer>();
-    	for (ReferenceField refFld : refFlds) {
-    		ids.add(refFld.getId());
-    	}
-    	return ids;    	
+        Collection<Integer> ids = new ArrayList<Integer>();
+        for (ReferenceField refFld : refFlds) {
+            ids.add(refFld.getId());
+        }
+        return ids;     
     }
         
     private int getNextId() {
-    	int maxId = -1;
-    	for (Reference reference : m_references) {
-    		maxId = Math.max(maxId, reference.getId());
-    	}
-    	return maxId + 1;
+        int maxId = -1;
+        for (Reference reference : m_references) {
+            maxId = Math.max(maxId, reference.getId());
+        }
+        return maxId + 1;
     }
  }
