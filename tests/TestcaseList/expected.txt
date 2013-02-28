@@ -1,5 +1,9 @@
 StartEmpty: Checks that we start with an empty database
 CreateRef: Checks that we can add an reference to the database
 DeleteRef: Checks that we can remove a reference from the database
+AddRemoveAuthor: Checks that we can add and remove authors to/from a reference
+AddRemoveInfo: Checks that we can add and remove infos to/from a reference
+SetDate: Checks that we can set a date on a reference
+SetISBN: Checks that we can set a date on a reference
 SearchAuthor: Checks the author search extension
 SearchTitle: Checks the title search extension

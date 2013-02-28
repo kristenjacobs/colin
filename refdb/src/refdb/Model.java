@@ -86,7 +86,7 @@ public class Model {
             if (!reference.getAuthors().isEmpty()) {
                 console.display("  ");  
                 for (ReferenceField field : reference.getAuthors()) {
-                    console.display(field.getData() + ", ");                    
+                    console.display(field.getData() + "[" + field.getId() + "], ");                    
                 }
                 console.display("\n");              
             }

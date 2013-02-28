@@ -1,5 +1,9 @@
 Running testcase: StartEmpty ... Passed
 Running testcase: CreateRef ... Passed
 Running testcase: DeleteRef ... Passed
+Running testcase: AddRemoveAuthor ... Passed
+Running testcase: AddRemoveInfo ... Passed
+Running testcase: SetDate ... Passed
+Running testcase: SetISBN ... Passed
 Running testcase: SearchAuthor ... Passed
 Running testcase: SearchTitle ... Passed

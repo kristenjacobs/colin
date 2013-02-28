@@ -2,20 +2,19 @@ package refdb.commands.remove;
 
 import java.util.Map;
 
-import refdb.Model;
-import refdb.commands.CommandUtils;
-
 import jcolin.commands.ICommand;
 import jcolin.consoles.IConsole;
 import jcolin.shell.Shell;
-import jcolin.utils.TypeUtils;
+import refdb.Model;
+import refdb.commands.CommandUtils;
 
 public class Info implements ICommand {
     @Override
     public void execute(Shell shell, Object model, 
             IConsole console, Map<String, String> args) {   
-        ((Model)model).removeInfo(
+        boolean status = ((Model)model).removeInfo(
                 CommandUtils.getRefId(args, (Model)model),
-                TypeUtils.getInteger(args, "infoid"));              
+                CommandUtils.getInfoId(args, (Model)model));
+        console.display(Boolean.toString(status) + "\n");
     }
 }

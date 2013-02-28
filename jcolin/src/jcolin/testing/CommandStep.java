@@ -3,6 +3,8 @@ package jcolin.testing;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import jcolin.consoles.TestConsole;
 import jcolin.shell.Shell;
@@ -34,12 +36,29 @@ public class CommandStep implements Step {
     
     private String[] getCommandArray() {
         Collection<String> array = new ArrayList<String>();
-        for (String str : m_name.split(" ")) {
-            String arg = str.trim();
-            if (!arg.equals("")) {
-                array.add(arg);
+        Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
+        Matcher regexMatcher = regex.matcher(m_name);
+        while (regexMatcher.find()) {
+            if (regexMatcher.group(1) != null) {
+                // Add double-quoted string without the quotes
+                addCommandArg(regexMatcher.group(1), array);
+                
+            } else if (regexMatcher.group(2) != null) {
+                // Add single-quoted string without the quotes
+                addCommandArg(regexMatcher.group(2), array);
+                
+            } else {
+                // Add unquoted word
+                addCommandArg(regexMatcher.group(), array);
             }
-        }
+        } 
         return array.toArray(new String[]{});
+    }
+    
+    private void addCommandArg(String match, Collection<String> array) {
+        String arg = match.trim();
+        if (!arg.equals("")) {
+            array.add(arg);
+        }        
     }
 }

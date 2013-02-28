@@ -230,6 +230,46 @@
                 <value></value>
             </assertEquals>    
         </testcase>
+        <testcase name="AddRemoveAuthor" 
+            description="Checks that we can add and remove authors to/from a reference">
+            <runCommand name="create ref"/>
+            <runCommand name="add author - fred"/>
+            <runCommand name="get author - -" var="result"/>
+            <assertEquals var="result"><value>fred</value></assertEquals>    
+            <runCommand name="add author - bob"/>
+            <runCommand name="get author - -" var="result"/>
+            <assertEquals var="result"><value>bob</value></assertEquals>    
+            <runCommand name="remove author - -"/>
+            <runCommand name="get authorids -" var="ids"/>
+            <assertRegex var="ids"><value>\d+</value></assertRegex>
+        </testcase>
+        <testcase name="AddRemoveInfo" 
+            description="Checks that we can add and remove infos to/from a reference">
+            <runCommand name="create ref"/>
+            <runCommand name="add info - fact1"/>
+            <runCommand name="get info - -" var="result"/>
+            <assertEquals var="result"><value>fact1</value></assertEquals>    
+            <runCommand name="add info - fact2"/>
+            <runCommand name="get info - -" var="result"/>
+            <assertEquals var="result"><value>fact2</value></assertEquals>    
+            <runCommand name="remove info - -"/>
+            <runCommand name="get infoids -" var="ids"/>
+            <assertRegex var="ids"><value>\d+</value></assertRegex>
+        </testcase>
+        <testcase name="SetDate" 
+            description="Checks that we can set a date on a reference">
+            <runCommand name="create ref"/>
+            <runCommand name="set date - &quot;jan 2000&quot;"/>
+            <runCommand name="get date -" var="result"/>
+            <assertEquals var="result"><value>jan 2000</value></assertEquals>    
+        </testcase>
+        <testcase name="SetISBN" 
+            description="Checks that we can set a date on a reference">
+            <runCommand name="create ref"/>
+            <runCommand name="set isbn - &quot;0123456789&quot;"/>
+            <runCommand name="get isbn -" var="result"/>
+            <assertEquals var="result"><value>0123456789</value></assertEquals>    
+        </testcase>
         <testcase name="SearchAuthor" 
             description="Checks the author search extension">
             <runScript name="SearchAuthorTest.py" var="result"/>
