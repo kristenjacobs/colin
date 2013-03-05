@@ -2,18 +2,12 @@
 Implementation:
 ===============================================================================
 
-- Remove the compact relax ng spec from git and add a make target to create
-  it from the xml instead.
-
 - Design a 'compact' (non xml) input language. Maybe make this look rather
   functional/haskell-ish. Also need a script to convert to this from the XML
   (add this as a make target as above)
 
 - Add some comments to the code in general, focusing on the code that
   is called from the application (i.e. the ModelFactory/creation + TypeUtils)
-
-- Create an external script which populates the refdb with the referecnces used
-  in the dissertation: Why do we need to do this?
 
 - Autogenerate the appendix
 
