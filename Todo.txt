@@ -18,19 +18,6 @@ Implementation:
 - Autogenerate the appendix
 
 ===============================================================================
-Testing:
-===============================================================================
-
-- Add tests for the common operations using the refdb application
-  (These need to be specified in the COLIN language itself)
-  e.g. 
-      - Create/delete a reference
-      - Add/remove attributes to a reference
-      - Set attributes on a reference
-      - Test the saving and restoring mechanism
-      **** Can we do all of the abobe using the references for this dissertation ****
-
-===============================================================================
 Bugs:
 ===============================================================================
 
