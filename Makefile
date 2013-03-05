@@ -1,4 +1,4 @@
-all: clean build test
+all: clean build rnc test
 
 build:
 	cd jcolin ; ant ; cd ../
@@ -10,4 +10,6 @@ clean:
 
 test:
 	cd tests ; python test.py ; cd ../
-    
+
+rnc:
+	cd jcolin ; trang -I rng -O rnc colin.rng colin.rnc ; cd ../
