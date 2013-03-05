@@ -5,5 +5,6 @@ AddRemoveAuthor: Checks that we can add and remove authors to/from a reference
 AddRemoveInfo: Checks that we can add and remove infos to/from a reference
 SetDate: Checks that we can set a date on a reference
 SetISBN: Checks that we can set a date on a reference
+SystemSaveAndRestore: Checks that we can save and restore the state of the reference database
 SearchAuthor: Checks the author search extension
 SearchTitle: Checks the title search extension

@@ -8,8 +8,9 @@ def setup():
 
 def setupRefDb():
     setup()
-    os.environ['JCOLIN_EXT_PATH']  = os.getcwd() + "/../../refdb/extensions" 
-    os.environ['JCOLIN_TEST_PATH'] = os.getcwd() + "/../../refdb/tests" 
+    os.environ['JCOLIN_EXT_PATH']       = os.getcwd() + "/../../refdb/extensions" 
+    os.environ['JCOLIN_TEST_PATH']      = os.getcwd() + "/../../refdb/tests" 
+    os.environ['JCOLIN_VALIDATOR_PATH'] = os.getcwd() + "/../../refdb/validators" 
 
 def setupJColin():
     setup()
