@@ -124,7 +124,7 @@ public class Model {
                     for (ReferenceField field : reference.getAuthors()) {
                         Element authorElement = XmlUtils.addElement(doc, authorsElement, "author");                     
                         XmlUtils.addAttribute(doc, authorElement, "id", Integer.toString(field.getId()));                   
-                        XmlUtils.addAttribute(doc, authorElement, "name", field.getData());                 
+                        XmlUtils.addAttribute(doc, authorElement, "data", field.getData());                 
                     }                    
                 }
                 if (!reference.getInfos().isEmpty()) {
@@ -132,7 +132,7 @@ public class Model {
                     for (ReferenceField field : reference.getInfos()) {
                         Element infoElement = XmlUtils.addElement(doc, infosElement, "info");                       
                         XmlUtils.addAttribute(doc, infoElement, "id", Integer.toString(field.getId()));                 
-                        XmlUtils.addAttribute(doc, infoElement, "name", field.getData());                   
+                        XmlUtils.addAttribute(doc, infoElement, "data", field.getData());                   
                     }
                 }                                
                 if (reference.getDate() != null) {
@@ -190,8 +190,8 @@ public class Model {
                     String date = element.getAttribute("date");
                     if (date != null) reference.setDate(date);
                     
-                    String ISBN = element.getAttribute("ISBN");
-                    if (ISBN != null) reference.setISBN(ISBN);
+                    String isbn = element.getAttribute("isbn");
+                    if (isbn != null) reference.setISBN(isbn);
                     
                     references.add(reference);
                 }

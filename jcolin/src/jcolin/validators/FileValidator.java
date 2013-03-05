@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import jcolin.commands.Command.ArgType;
 import jcolin.utils.RngUtils;
+import jcolin.utils.ScriptUtils;
 
 public class FileValidator extends Validator {
     private String m_schema;
@@ -27,15 +28,15 @@ public class FileValidator extends Validator {
             if (!m_schema.equals("")) {
                 // A schema file has been specified, so we must
                 // validate the given file against this.
-                File schemaFile = new File(m_schema);               
-                if (!schemaFile.exists()) {
+                String schemaFile = ScriptUtils.locate("JCOLIN_VALIDATOR_PATH", m_schema);
+                if (schemaFile == null) {
                     return false;
-                }
+                }       
                 File valueFile  = new File(value);
                 if (!valueFile.exists()) {
                     return false;
-                }   
-                return RngUtils.validate(valueFile, schemaFile, null);
+                }
+                return RngUtils.validate(valueFile, new File(schemaFile), null);
             }
             // No schema file has been specified so the most 
             // we can do is check that the file exists (if required).

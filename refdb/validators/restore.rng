@@ -1,0 +1,41 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <start>
+        <element name="refdb">
+            <zeroOrMore>
+                <element name="references">
+                    <zeroOrMore>
+                        <element name="reference">
+                            <attribute name="id"/>
+                            <attribute name="title"/>
+                            <optional><attribute name="date"/></optional>
+                            <optional><attribute name="isbn"/></optional>
+                            <optional>
+                                <element name="authors">
+                                    <oneOrMore>
+                                        <element name="author">
+                                            <attribute name="id"/>
+                                            <attribute name="data"/>
+                                        </element>
+                                    </oneOrMore>
+                                </element>
+                            </optional>
+                            <optional>
+                                <element name="infos">
+                                    <oneOrMore>
+                                        <element name="info">
+                                            <attribute name="id"/>
+                                            <attribute name="data"/>
+                                        </element>
+                                    </oneOrMore>
+                                </element>
+                            </optional>
+                        </element>
+                    </zeroOrMore>
+                </element>
+            </zeroOrMore>
+        </element>
+    </start>
+</grammar>
+
+
+

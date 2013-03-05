@@ -119,7 +119,7 @@
            <command name="restore" impl="refdb.commands.system.Restore">
                <description>Restores the current state of the reference database</description>
                <args>
-                   <arg name="filename"><File schema="restore.rnc"/></arg>
+                   <arg name="filename"><File schema="restore.rng"/></arg>
                </args>
            </command>
        </container>
@@ -213,6 +213,7 @@
                 <value></value>
             </assertEquals>
         </testcase>
+     
         <testcase name="CreateRef" 
             description="Checks that we can add an reference to the database">
             <runCommand name="create ref1"/>
@@ -221,6 +222,7 @@
                 <value>[0] "ref1"</value>
             </assertEquals>    
         </testcase>
+        
         <testcase name="DeleteRef" 
             description="Checks that we can remove a reference from the database">
             <runCommand name="create ref1"/>
@@ -230,6 +232,7 @@
                 <value></value>
             </assertEquals>    
         </testcase>
+        
         <testcase name="AddRemoveAuthor" 
             description="Checks that we can add and remove authors to/from a reference">
             <runCommand name="create ref"/>
@@ -243,6 +246,7 @@
             <runCommand name="get authorids -" var="ids"/>
             <assertRegex var="ids"><value>\d+</value></assertRegex>
         </testcase>
+        
         <testcase name="AddRemoveInfo" 
             description="Checks that we can add and remove infos to/from a reference">
             <runCommand name="create ref"/>
@@ -256,6 +260,7 @@
             <runCommand name="get infoids -" var="ids"/>
             <assertRegex var="ids"><value>\d+</value></assertRegex>
         </testcase>
+        
         <testcase name="SetDate" 
             description="Checks that we can set a date on a reference">
             <runCommand name="create ref"/>
@@ -263,6 +268,7 @@
             <runCommand name="get date -" var="result"/>
             <assertEquals var="result"><value>jan 2000</value></assertEquals>    
         </testcase>
+
         <testcase name="SetISBN" 
             description="Checks that we can set a date on a reference">
             <runCommand name="create ref"/>
@@ -270,6 +276,57 @@
             <runCommand name="get isbn -" var="result"/>
             <assertEquals var="result"><value>0123456789</value></assertEquals>    
         </testcase>
+      
+        <testcase name="SystemSaveAndRestore" 
+            description="Checks that we can save and restore the state of the reference database">
+            
+            <!-- Adds some references -->
+            <runCommand name="create ref1"/>
+            <runCommand name="set date - &quot;jan 2000&quot;"/>
+            <runCommand name="set isbn - &quot;1111111111&quot;"/>
+            <runCommand name="add author - fred1"/>
+            <runCommand name="add author - bob1"/>
+            <runCommand name="add info - data11"/>
+            <runCommand name="add info - data12"/>
+            <runCommand name="create ref2"/>
+            <runCommand name="set date - &quot;feb 2000&quot;"/>
+            <runCommand name="set isbn - &quot;2222222222&quot;"/>
+            <runCommand name="add author - fred2"/>
+            <runCommand name="add author - bob2"/>
+            <runCommand name="add info - data21"/>
+            <runCommand name="add info - data22"/>
+            <runCommand name="get refids" var="result"/>
+            <assertEquals var="result"><value>0 1</value></assertEquals>    
+
+            <!-- Saves the state -->
+            <runCommand name="system save state.xml"/>
+
+            <!-- Deletes the references and checks they have been cleared -->
+            <runCommand name="delete 0"/>
+            <runCommand name="delete 1"/>
+            <runCommand name="get refids" var="result"/>
+            <assertEquals var="result"><value></value></assertEquals>    
+
+            <!-- Restores the state and check that the state has been restored -->
+            <runCommand name="system restore state.xml"/>
+            <runCommand name="list" var="result"/>
+            <assertEquals var="result">    
+                <value>[0] "ref1"
+  fred1[0], bob1[1], 
+  data11
+  data12
+  Publication Date: jan 2000
+  ISBN Number: 1111111111
+
+[1] "ref2"
+  fred2[0], bob2[1], 
+  data21
+  data22
+  Publication Date: feb 2000
+  ISBN Number: 2222222222</value>
+            </assertEquals>    
+        </testcase>
+
         <testcase name="SearchAuthor" 
             description="Checks the author search extension">
             <runScript name="SearchAuthorTest.py" var="result"/>
@@ -277,6 +334,7 @@
                 <value>Passed</value>
             </assertEquals>    
         </testcase>
+        
         <testcase name="SearchTitle" 
             description="Checks the title search extension">
             <runScript name="SearchTitleTest.py" var="result"/>
