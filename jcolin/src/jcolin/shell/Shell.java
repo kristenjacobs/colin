@@ -335,8 +335,7 @@ public class Shell {
 
         for (Command command : m_commandFactory.getCommands()) {
             m_console.display(String.format("  %s\n", command.description(false)));
-        }
-        
+        }        
         System.exit(1);
     }
     

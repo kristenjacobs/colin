@@ -15,6 +15,10 @@ import jcolin.commands.testcase.TestCase;
 import jcolin.commands.version.Version;
 import jcolin.consoles.Console;
 
+/**
+ * Given a list of string arguments, this class creates 
+ * instances of the required commands.
+ */
 public class CommandFactory {
     Collection<Command> m_commands;
 

@@ -6,6 +6,9 @@ import java.util.Collection;
 import jcolin.consoles.Console;
 import jcolin.shell.Shell;
 
+/**
+ * Base class for internal framework commands.
+ */
 public abstract class Command {
     public static final String REDIRECT_OVERWITE = ">";
     public static final String REDIRECT_APPEND   = ">>";

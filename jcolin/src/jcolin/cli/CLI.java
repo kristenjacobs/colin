@@ -6,6 +6,10 @@ import java.util.Collection;
 import jcolin.commands.Command;
 import jcolin.testing.Testcase;
 
+/**
+ * The CLI class represents the user specified contents 
+ * of the configuration file.
+ */
 public class CLI {
     private String m_toolName;
     private String m_prompt;

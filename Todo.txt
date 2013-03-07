@@ -6,9 +6,6 @@ Implementation:
   functional/haskell-ish. Also need a script to convert to this from the XML
   (add this as a make target as above)
 
-- Add some comments to the code in general, focusing on the code that
-  is called from the application (i.e. the ModelFactory/creation + TypeUtils)
-
 - Autogenerate the appendix
 
 ===============================================================================
