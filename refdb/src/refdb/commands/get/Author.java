@@ -15,9 +15,9 @@ public class Author implements ICommand {
             IConsole console, Map<String, String> args) {   
         
         int refId    = CommandUtils.getRefId(args, (Model)model);
-        int authorId = CommandUtils.getAuthorId(args, (Model)model);
+        int authorId = CommandUtils.getAuthorId(args, (Model)model, console);
 
-        Reference reference = ((Model)model).getReference(refId);
+        Reference reference = ((Model)model).getReference(refId, console);
         console.display(reference.getAuthor(authorId).getData() + "\n");
     }
 }

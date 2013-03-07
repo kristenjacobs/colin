@@ -14,6 +14,6 @@ public class Title implements ICommand {
             IConsole console, Map<String, String> args) {   
         
         int refId = CommandUtils.getRefId(args, (Model)model);
-        console.display(((Model)model).getReference(refId).getTitle() + "\n");
+        console.display(((Model)model).getReference(refId, console).getTitle() + "\n");
     }
 }

@@ -14,7 +14,8 @@ public class Author implements ICommand {
             IConsole console, Map<String, String> args) {
         boolean status = ((Model)model).removeAuthor(
                 CommandUtils.getRefId(args, (Model)model),
-                CommandUtils.getAuthorId(args, (Model)model));
+                CommandUtils.getAuthorId(args, (Model)model, console), 
+                console);
         console.display(Boolean.toString(status) + "\n");       
     }
 }

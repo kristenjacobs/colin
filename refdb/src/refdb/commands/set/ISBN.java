@@ -15,7 +15,7 @@ public class ISBN implements ICommand {
             IConsole console, Map<String, String> args) {
         boolean success = ((Model)model).setISBN(
                 CommandUtils.getRefId(args, (Model)model),
-                TypeUtils.getString(args, "number"));       
+                TypeUtils.getString(args, "number"), console);       
         console.display(Boolean.toString(success) + "\n");
     }
 }

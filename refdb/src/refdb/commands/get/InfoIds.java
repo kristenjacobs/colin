@@ -14,6 +14,6 @@ public class InfoIds implements ICommand {
             IConsole console, Map<String, String> args) {   
         
         int refId = CommandUtils.getRefId(args, (Model)model);      
-        CommandUtils.outputIds(console, ((Model)model).getInfoIds(refId));
+        CommandUtils.outputIds(console, ((Model)model).getInfoIds(refId, console));
     }
 }

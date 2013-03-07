@@ -17,19 +17,19 @@ public class TestConsole extends Console {
     }
     
     public void display(String str) {
-        output(str, false);
+        output(str, false, true);
     }
 
     public void displayError(String str) {
-        output("error: " + str, true);
+        output("error: " + str, true, false);
     }
 
     public void displayWarning(String str) {
-        output("warning: " + str, true);        
+        output("warning: " + str, true, false);        
     }
     
     public void displayInfo(String str) {
-        output("info: " + str, true);
+        output("info: " + str, true, false);
     }
     
     public void displayPrompt(String str) {
@@ -50,8 +50,8 @@ public class TestConsole extends Console {
         m_testBuffer.delete(0, m_testBuffer.length());
     }
     
-    private void output(String str, boolean forceOutputDisplay) {
-        super.addCommandOutput(str);
+    private void output(String str, boolean forceOutputDisplay, boolean addToLog) {
+        super.addCommandOutput(str, addToLog);
         if (outputEnabled(forceOutputDisplay)) {
             m_testBuffer.append(str);           
         }

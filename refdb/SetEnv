@@ -8,3 +8,5 @@ export JCOLIN_VALIDATOR_PATH=$REFDBROOT/validators
 
 export PYTHON_HOME=$REFDBROOT/../jcolin/jython
 export PYTHON_VERBOSE=error
+
+alias refdb='java -jar $REFDBROOT/jars/refdb.jar'

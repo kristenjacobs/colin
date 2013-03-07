@@ -13,21 +13,21 @@ public class BasicConsole extends Console {
     }
     
     public void display(String str) {
-        output(str, false);
+        output(str, false, true);
     }
 
     public void displayError(String str) {
-        output("error: " + str, true);
+        output("error: " + str, true, false);
     }
 
     public void displayWarning(String str) {
-        output("warning: " + str, true);        
+        output("warning: " + str, true, false);        
     }
     
     public void displayInfo(String str) {
-        output("info: " + str, true);
+        output("info: " + str, true, false);
     }
-    
+
     public void displayPrompt(String str) {
         System.out.printf("%s", str);
     }
@@ -38,8 +38,16 @@ public class BasicConsole extends Console {
         return new Scanner(System.in).nextLine();
     }
 
-    private void output(String str, boolean forceOutputDisplay) {
-        super.addCommandOutput(str);
+    /**
+     * Note: The 'forceOutputDisplay' parameter ensure that the output gets
+     * displayed on the console irrespective of the settings of the command that
+     * initiated the output.
+     * 
+     * Note: The 'addToLog' parameter can be used to enable/disable the storing
+     * of this output string in the output buffer.
+     */
+    private void output(String str, boolean forceOutputDisplay, boolean addToLog) {
+        super.addCommandOutput(str, addToLog);
         if (outputEnabled(forceOutputDisplay) &&
             !redirectToFile(str)) {
             System.out.printf("%s", str);

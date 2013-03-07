@@ -23,19 +23,19 @@ public class JLineConsole extends Console {
     }
     
     public void display(String str) {
-        output(str, false);
+        output(str, false, true);
     }
 
     public void displayError(String str) {
-        output("error: " + str, true);
+        output("error: " + str, true, false);
     }
 
     public void displayWarning(String str) {
-        output("warning: " + str, true);        
+        output("warning: " + str, true, false);        
     }
     
     public void displayInfo(String str) {
-        output("info: " + str, true);
+        output("info: " + str, true, false);
     }
     
     public void displayPrompt(String str) {
@@ -65,8 +65,8 @@ public class JLineConsole extends Console {
         System.exit(1);
     }
     
-    private void output(String str, boolean forceOutputDisplay) {
-        super.addCommandOutput(str);        
+    private void output(String str, boolean forceOutputDisplay, boolean addToLog) {
+        super.addCommandOutput(str, addToLog);        
         if (outputEnabled(forceOutputDisplay) &&
             !redirectToFile(str)) {
             System.out.printf("%s", str);

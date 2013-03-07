@@ -14,6 +14,6 @@ public class Date implements ICommand {
             IConsole console, Map<String, String> args) {   
         
         int refId = CommandUtils.getRefId(args, (Model)model);
-        console.display(((Model)model).getReference(refId).getDate() + "\n");
+        console.display(((Model)model).getReference(refId, console).getDate() + "\n");
     }
 }

@@ -14,6 +14,6 @@ public class AuthorIds implements ICommand {
             IConsole console, Map<String, String> args) {   
         
         int refId = CommandUtils.getRefId(args, (Model)model);      
-        CommandUtils.outputIds(console, ((Model)model).getAuthorIds(refId));
+        CommandUtils.outputIds(console, ((Model)model).getAuthorIds(refId, console));
     }
 }

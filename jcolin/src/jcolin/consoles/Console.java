@@ -82,8 +82,10 @@ public abstract class Console implements IConsole {
         m_outputBuffer = new StringBuffer();
     }
     
-    public void addCommandOutput(String output) {
-        m_outputBuffer.append(output);
+    public void addCommandOutput(String output, boolean addToLog) {
+        if (addToLog) {
+            m_outputBuffer.append(output);            
+        }
     }
     
     public String getCommandOutput() {

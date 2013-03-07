@@ -13,6 +13,6 @@ public class Delete implements ICommand {
     public void execute(Shell shell, Object model, 
             IConsole console, Map<String, String> args) {
         ((Model)model).deleteReference(
-                CommandUtils.getRefId(args, (Model)model));
+                CommandUtils.getRefId(args, (Model)model), console);
     }
 }

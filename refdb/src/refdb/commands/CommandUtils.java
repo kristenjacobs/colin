@@ -28,11 +28,13 @@ public class CommandUtils {
      * unless the arg value is "-" in which case it returns 
      * the authorid of the most recently created author.
      */
-    public static int getAuthorId(Map<String, String> args, Model model) {
+    public static int getAuthorId(Map<String, String> args, 
+            Model model, IConsole console) {
+        
         String authorId = args.get("authorid"); 
         if ((authorId != null) && authorId.equals("-")) {
             int refId = getRefId(args, model);
-            Reference reference = model.getReference(refId);
+            Reference reference = model.getReference(refId, console);
             return reference.getLastAuthorId();
         }
         return TypeUtils.getInteger(args, "authorid");
@@ -43,11 +45,13 @@ public class CommandUtils {
      * unless the arg value is "-" in which case it returns 
      * the infoid of the most recently created author.
      */
-    public static int getInfoId(Map<String, String> args, Model model) {
+    public static int getInfoId(Map<String, String> args, 
+            Model model, IConsole console) {
+        
         String infoId = args.get("infoid"); 
         if ((infoId != null) && infoId.equals("-")) {
             int refId = getRefId(args, model);
-            Reference reference = model.getReference(refId);
+            Reference reference = model.getReference(refId, console);
             return reference.getLastInfoId();
         }
         return TypeUtils.getInteger(args, "infoid");

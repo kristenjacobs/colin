@@ -8,3 +8,5 @@ SetISBN: Checks that we can set a date on a reference
 SystemSaveAndRestore: Checks that we can save and restore the state of the reference database
 SearchAuthor: Checks the author search extension
 SearchTitle: Checks the title search extension
+ValidRefId: Checks that we handle valid reference IDs
+InvalidRefId: Checks that we handle invalid reference IDs

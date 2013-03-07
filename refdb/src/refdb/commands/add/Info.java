@@ -16,7 +16,7 @@ public class Info implements ICommand {
             IConsole console, Map<String, String> args) {       
         int id = ((Model)model).addInfo(
                 CommandUtils.getRefId(args, (Model)model),
-                TypeUtils.getString(args, "info"));
+                TypeUtils.getString(args, "info"), console);
         console.display(Integer.toString(id) + "\n");
     }
 }

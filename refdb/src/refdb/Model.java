@@ -30,8 +30,8 @@ public class Model {
         return id;
     }
     
-    public boolean deleteReference(int refId) {
-        Reference reference = getReference(refId);
+    public boolean deleteReference(int refId, IConsole console) {
+        Reference reference = getReference(refId, console);
         if (reference != null) {
             m_references.remove(reference);
             return true;
@@ -39,28 +39,28 @@ public class Model {
         return false;
     }
     
-    public int addAuthor(int refId, String author) {
-        Reference reference = getReference(refId);
+    public int addAuthor(int refId, String author, IConsole console) {
+        Reference reference = getReference(refId, console);
         return (reference != null) ? reference.addAuthor(author) : INVALID_ID;
     }
     
-    public boolean removeAuthor(int refId, int authorId) {
-        Reference reference = getReference(refId);
+    public boolean removeAuthor(int refId, int authorId, IConsole console) {
+        Reference reference = getReference(refId, console);
         return (reference != null) ? reference.removeAuthor(authorId) : false;
     }
     
-    public int addInfo(int refId, String info) {
-        Reference reference = getReference(refId);
+    public int addInfo(int refId, String info, IConsole console) {
+        Reference reference = getReference(refId, console);
         return (reference != null) ? reference.addInfo(info) : INVALID_ID;
     }
     
-    public boolean removeInfo(int refId, int infoId) {
-        Reference reference = getReference(refId);
+    public boolean removeInfo(int refId, int infoId, IConsole console) {
+        Reference reference = getReference(refId, console);
         return (reference != null) ? reference.removeInfo(infoId) : false;
     }
     
-    public boolean setDate(int refId, String date) {
-        Reference reference = getReference(refId);
+    public boolean setDate(int refId, String date, IConsole console) {
+        Reference reference = getReference(refId, console);
         if (reference != null) {
             reference.setDate(date);
             return true;
@@ -68,8 +68,8 @@ public class Model {
         return false;               
     }
     
-    public boolean setISBN(int refId, String ISBN) {
-        Reference reference = getReference(refId);
+    public boolean setISBN(int refId, String ISBN, IConsole console) {
+        Reference reference = getReference(refId, console);
         if (reference != null) {
             reference.setISBN(ISBN);
             return true;
@@ -215,20 +215,21 @@ public class Model {
         return m_lastRefId;
     }
 
-    public Collection<Integer> getAuthorIds(int refId) {
-        return getIds(getReference(refId).getAuthors());
+    public Collection<Integer> getAuthorIds(int refId, IConsole console) {
+        return getIds(getReference(refId, console).getAuthors());
     }    
     
-    public Collection<Integer> getInfoIds(int refId) {
-        return getIds(getReference(refId).getInfos());
+    public Collection<Integer> getInfoIds(int refId, IConsole console) {
+        return getIds(getReference(refId, console).getInfos());
     }
 
-    public Reference getReference(int id) {
+    public Reference getReference(int id, IConsole console) {
         for (Reference reference : m_references) {
             if (id == reference.getId()) {
                 return reference;
             }
         }
+        console.displayError("Invalid reference id: " + id + "\n");
         return null;
     }
     

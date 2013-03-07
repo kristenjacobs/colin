@@ -8,3 +8,5 @@ Running testcase: SetISBN ... Passed
 Running testcase: SystemSaveAndRestore ... Passed
 Running testcase: SearchAuthor ... Passed
 Running testcase: SearchTitle ... Passed
+Running testcase: ValidRefId ... Passed
+Running testcase: InvalidRefId ... Passed

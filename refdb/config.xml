@@ -342,6 +342,19 @@
                 <value>Passed</value>
             </assertEquals>    
         </testcase>
+
+        <testcase name="ValidRefId" 
+            description="Checks that we handle valid reference IDs">
+            <runCommand name="create ref"/>
+            <runCommand name="set date - &quot;jan 2000&quot;" var="result"/>
+            <assertEquals var="result"><value>true</value></assertEquals>    
+        </testcase>
+
+        <testcase name="InvalidRefId" 
+            description="Checks that we handle invalid reference IDs">
+            <runCommand name="set date 45 &quot;jan 2000&quot;" var="result"/>
+            <assertEquals var="result"><value>false</value></assertEquals>    
+        </testcase>
     </testcases>
 
 </colin>

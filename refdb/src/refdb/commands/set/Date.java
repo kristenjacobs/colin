@@ -15,7 +15,7 @@ public class Date implements ICommand {
             IConsole console, Map<String, String> args) {
         boolean success = ((Model)model).setDate(
                 CommandUtils.getRefId(args, (Model)model),
-                TypeUtils.getString(args, "date"));
+                TypeUtils.getString(args, "date"), console);
         console.display(Boolean.toString(success) + "\n");
     }
 }

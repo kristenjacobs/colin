@@ -14,7 +14,8 @@ public class Info implements ICommand {
             IConsole console, Map<String, String> args) {   
         boolean status = ((Model)model).removeInfo(
                 CommandUtils.getRefId(args, (Model)model),
-                CommandUtils.getInfoId(args, (Model)model));
+                CommandUtils.getInfoId(args, (Model)model, console), 
+                console);
         console.display(Boolean.toString(status) + "\n");
     }
 }
