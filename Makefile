@@ -1,4 +1,4 @@
-all: clean build rnc test
+all: clean build rnc cln test
 
 build:
 	cd jcolin ; ant ; cd ../
@@ -13,3 +13,6 @@ test:
 
 rnc:
 	cd jcolin ; trang -I rng -O rnc colin.rng colin.rnc ; cd ../
+
+cln:
+	cd refdb ; python ../scripts/convert.py > config.cln ; cd ../
