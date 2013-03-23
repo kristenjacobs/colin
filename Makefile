@@ -7,6 +7,8 @@ build:
 clean:
 	cd jcolin ; ant clean ; cd ../
 	cd refdb ; ant clean ; cd ../
+	rm -rf jcolin/colin.rnc
+	rm -rf refdb/config.cln
 
 test:
 	cd tests ; python test.py ; cd ../
