@@ -22,6 +22,7 @@ def handleTypes(typeElmts, arg, mode):
 def handleCommand(commandElmt, parent, level):
     command = Command( 
         commandElmt.get("name"),
+        commandElmt.get("impl"),
         commandElmt.find("description").text, level)
     parent.addEntry(command)
     argsElmt = commandElmt.find("args")
@@ -221,8 +222,9 @@ class Output:
         sys.stdout.write("[" + self.typeString + "]") 
 
 class Command:
-    def __init__(self, name, description, level):
+    def __init__(self, name, impl, description, level):
         self.name = name
+        self.impl = impl
         self.description = description
         self.level = level
         self.args = []
@@ -240,7 +242,7 @@ class Command:
 
     def output(self):
         self.indent()
-        sys.stdout.write(self.name + " :: " + self.description + "\n")
+        sys.stdout.write(self.name + " :: " + self.impl + " :: " + self.description + "\n")
         first = True
         self.indent(1)
         for arg in self.args:
