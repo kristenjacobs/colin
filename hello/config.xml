@@ -1,0 +1,7 @@
+<colin toolname="hello" prompt=">" version="0.9.9">
+    <commands>
+        <command name="run" impl="hello.Run">
+            <description>Displays Hello World on the console</description>
+        </command>
+    </commands>     
+</colin>

@@ -1,4 +1,4 @@
-<project name="refdb" default="dist" basedir=".">
+<project name="hello" default="dist" basedir=".">
 
   <property name="src" location="src"/>
   <property name="bin" location="bin"/>
@@ -28,16 +28,16 @@
   <target name="dist" depends="compile" description="generate the distribution" >
     <mkdir dir="jars"/>
 
-    <jar jarfile="jars/refdb.jar"
+    <jar jarfile="jars/hello.jar"
          basedir="${bin}"
-         manifest="manifests/refdb">
+         manifest="manifests/hello">
          <zipfileset src="../jcolin/jars/jcolin.jar"/>
     </jar>
   </target>
 
   <target name="clean" description="clean up" >
     <delete dir="${bin}"/>
-  	<delete file="jars/refdb.jar"/>
+  	<delete file="jars/hello.jar"/>
   </target>
 
 </project>

@@ -1,0 +1,12 @@
+export HELLOROOT=/home/kris/University/SoftwareEngineeringMscOxford/PRJ/Implementation/hello
+
+export JCOLIN_CONFIG_FILE=$HELLOROOT/config.xml
+export JCOLIN_SCHEMA_FILE=$HELLOROOT/../jcolin/colin.rng
+export JCOLIN_EXT_PATH=$HELLOROOT/extensions
+export JCOLIN_TEST_PATH=$HELLOROOT/tests
+export JCOLIN_VALIDATOR_PATH=$HELLOROOT/validators
+
+export PYTHON_HOME=$HELLOROOT/../jcolin/jython
+export PYTHON_VERBOSE=error
+
+alias hello='java -jar $HELLOROOT/jars/hello.jar'
