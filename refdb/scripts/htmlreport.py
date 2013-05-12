@@ -1,7 +1,5 @@
 import sys
 
-targetAuthor = sys.argv[0]
-
 refids = refdb.exec(["get", "refids"]).split()
 for refid in refids:
     title = refdb.exec(["get", "title", refid])
