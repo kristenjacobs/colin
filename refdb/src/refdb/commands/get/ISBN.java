@@ -14,6 +14,9 @@ public class ISBN implements ICommand {
             IConsole console, Map<String, String> args) {   
         
         int refId = CommandUtils.getRefId(args, (Model)model);
-        console.display(((Model)model).getReference(refId, console).getISBN() + "\n");
+        String isbn = ((Model)model).getReference(refId, console).getISBN();
+        if (isbn != null) {
+            console.display(isbn + "\n");            
+        }
     }
 }

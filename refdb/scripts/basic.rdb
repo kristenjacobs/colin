@@ -1,0 +1,17 @@
+# Creates the 1st reference..
+create "The Art of Unix Programming"
+add author "-" "Eric S Raymond"
+add info "-" "Addison Wesley"
+set date "-" "feb 2003"
+
+# Creates the 2nd reference..
+create "Object Oriented Software Construction"
+add author "-" "Bertrand Meyer"
+add info "-" "Prentice Hall"
+add info "-" "2nd Edition"
+set date "-" "jun 1997"
+
+echo "Bilbliography"
+echo "-------------"
+list
+
