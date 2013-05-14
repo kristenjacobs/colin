@@ -190,14 +190,12 @@
                <args>
                   <arg name="name"><String/></arg>
                </args>
-               <output display="EXTERNAL"/>
            </command>
            <command name="title" impl="SearchTitle.py"> 
                <description>Lists entires with the given keyword in the title</description>
                <args>
                    <arg name="keyword"><String/></arg>
                </args>
-               <output display="EXTERNAL"/>
            </command>
        </container>
     </commands>
@@ -331,7 +329,10 @@
             description="Checks the author search extension">
             <runScript name="SearchAuthorTest.py" var="result"/>
             <assertEquals var="result">
-                <value>Passed</value>
+                <value>Found match: Title: TestBook, Author: Fred
+Found 1 match
+No matches found
+Passed</value>
             </assertEquals>    
         </testcase>
         
@@ -339,7 +340,10 @@
             description="Checks the title search extension">
             <runScript name="SearchTitleTest.py" var="result"/>
             <assertEquals var="result">
-                <value>Passed</value>
+                <value>Found match: Title: TestBook
+Found 1 match
+No matches found
+Passed</value>
             </assertEquals>    
         </testcase>
 
