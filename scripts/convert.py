@@ -41,15 +41,16 @@ def handleCommand(commandElmt, parent, level):
                 arg.addType(getTypeString(child))
     outputElmt = commandElmt.find("output")
     if outputElmt != None:
+        display = outputElmt.get("display")
         if len(outputElmt.getchildren()) > 0:
             # Found an explict output element with a type specified.
-            command.setRes(Output(getTypeString(outputElmt.getchildren()[0])))
+            command.setRes(Output(getTypeString(outputElmt.getchildren()[0]), display))
         else: 
             # Found an explict output element with no type specified, default to String.
-            command.setRes(Output("String")) 
+            command.setRes(Output("String", display)) 
     else:
         # No output element found, default to String.
-        command.setRes(Output("String")) 
+        command.setRes(Output("String", None)) 
 
 def handleContainer(containerElmt, parent, level):
     container = Container( 
@@ -215,11 +216,14 @@ class Arg:
         sys.stdout.write("]") 
 
 class Output:
-    def __init__(self, typeString):
+    def __init__(self, typeString, display):
         self.typeString = typeString 
+        self.display = display
         
     def output(self):
         sys.stdout.write("[" + self.typeString + "]") 
+        if self.display != None:
+            sys.stdout.write(", display=" + self.display)
 
 class Command:
     def __init__(self, name, impl, description, level):
