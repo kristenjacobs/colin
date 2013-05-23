@@ -1,4 +1,4 @@
-export HELLOROOT=/home/kris/University/SoftwareEngineeringMscOxford/PRJ/Implementation/hello
+export HELLOROOT=`pwd`
 
 export JCOLIN_CONFIG_FILE=$HELLOROOT/config.xml
 export JCOLIN_SCHEMA_FILE=$HELLOROOT/../jcolin/colin.rng

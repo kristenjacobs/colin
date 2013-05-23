@@ -1,4 +1,4 @@
-export REFDBROOT=/home/kris/University/SoftwareEngineeringMscOxford/PRJ/Implementation/refdb
+export REFDBROOT=`pwd`
 
 export JCOLIN_CONFIG_FILE=$REFDBROOT/config.xml
 export JCOLIN_SCHEMA_FILE=$REFDBROOT/../jcolin/colin.rng
