@@ -238,7 +238,9 @@ public class Shell {
         return m_modelFactory.createModel();
     }
 
-    private void initialise(Console console, CommandFactory commandFactory, ModelFactory modelFactory) throws Exception {
+    private void initialise(Console console, CommandFactory commandFactory, 
+            ModelFactory modelFactory) throws Exception {
+
         m_modelFactory = modelFactory;
         m_model = createModel();
         m_console = console;
@@ -250,7 +252,8 @@ public class Shell {
 
     private void processCommands(String[] args) {
         for (int i = 0; i < args.length; ++i) {
-            Command command = m_commandFactory.buildCommand(args, i, m_commandHistory, m_console);
+            Command command = m_commandFactory.buildCommand(
+                    args, i, m_commandHistory, m_console);
             if (command == null) {
                 usage();
             }

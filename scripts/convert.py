@@ -251,10 +251,12 @@ class Command:
         self.indent(1)
         for arg in self.args:
             if not first:
-                sys.stdout.write(", ")
+                sys.stdout.write(",\n")
+                self.indent(1)
             arg.output()
             first = False
-        sys.stdout.write(" -> ")
+        sys.stdout.write(" ->\n")
+        self.indent(1)
         self.res.output()
         sys.stdout.write("\n\n")
 
