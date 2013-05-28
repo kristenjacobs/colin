@@ -11,6 +11,8 @@ import jcolin.utils.RngUtils;
 
 public abstract class Validator {
     
+    private static final boolean DEBUG = false;
+    
     abstract String getTypeName();
     abstract Collection<ValidatorAttribute> getAttributes();
     abstract public ArgType getArgType();
@@ -18,9 +20,15 @@ public abstract class Validator {
     public boolean validate(String value) {
         try {
             String xml = createXml(value);      
+            if (DEBUG) {
+                System.out.printf("Validator: Xml: %s\n", xml);
+            }            
             String rng = createRng();           
+            if (DEBUG) {
+                System.out.printf("Validator: Rng: %s\n", rng);
+            }            
             return RngUtils.validate(xml, rng);
-            
+       
         } catch (Exception e) {
             return false;
         }               
